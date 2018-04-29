@@ -1,0 +1,207 @@
+/* 398ea7 - cyan to be used. */
+body{
+  background-color: #E1E1E1;
+}
+.bold{font-weight: bold;}
+
+.flexColumn{
+  display: flex;
+  flex-direction: column;
+}
+
+.flexRow{
+  display: flex;
+  flex-direction: row;
+}
+
+.margintop{margin-top: 1em;}
+.marginbottom{margin-bottom: 1em;}
+
+.jumbotron{
+  background-color: white;
+  background-image: linear-gradient(to right, #333 35%, rgba(255, 255, 255, 0) 0%);
+  background-position: bottom;
+  background-size: 10px 2px;
+  background-repeat: repeat-x;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.jumbotron h6{color: #999999;}
+
+
+.btnDisable{
+  background-color: white;
+}
+
+input[type="button" i], input[type="submit" i],
+ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
+  button{
+    background: transparent;
+    border: 2px #398ea7 solid;
+    border-radius: 4px;
+    color: #398ea7;
+  }
+
+.alertBar{display: none;} /*jQuery changes this when required*/
+
+.fullUnderline{
+  position:relative;
+  /* display:block; */
+  float:left;
+  /* width:50%; */
+  text-align:center;
+  padding-bottom:50px;
+  cursor:pointer;
+}
+
+.fullUnderline:after{
+  content: "";
+  position: absolute;
+  width: 96%;
+  left:1.9%;
+  height: 1px;
+  top: 17em;
+  border-bottom: 1px solid grey;
+}
+
+.backbtn{
+  color:black;
+  text-decoration: none;
+  position: relative;
+}
+.backbtn:before {
+  position: absolute;
+  content: '';
+  height: 2px;
+  bottom: -4px;
+  width: 60%;
+  margin: 0 auto;
+  background: #398ea7;
+}
+
+.underBackbtn{
+  font-size: 1.3rem;
+}
+
+.bookingForm{
+  text-align: center;
+  background-color: white;
+  margin: auto;
+  line-height: 50%;
+  padding: 20px;
+}
+
+.bookingForm input[type='submit']{
+  padding: 10px;
+}
+
+
+/**s p e c e x **/
+.p4kbox{ /*Going to need to do media queries for spex ex page*/
+  display: block;
+  position: relative;
+  right: 1rem;
+  margin-top:2em;
+}
+
+.bestNewBox p{
+  color: green;
+  position: relative;
+  left: 0.6em;
+}
+
+
+.bestNewBox{
+  position: relative;
+  top: 2em;
+}
+
+
+.p4kbnm{
+  color: green;
+  display: flex;
+  font-size: 3.3rem;
+  align-self: center;
+  border: 4.5px solid green;
+  border-radius: 70px;
+  padding: 27px;
+  position: relative;
+}
+.p4kst{
+  display: flex;
+  font-size: 3rem;
+  align-self: center;
+  border: 4.5px solid black;
+  border-radius: 60px;
+  padding: 23px;
+  position: relative;
+}
+
+
+.specExContainer{
+  width: 70%; /*consider grid system instead*/
+}
+
+.specExStatus{align-items: center; justify-content: center;}
+
+.specExTitle{
+  display: flex;
+  align-self: center;
+  position: relative;
+  left: 0.4em;
+}
+
+.specExStatus{margin-bottom: 0;}
+
+.specExHeader{
+  margin-top:3em;
+  margin-bottom: 3em;
+  background-color: white;
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-radius: 8px;
+}
+
+
+.specExContainer{margin-bottom: 10em;}
+
+/* reviews*/
+.postReviewBox{
+  margin-top: 4em;
+  width: 100%;
+  float:left;
+  text-align: center;
+}
+
+.postReviewBox input[type='text'],
+.postReviewBox input[type='submit'],
+.postReviewBox input[type='button']{
+  padding: 10px;
+}
+
+.postReviewBox input[type='text'] {
+  width: 100%;
+}
+
+.specExImg{
+  width: auto;
+  height:200px;
+  float:right;
+}
+
+/*  */
+
+
+.1-5{
+  display: flex;
+  align-self: center;
+}
+
+.specExDateTime p{
+  text-align: center;
+  margin-bottom: 0;
+}
