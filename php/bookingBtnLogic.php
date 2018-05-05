@@ -38,7 +38,7 @@ if(ISSET($_SESSION['id'])){
   echo '<button type="button" name="booktickets" class="btn disabled btnDisable bookcase1" value="Book Tickets">Book Tickets</button>';
 }
 
-
+//if user has booked the exhibition replace the book tickets with "you are going to this event!"
 
 
 // if(ISSET($_SESSION['id']))

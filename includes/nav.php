@@ -66,7 +66,7 @@ session_start();
 } else if(($_SESSION['userrole'] === 'creator'
         || $_SESSION['userrole'] === 'readonly')) {
   ?>
-  <!-- LOGGED IN AS CREATOR NAVBAR -->
+  <!-- LOGGED IN AS CREATOR/READONLY NAVBAR -->
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav mr-auto">
@@ -80,7 +80,10 @@ session_start();
                 <a class="nav-link" href="#">Chatbot</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">@<?php echo $_SESSION['username'];?></a>
+                <a class="nav-link"
+                  href="userprofile.php">
+                  @<?php echo $_SESSION['username'];?>
+                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -119,10 +122,13 @@ session_start();
                 <a class="nav-link" href="#">Chatbot</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">@<?php echo $_SESSION['username'] ?></a>
+              <a class="nav-link"
+                href="userprofile.php?<?php echo $_SESSION['id']; ?> ">
+                @<?php echo $_SESSION['username'];?>
+              </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">ADMIN</a>
+                <a class="nav-link" href="admin.php">*administration</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -138,9 +144,9 @@ session_start();
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a  class="nav-item nav-link " href="php/logout.php">Logout: <?php echo $_SESSION['username']; ?></a>
+              <a  class="nav-item nav-link" href="php/logout.php">Logout: <?php echo $_SESSION['username']; ?></a>
             </li>
         </ul>
     </div>
 </nav>
-<?php }s ?>
+<?php } ?>

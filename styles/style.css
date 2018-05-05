@@ -1,23 +1,15 @@
 /* 398ea7 - cyan to be used. */
-body{
-  background-color: #E1E1E1;
-}
-.bold{font-weight: bold;}
+/* 8C8C8C - liight grey to be used. */
+body {background-color: #EEEEEE;}
+.bold {font-weight: bold;}
+.light {font-weight: lighter; color: #8C8C8C;}
+.flexColumn {display: flex; flex-direction: column;}
 
-.flexColumn{
-  display: flex;
-  flex-direction: column;
-}
+.margintop {margin-top: 1em;}
+.paddingbottom {padding-bottom: 3rem;}
+.whitebg {background-color: white;}
 
-.flexRow{
-  display: flex;
-  flex-direction: row;
-}
-
-.margintop{margin-top: 1em;}
-.marginbottom{margin-bottom: 1em;}
-
-.jumbotron{
+.jumbotron {
   background-color: white;
   background-image: linear-gradient(to right, #333 35%, rgba(255, 255, 255, 0) 0%);
   background-position: bottom;
@@ -28,25 +20,30 @@ body{
   align-items: center;
 }
 
-.jumbotron h6{color: #999999;}
+/* .cutpage{
+  background-image: linear-gradient(to right, #333 35%, rgba(255, 255, 255, 0) 0%);
+  background-position: bottom;
+  background-size: 10px 2px;
+  background-repeat: repeat-x;
+} */
 
+.jumbotron h6 {color: #999999;}
+.btnDisable {background-color: white; outline: none;}
 
-.btnDisable{
-  background-color: white;
-}
 
 input[type="button" i], input[type="submit" i],
- input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
+input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
   button{
-    background: transparent;
+    background: white;
     border: 2px #398ea7 solid;
+    padding: 5px;
     border-radius: 4px;
     color: #398ea7;
   }
 
-.alertBar{display: none;} /*jQuery changes this when required*/
+.alertBar {display: none;} /*jQuery changes this when required*/
 
-.fullUnderline{
+.fullUnderline {
   position:relative;
   /* display:block; */
   float:left;
@@ -56,7 +53,7 @@ input[type="button" i], input[type="submit" i],
   cursor:pointer;
 }
 
-.fullUnderline:after{
+.fullUnderline:after {
   content: "";
   position: absolute;
   width: 96%;
@@ -66,7 +63,7 @@ input[type="button" i], input[type="submit" i],
   border-bottom: 1px solid grey;
 }
 
-.backbtn{
+.backbtn {
   color:black;
   text-decoration: none;
   position: relative;
@@ -81,11 +78,11 @@ input[type="button" i], input[type="submit" i],
   background: #398ea7;
 }
 
-.underBackbtn{
+.underBackbtn {
   font-size: 1.3rem;
 }
 
-.bookingForm{
+.bookingForm {
   text-align: center;
   background-color: white;
   margin: auto;
@@ -93,69 +90,67 @@ input[type="button" i], input[type="submit" i],
   padding: 20px;
 }
 
-.bookingForm input[type='submit']{
-  padding: 10px;
-}
+.bookingForm input[type='submit'] {padding: 10px;}
 
 
 /**s p e c e x **/
-.p4kbox{ /*Going to need to do media queries for spex ex page*/
+.p4kbox { /*Going to need to do media queries for spex ex page*/
   display: block;
   position: relative;
   right: 1rem;
   margin-top:2em;
 }
 
-.bestNewBox p{
+.bestNewBox p {
   color: green;
   position: relative;
   left: 0.6em;
 }
 
 
-.bestNewBox{
-  position: relative;
-  top: 2em;
-}
+.bestNewBox {position: relative; top: 3em;}
 
 
-.p4kbnm{
+.p4kbnm {
   color: green;
   display: flex;
-  font-size: 3.3rem;
+  font-weight: lighter;
+  font-size: 2.9rem;
   align-self: center;
-  border: 4.5px solid green;
+  border: 3px solid green;
   border-radius: 70px;
   padding: 27px;
+  padding-top: 30px; padding-bottom: 30px;
   position: relative;
 }
-.p4kst{
+.p4kst {
+  font-weight: lighter;
   display: flex;
-  font-size: 3rem;
+  font-size: 2.9rem;
   align-self: center;
-  border: 4.5px solid black;
+  border: 3px solid black;
   border-radius: 60px;
   padding: 23px;
   position: relative;
 }
 
 
-.specExContainer{
-  width: 70%; /*consider grid system instead*/
-}
+.specExContainer {width: 70%; /*consider grid system instead*/}
 
-.specExStatus{align-items: center; justify-content: center;}
+.specExStatus {align-items: center; justify-content: center;}
+.specExType {margin-bottom: 2rem;}
 
-.specExTitle{
+.specExTitle {
+  font-family: Lobster Two;
   display: flex;
   align-self: center;
   position: relative;
   left: 0.4em;
 }
 
-.specExStatus{margin-bottom: 0;}
+.specExStatus {margin-bottom: 0;}
 
-.specExHeader{
+.specExHeader {
   margin-top:3em;
   margin-bottom: 3em;
   background-color: white;
@@ -164,44 +159,165 @@ input[type="button" i], input[type="submit" i],
   flex-direction: row;
   justify-content: space-between;
   border-radius: 8px;
+  -webkit-box-shadow: 16px 15px 8px -4px rgba(0,0,0,0.48);
+  -moz-box-shadow: 16px 15px 8px -4px rgba(0,0,0,0.48);
+  box-shadow: 16px 15px 8px -4px rgba(0,0,0,0.48);
+  border-top: 4px solid #398ea7;
 }
 
 
-.specExContainer{margin-bottom: 10em;}
+.specExContainer {margin-bottom: 10em;}
 
 /* reviews*/
-.postReviewBox{
-  margin-top: 4em;
+.postReviewBox form {
+  margin-top: 3rem;
+  margin-bottom: 4rem;
   width: 100%;
-  float:left;
   text-align: center;
 }
-
 .postReviewBox input[type='text'],
 .postReviewBox input[type='submit'],
-.postReviewBox input[type='button']{
+.postReviewBox input[type='button'] {padding: 10px;}
+
+.postReviewBox textarea {
+  outline: none;
+  border: 2px #398ea7 solid;
+  border-radius: 4px;
+  width:95%;
+  float:left;
+}
+
+.ratingPost {
+  margin-bottom: 2.4rem;
+  align-self: baseline;
+}
+
+.ratingPost select {
   padding: 10px;
+  margin-left: 14px;
+  border-radius: 4px;
+  border: 2px #398ea7 solid;
 }
 
-.postReviewBox input[type='text'] {
-  width: 100%;
+.reviewInputBtn {
+  align-items: flex-end;
+}
+.reviewInputBtn input {
+  background-color: white;
+  color: black;
 }
 
-.specExImg{
-  width: auto;
-  height:200px;
-  float:right;
-}
+
+
+.specExImg {width: auto; height:200px; float:right;}
 
 /*  */
+.1-5 {display: flex; align-self: center;}
+.specExDateTime p {text-align: center; margin-bottom: 0;}
 
 
-.1-5{
+
+
+ /*R E V I E W S*/
+.reviewsContainer{
+  display:flex;
+  flex-direction: column;
+}
+
+.singleReview{
   display: flex;
-  align-self: center;
+  flex-direction:row;
+  margin-bottom: 3em;
+  border-left: 4px solid #398ea7;
+  border-right: 4px solid #398ea7;
+  border-top: 1px solid #999999;
+  border-bottom: 1px solid #999999;
+  background-color: white;
+  border-radius: 4px;
+
+  padding: 15px;
+  -webkit-box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
+  -moz-box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
+  box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
+
+  /* -webkit-box-shadow: 21px 18px 5px 0px rgba(0,0,0,0.42);
+  -moz-box-shadow: 21px 18px 5px 0px rgba(0,0,0,0.42);
+  box-shadow: 21px 18px 5px 0px rgba(0,0,0,0.42); */
 }
 
-.specExDateTime p{
-  text-align: center;
-  margin-bottom: 0;
+.topofReview{
+  display: flex;
+  flex-direction: row;
 }
+
+.reviewText{
+ word-wrap: break-word;
+ width:100%;;
+}
+
+.userAvatar{
+  width: 100px;
+  height: 100px;
+  float:left;
+  margin-right: 10px;
+}
+
+.deleteReviewBtn{
+  margin-bottom: 1.5em;
+}
+
+.userRatingRED {
+  font-size: 1.4rem;
+  font-weight: bold;
+  border: 2px solid red;
+  color: red;
+  border-radius: 100%;
+  padding: 22px 29px 22px 29px;
+  margin-right: 1.5rem;
+  align-self: center;
+  font-family: IBM Plex Sans;
+}
+.userRatingORANGE {
+  font-size: 1.4rem;
+  font-weight: bold;
+  border: 2px solid orange;
+  color: orange;
+  border-radius: 100%;
+  padding: 22px 29px 22px 29px;
+  margin-right: 1.5rem;
+  align-self: center;
+  font-family: IBM Plex Sans;
+}
+.userRatingGREEN {
+  font-size: 1.4rem;
+  font-weight: bold;
+  border: 2px solid green;
+  color: green;
+  border-radius: 100%;
+  padding: 22px 29px 22px 29px;
+  margin-right: 1.5rem;
+  align-self: center;
+  font-family: IBM Plex Sans;
+}
+
+.userRatingTEN {
+  font-size: 1.4rem;
+  font-weight: bold;
+  border: 2px solid #398ea7;
+  color: #398ea7;
+  border-radius: 100%;
+  padding: 22px;
+  padding-left: 24px; padding-right: 24px;
+  margin-right: 1.5rem;
+  align-self: center;
+  font-family: IBM Plex Sans;
+}
+
+ /*P R O F I L E*/
+
+ .profilePageAvatar {width: 150px; height: 150px;}
+
+ .updateInfo {margin-top: 1.9rem;}
+  .updatePw {margin-top:3rem;}
+
+  .bookedExImage {width: 150px; height: 150px}

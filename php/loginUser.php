@@ -36,10 +36,7 @@ if($numRows == 1){
     $_SESSION['authuser'] = 1; //if statement above this one for admin login
     $_SESSION['userrole'] = $row['role'];
     //take user back to previous page
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
-    echo '<script type="text/javascript">',
-         'location.reload();', 
-         '</script>';
+    header('Location: ../userProfile.php?uid='. $row['userid']);
   } else {
   $message = "Incorrect username/password combination, please try again";
   header("location: ../register.php?message={$message}");
