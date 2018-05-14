@@ -15,7 +15,7 @@ if($uid == $specuid /*|| isAdmin*/ ){
 
   if($deleteReview){
 
-    header('location: ../specificExhibition.php?id='.$exid . '&err=Comment deleted');
+    header('location: ../specificExhibition.php?id='.$exid . '&alertBarMsg=Comment deleted');
   } else {
     echo "derp";
   }

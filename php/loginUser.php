@@ -35,6 +35,7 @@ if($numRows == 1){
     $_SESSION["username"] = $username;
     $_SESSION['authuser'] = 1; //if statement above this one for admin login
     $_SESSION['userrole'] = $row['role'];
+    $_SESSION['needsNotify'] = $row['needsNotified'];
     //take user back to previous page
     header('Location: ../userProfile.php?uid='. $row['userid']);
   } else {

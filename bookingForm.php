@@ -79,5 +79,6 @@
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <?php include('js/letterBoxAlerts.php'); ?>
   <script src="js/loginForm.js"></script>
   </html>

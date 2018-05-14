@@ -4,6 +4,13 @@ $('#alertBar').click(function(){
   $('#alertBar').hide(800);
 });
 
+// if ($('.alertBar').html) {
+//         window.setInterval(10);
+//         $('.alertBar').html.remove();
+//     }
+//
+
+
 $(".bookcase1").click(function(){
   $("#alertBar").html("Sorry, you must be logged in to book tickets - click to dismiss");
   $("#alertBar").show(300);

@@ -63,7 +63,6 @@ session_start();
 
      else {
       /*REGEX HERE?*/
-      /*IF USER HAS BOOKED A TICEKT*/
       $dateTime = gmdate('Y-m-d h:i:s \G\M\T', time());
        test_input($_POST['reviewPost']);
        $ratingP = $_POST['ratingPost'];
@@ -153,13 +152,20 @@ $sqlReviewUser = mysqli_query($conn, "SELECT U.userid, R.review, R.rating, R.use
     INNER JOIN ratings R ON R.userid = U.userid
     WHERE R.exhibitionid LIKE $exid");
 
+    $rowcount = mysqli_num_rows($sqlReviewUser);
+
     //function below figures out how long ago the review was posted
     include('timeAgoFunc.php');
 //this.review
+#if no reviews display encouraging message
+if($rowcount == 0){
+     echo "<div class='NMScard'> <p class='centerText pNoMarginBelow'> Be the first to review this exhibition!</p></div>";
+   }
 
 while($row = mysqli_fetch_array($sqlReviewUser))
   {
-    global $username; global $review; global $rating; global $image; global $datePost; global $role; global $uid;
+    global $username; global $review; global $rating; global $image;
+    global $datePost; global $role; global $uid; global $rowcount;
     $specUid = $row['userid'];
     $username = $row['username'];
     $review = $row['review'];
@@ -167,12 +173,13 @@ while($row = mysqli_fetch_array($sqlReviewUser))
     $rating =  $row['rating'];
     $image =  $row['image'];
     $role = $row['role'];
-
     ?>
+
+
 
     <div class="singleReview row">
       <div class="col-xs-2">
-        <img class="userAvatar" src='img/<?php echo $image; ?>' alt="user avatar">
+        <img class="userAvatar" src='img/userUploaded/<?php echo $image; ?>' alt="user avatar">
       </div>
       <div class="reviewText col">
         <div class="topofReview">

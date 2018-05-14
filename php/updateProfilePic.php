@@ -1,4 +1,5 @@
 <?php
+session_start();
 require('../includes/dbconx.php');
 
 
@@ -13,24 +14,24 @@ if(isset($_POST["submit"])) {
         echo "File is an image - " . $check["mime"] . ".";
         $uploadOk = 1;
     } else {
-        echo "File is not an image.";
+      header('location: ../userprofile.php?alertBarMsg=Please upload an image file only.');
         $uploadOk = 0;
     }
 }
 // Check if file already exists
 if (file_exists($target_file)) {
-    echo "Sorry, file already exists.";
+    header('location: ../userprofile.php?alertBarMsg=That file already exists in our database, either rename it or choose another file, sorry!');
     $uploadOk = 0;
 }
 // Check file size
 if ($_FILES["updatedProfPic"]["size"] > 500000) {
-    echo "Sorry, your file is too large.";
+    header('location: ../userprofile.php?alertBarMsg=Sorry, that picture is too big for our database. Please upload a smaller one (<500kb)');
     $uploadOk = 0;
 }
 // Allow certain file formats
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
 && $imageFileType != "gif" ) {
-    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+    header('location: ../userprofile.php?alertBarMsg=Please upload an image file only.');
     $uploadOk = 0;
 }
 // Check if $uploadOk is set to 0 by an error
@@ -39,9 +40,15 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["updatedProfPic"]["tmp_name"], $target_file)) {
-
-        echo "The file ". basename( $_FILES["updatedProfPic"]["name"]). " has been uploaded.";
-        // 
+        $uid = $_SESSION['id'];
+        $picUrl = basename($_FILES["updatedProfPic"]["name"]);
+        #do some cool stuff here
+        $updateProfPic = mysqli_query($conn, "UPDATE users set image = '$picUrl' WHERE userid = $uid");
+        if($updateProfPic) {
+          header('location: ../userprofile.php?alertBarMsg=Profile picture changed!');
+        }
+          else {header('location: ../userprofile.php?alertBarMsg=Server error. Please try again later!');}
+                //
         // $i = imagecreatefromjpeg($target_file);
         // echo $target_file;
         //
@@ -57,7 +64,8 @@ if ($uploadOk == 0) {
         // imagejpeg($thumb);
 
     } else {
-        echo "Sorry, there was an error uploading your file.";
+      header('location: ../userprofile.php?alertBarMsg=Sorry, there was a server error, please try again later.');
+
     }
 }
 

@@ -39,7 +39,7 @@ function checkPw($pw){
     $row = mysqli_fetch_assoc($sqlUser);
 
     if(mysqli_num_rows($sqlCheckBookings)>=1){
-      header('location: ../specificExhibition.php?id=' . $exid . '&alertMsg=Sorry, you have already booked this exhibition!');
+      header('location: ../specificExhibition.php?exid=' . $exid . '&alertBarMsg=You have already booked this exhibition! - be sure to leave a review after you visit!');
       return;
     }
     //check doesnt exist
@@ -52,13 +52,13 @@ function checkPw($pw){
           //remove spaces from exhibiton table
           $sqlSpacesleft = mysqli_query($conn, "UPDATE exhibitions SET spacesleft = spacesleft - '$ticketNo' WHERE exhibitionid LIKE '$exid'");
           $sqlSpacesleft;
-          header("location: ../userProfile.php?uid=" .$uid . "&alertMsg=Tickets booked!");
+          header("location: ../userProfile.php?alertBarMsg=Tickets booked! - be sure to leave a review after you visit!");
         } else {
           echo $sqlSpacesleft;
           echo "Something went wrong! - Please try again later";
         }
     } else {
-     header('location: ../bookingForm.php?exid=' .$exid . '&message=incorrect password!');
+     header('location: ../bookingForm.php?exid=' .$exid . '&alertBarMsg=incorrect password! - please try again');
     }
   }
 

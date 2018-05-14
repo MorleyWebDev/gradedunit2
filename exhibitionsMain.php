@@ -21,12 +21,12 @@
   <div class="shopContainer">
     <?php
       while($row = mysqli_fetch_array($sql)){
-        
+
         echo "<div class='container'>";
           echo '<h3>' . $row['title'] . '</h3>';
           echo '<p>' . $row['description'] . '<p>';
           echo '<p> spaces left: ' . $row['spacesleft'] . '</p>';
-          echo '<a href="specificExhibition.php?id=' . $row['exhibitionid'] . '"' . '><input type="submit" value="More information"></a>';
+          echo '<a href="specificExhibition.php?exid=' . $row['exhibitionid'] . '"' . '><input type="submit" value="More information"></a>';
         echo "</div>";
       }
       mysqli_close($conn);
@@ -38,6 +38,7 @@
      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
      crossorigin="anonymous"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+   <?php include('js/letterBoxAlerts.php'); ?>
    <script src="js/loginForm.js"></script>
   </body>
 </html>

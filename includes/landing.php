@@ -13,6 +13,7 @@ session_start();
   ?>
   <div class="container">
     <h1>You are now logged in.</h1>
+    <p>Looking for a more INTERACTIVE EXPERIENCE? Try out our  <a href="chatbot.php">chatbot</a> - Try asking it about what exhibitions are on! </p>
   </div>
 
 

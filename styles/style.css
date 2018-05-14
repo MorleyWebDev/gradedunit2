@@ -7,7 +7,20 @@ body {background-color: #EEEEEE;}
 
 .margintop {margin-top: 1em;}
 .paddingbottom {padding-bottom: 3rem;}
+
 .whitebg {background-color: white;}
+.redbg{background-color: red;}
+.marginauto {margin:auto;}
+.centerText{text-align: center;}
+.letterBox, .ALERTEDletterBox {
+  width:35px;
+  margin-top:0.75rem;
+}
+.pNoMarginBelow{margin-bottom: 0;}
+.forceColumn{
+text-align: center; flex-direction: column; display: flex; align-self: center;
+}
+
 
 .jumbotron {
   background-color: white;
@@ -18,6 +31,7 @@ body {background-color: #EEEEEE;}
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
 
 /* .cutpage{
@@ -31,17 +45,20 @@ body {background-color: #EEEEEE;}
 .btnDisable {background-color: white; outline: none;}
 
 
-input[type="button" i], input[type="submit" i],
+input[type="button" i], input[type="submit" i], .updateProfPic,
 input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
   button{
-    background: white;
-    border: 2px #398ea7 solid;
-    padding: 5px;
+    background: #398ea7;
+    border: 0;
+    padding: 10px;
     border-radius: 4px;
-    color: #398ea7;
+    color: white;
+    -webkit-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
+    -moz-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
+    box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
   }
 
-.alertBar {display: none;} /*jQuery changes this when required*/
+ /*jQuery changes this when required*/
 
 .fullUnderline {
   position:relative;
@@ -78,10 +95,12 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
   background: #398ea7;
 }
 
+.hdrUnderBackBtn {margin-top: 3rem;}
+
 .underBackbtn {
   font-size: 1.3rem;
 }
-
+/* b o o k i n g f o r m */
 .bookingForm {
   text-align: center;
   background-color: white;
@@ -94,12 +113,6 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
 
 
 /**s p e c e x **/
-.p4kbox { /*Going to need to do media queries for spex ex page*/
-  display: block;
-  position: relative;
-  right: 1rem;
-  margin-top:2em;
-}
 
 .bestNewBox p {
   color: green;
@@ -112,6 +125,8 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
 
 
 .p4kbnm {
+  margin-top: 10px;
+  float:right;
   color: green;
   display: flex;
   font-weight: lighter;
@@ -124,6 +139,7 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
   position: relative;
 }
 .p4kst {
+  float:right;
   font-weight: lighter;
   display: flex;
   font-size: 2.9rem;
@@ -137,18 +153,29 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
 
 .specExContainer {width: 70%; /*consider grid system instead*/}
 
-.specExStatus {align-items: center; justify-content: center;}
-.specExType {margin-bottom: 2rem;}
+.specExStatus {
+  align-items: center;
+  justify-content: center;
+  left: 1rem;
+  position: relative;
+}
+
+
+.specExType {margin-bottom: 2rem; position: relative; bottom: 4.8rem;}
+.specExDesc {align-self: center;}
 
 .specExTitle {
   font-family: Lobster Two;
   display: flex;
   align-self: center;
+  text-align:center;
   position: relative;
   left: 0.4em;
 }
 
 .specExStatus {margin-bottom: 0;}
+
+
 
 .specExHeader {
   margin-top:3em;
@@ -164,6 +191,9 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
   box-shadow: 16px 15px 8px -4px rgba(0,0,0,0.48);
   border-top: 4px solid #398ea7;
 }
+
+
+
 
 
 .specExContainer {margin-bottom: 10em;}
@@ -209,19 +239,23 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
 
 
 
-.specExImg {width: auto; height:200px; float:right;}
+.specExImg {width: auto; height:200px;}
 
 /*  */
 .1-5 {display: flex; align-self: center;}
-.specExDateTime p {text-align: center; margin-bottom: 0;}
 
-
-
+.specExDateTime p {
+  text-align: center;
+   /* position: relative;
+  left:2.8rem; */
+  line-height: 0.9rem;
+}
 
  /*R E V I E W S*/
 .reviewsContainer{
   display:flex;
   flex-direction: column;
+  margin-top:3rem;
 }
 
 .singleReview{
@@ -317,7 +351,117 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
 
  .profilePageAvatar {width: 150px; height: 150px;}
 
- .updateInfo {margin-top: 1.9rem;}
-  .updatePw {margin-top:3rem;}
+ .updateInfo, .updatePw {
+   margin-top: 1.9rem;
+   background-color: white;
+   padding: 20px;
+   border-left: 5px solid #398ea7;
+   border-radius: 10px;
+   -webkit-box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
+   -moz-box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
+   box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
+ }
+  .updatePw {margin-top:3.4rem;}
 
   .bookedExImage {width: 150px; height: 150px}
+
+  .mybookings, .mybookingsH{
+    position: relative;
+    top: 3rem;
+  }
+  .mybookingsH {margin-bottom: 1.5rem;}
+
+  .profPicBox {
+    flex-direction: column;
+  }
+
+.p4kProfileBooking {
+  float:right;
+  font-weight: lighter;
+  font-size: 2rem;
+  align-self: center;
+  border: 3px solid black;
+  border-radius: 60px;
+  padding: 23px;
+  align-self: flex-start;
+}
+.rightProfileBooking {flex-grow: 0; float:right}
+.rightProfileBooking h3 {position: relative; }
+
+
+.NMScard{
+  background-color: white;
+  padding: 15px;
+  -webkit-box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
+  -moz-box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
+  box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
+  border-left: 5px solid #398ea7;
+  margin-bottom: 50px;
+  border-radius: 10px;
+}
+
+/* a d m i n */
+  .ui-state-active,
+  .ui-widget-content .ui-state-active,
+   .ui-widget-header .ui-state-active,
+   a.ui-button:active, .ui-button:active,
+  .ui-button.ui-state-active:hover {
+    background: #398ea7 !important;
+    border: 1px solid #398ea7 !important;
+  }
+
+  .adminCreateExFrm input {
+    width: 100%;
+  }
+ /* / start of breakpoints / */
+ /*  */
+ /*  */
+ /*  */
+ /*  */
+ /*  */
+ /* Small devices (landscape phones, 576px and up)*/
+@media (max-width: 576px) {
+  .specExImg{
+    height:  125px;
+    margin: auto;
+  }
+
+  .specExHeader {
+    padding-bottom: 140px ;
+    padding-top: 140px ;
+    justify-content: column !important;
+  }
+
+  .bestNewBox{
+    margin:auto;
+  }
+}
+
+/* Medium devices (tablets, 768px and up)*/
+@media (max-width: 768px) {
+  .specExType{
+    bottom: 0rem;
+  }
+
+  .specExImg{
+    height:  150px;
+  }
+
+  .specExDateTime p {
+    text-align: center;
+     position: relative;
+    left:0;
+    line-height: 0.9rem;
+  }
+}
+
+//* Large devices (desktops, 992px and up)*/
+@media (max-width: 992px) {
+  .specExType{
+    bottom: 4.8rem;
+  }
+
+ }
+
+//* Extra large devices (large desktops, 1200px and up)*/
+@media (max-width: 1200px) { ... }
