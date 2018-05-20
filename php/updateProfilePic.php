@@ -43,7 +43,7 @@ if ($uploadOk == 0) {
         $uid = $_SESSION['id'];
         $picUrl = basename($_FILES["updatedProfPic"]["name"]);
         #do some cool stuff here
-        $updateProfPic = mysqli_query($conn, "UPDATE users set image = '$picUrl' WHERE userid = $uid");
+        $updateProfPic = mysqli_query($conn, "UPDATE users set avatar = '$picUrl' WHERE userid = $uid");
         if($updateProfPic) {
           header('location: ../userprofile.php?alertBarMsg=Profile picture changed!');
         }

@@ -20,12 +20,12 @@ if ($checkNumRow > 0){
   $DeleteReviews = mysqli_query($conn, "DELETE FROM ratings WHERE userid like $uid AND exhibitionid like $GETexid");
 
   if($sqlDeleteUsersBkng && $ReSellTickets && $DeleteReviews){
-    header('location: ../userProfile.php?alertBarMsg=booking cancelled');
+    header('location: ../userProfile.php?alertBarMsg=Removed Booking');
   } else {
     header('location: ../userProfile.php?alertBarMsg=server error.');
   }
 } else {
-  //user doesn't have any tickets. 
+  //user doesn't have any tickets.
     header('location: ../exhibitionsMain.php');
 }
 

@@ -33,7 +33,7 @@
       $lastN = $row['lastname'];
       $phoneNo = $row['phonenumber'];
       $role = $row['role'];
-      $imageUrl = $row['image'];
+      $imageUrl = $row['avatar'];
 
     }
 
@@ -58,7 +58,7 @@
 
     <div class="jumbotron">
       <h1><?php echo $un ?></h1>
-      <p>Welcome to your profile page. no one else can see this. </p>
+      <p>Welcome to your profile page! Only you can see this </p>
     </div>
 
     <div class="container">
@@ -109,11 +109,11 @@
             </div>
             <div class="form-group">
               <label for="emailx">Email: <?php echo $emailEr ?> </label>
-              <input type="text" placeholder="email" id="emailx" class="form-control" name="emailx" value="<?php echo htmlspecialchars($email); ?>">
+              <input type="email" placeholder="email" id="emailx" class="form-control" name="emailx" value="<?php echo htmlspecialchars($email); ?>">
             </div>
             <div class="form-group">
               <label for="phoneno">Phone Number: <?php echo $noEr; ?> </label>
-              <input type="text" placeholder="phone number" id="phoneNo" class="form-control" name="phoneNo" value="<?php echo htmlspecialchars($phoneNo); ?>">
+              <input type="number" placeholder="phone number" id="phoneNo" class="form-control" name="phoneNo" value="<?php echo htmlspecialchars($phoneNo); ?>">
             </div>
             <input class="updateDetailsBtn"type="submit" name="" value="Update Details">
           </form>
@@ -121,13 +121,13 @@
       </div>
 
       <h3 class="mybookingsH">My Bookings</h3>
-          <div class="row mybookings NMScard justify-content-between">
+
           <?php $usersBookings = mysqli_query($conn, "SELECT
             t.userid, t.exhibitionid, t.tickets, t.totalcost, e.title, e.startdate, e.enddate, e.spacesleft, e.cancel, e.image
             from tickets t INNER JOIN exhibitions e ON t.exhibitionid = e.exhibitionid
              WHERE t.userid LIKE $uid");
              if(mysqli_num_rows($usersBookings) == 0){
-               echo "<p class='marginauto'>You haven't booked any exhibitions yet! you can view all the current exhibitions <a href='exhibitionsMain.php'>here</a>  </p>";
+               echo "<div class='NMScard row'><p class='marginauto margintop'>You haven't booked any exhibitions yet! you can view all the current exhibitions <a href='exhibitionsMain.php'>here</a>  </p></div>";
              }
 
              while ($row = mysqli_fetch_array($usersBookings)) {
@@ -140,19 +140,8 @@
                $enddate = strtotime($row['enddate']);
                $cancel = $row['cancel'];
           ?>
-
-
-
-          <div class="col-md-3">
-            <img class = "bookedExImage" src="img/<?php echo $eximage; ?>" alt="exhibition picture">
-      <?php if($cancel == 0) { ?> <input type="button" class="margintop" id="userCancelsBookingBtn" name="" value="cancel booking"> <?php } ?>
-      <?php if($cancel == 1) { ?>
-         <p class="pNoMarginBelow">This exhibition is cancelled, click the button below to remove it from your bookings list</p>
-         <a href="userRemovesBkNotification.php?exid= <?php echo $exid; ?> "><input type="button" class="margintop" name="" value="Remove Notification"></a>
-       <?php } ?>
-          </div>
-
-          <div class="modal fade" id="userCancelsBookingBtnModal" role="dialog">
+          <!--  open modal box-->
+          <div class="modal fade" id="usrCancels<?php echo $exid ?>" role="dialog">
           <div class="modal-dialog modal-sm">
             <div class="modal-content">
               <div class="modal-header">
@@ -166,16 +155,29 @@
             </div>
           </div>
           </div>
+          <!-- end of modal -->
+
+
+          <div class="row mybookings NMScard justify-content-between">
+
+              <div class="col-sm-2">
+                <img class = "bookedExImage" src="img/exhibitions/<?php echo $eximage; ?>" alt="exhibition picture">
+          <?php if($cancel == 0) { ?> <input type="button" class="margintop" data-toggle="modal" data-target="#usrCancels<?php echo $exid ?>" name="" value="cancel booking"> <?php } ?>
+          <?php if($cancel == 1) { ?>
+             <p class="pNoMarginBelow">This exhibition is cancelled, click the button below to remove it from your bookings list</p>
+             <a href="php/userCancelsBooking.php?exid=<?php echo $exid; ?>"> <input type="button" class="margintop" name="" value="Remove notification"></a>
+           <?php } ?>
+              </div>
+
 
           <?php   $sqlRating = mysqli_query($conn, "SELECT ROUND(AVG(ratings.rating),1) as score FROM Exhibitions INNER JOIN ratings ON
               ratings.exhibitionid = exhibitions.exhibitionid WHERE exhibitions.exhibitionid LIKE $exid");
-
+              $checkReviewsExist = mysqli_num_rows(mysqli_query($conn, "SELECT review from ratings where exhibitionid = $exid"));
               $fetchscr = mysqli_fetch_assoc($sqlRating);
-
-
                ?>
 
-          <div class="col-md-5 vertical-align-middle align-self-center justify-content-center">
+
+          <div class="col-md-5 vertical-align-middle align-self-center justify-content-flexend">
             <h3><?php echo $title ?></h3>
 
             <p><span class="bold">Status:</span> <?php
@@ -199,22 +201,30 @@
             </p>
 
             <p><span class="bold">Tickets Purchased</span> - <?php echo $tickets; ?></p>
-            <p><span class="bold">total cost</span> -£<?php echo $totalcost; ?> (pay at door)</p>
+            <p><span class="bold">Total cost</span> -£<?php echo $totalcost; ?> (pay at door)</p>
+                  <?php  if($checkReviewsExist > 0){?>
+            <p><span class="bold">Rated: </span><?php echo $fetchscr['score']; ?>/ 10</p>
+          <?php } ?>
             <a href="specificExhibition.php?exid=<?php echo $exid; ?>"><input type="button" name="" value="View exhibition"></a>
             <p></p>
-          </div>
-<?php   $checkReviewsExist = mysqli_num_rows(mysqli_query($conn, "SELECT review from ratings where exhibitionid = $exid"));
-        if($checkReviewsExist > 0){
+          </div> <!--end of col 5 middle -->
+
+
+<?php
+        $usersRating = mysqli_query($conn, "SELECT rating from ratings where userid = $uid AND exhibitionid = $exid");
+        while($row = mysqli_fetch_array($usersRating)){
+
  ?>
           <div class="col vertical-align-middle align-self-center justify-content-center rightProfileBooking">
-            <h3 class="align-middle">Rating</h3> </br>
-            <span class="p4kProfileBooking"><?php echo $fetchscr['score']; ?></span>
+            <h3 class="align-middle">My rating</h3> </br>
+            <span class="p4kProfileBooking"><?php echo $row['rating']; ?></span>
           </div>
 
-        </div>
-      <?php }}?>
+</div>
+<?php  }}?>
+          </div>
 
-      </div>
+
 
 
 </body>

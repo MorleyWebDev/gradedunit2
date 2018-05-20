@@ -49,15 +49,17 @@ session_start();
 
 
   if(empty($_POST['reviewPost'])){
-    header('Location: ' . $_SERVER['HTTP_REFERER'] ."&err=Make Sure you type a review!");
+    header('Location: ' . $_SERVER['HTTP_REFERER'] ."&alertBarMsg=Make Sure you type a review before posting!");
   }
+
 
   else if(check_dplc($uid, $exid) == 1) {
-    header('Location: ' . $_SERVER['HTTP_REFERER'] ."&err=Sorry, you have already posted a review for this exhibiton! You could always delete it if you want to post another.");
+    header('Location: ' . $_SERVER['HTTP_REFERER'] ."&alertBarMsg=Sorry, you have already posted a review for this exhibiton! You could always delete it if you want to post another.");
   }
 
+  #this will not fire anymore. jQuery stops users who have not booked from submitting data.
   else if(check_booked($uid, $exid) == 0) {
-    header('Location: ' . $_SERVER['HTTP_REFERER'] ."&err=you need to book a ticket. - ");
+    header('Location: ' . $_SERVER['HTTP_REFERER'] ."&alertBarMsg=you need to book a ticket. - ");
   }
 
 
@@ -72,7 +74,7 @@ session_start();
        VALUE ('$uid', '$exid', '$ratingP', '$reviewP', now() )");
 
        $reviewInsert;
-       header('Location: ' . $_SERVER['HTTP_REFERER'] ."&err=Review Posted!");
+       header('Location: ' . $_SERVER['HTTP_REFERER'] ."&alertBarMsg=Review Posted!");
       }
   }
 
@@ -148,7 +150,7 @@ function test_input($data) {
 <?php
 $username = $review = $rating = $image = $role=""; $times;
 // view exibitions select statement
-$sqlReviewUser = mysqli_query($conn, "SELECT U.userid, R.review, R.rating, R.userid, R.datePosted, U.username, U.image, U.role, R.exhibitionid FROM users U
+$sqlReviewUser = mysqli_query($conn, "SELECT U.userid, R.review, R.rating, R.userid, R.datePosted, U.username, U.avatar, U.role, R.exhibitionid FROM users U
     INNER JOIN ratings R ON R.userid = U.userid
     WHERE R.exhibitionid LIKE $exid");
 
@@ -164,14 +166,14 @@ if($rowcount == 0){
 
 while($row = mysqli_fetch_array($sqlReviewUser))
   {
-    global $username; global $review; global $rating; global $image;
+    global $username; global $review; global $rating; global $avatar;
     global $datePost; global $role; global $uid; global $rowcount;
     $specUid = $row['userid'];
     $username = $row['username'];
     $review = $row['review'];
     $datePost = $row['datePosted'];
     $rating =  $row['rating'];
-    $image =  $row['image'];
+    $image =  $row['avatar'];
     $role = $row['role'];
     ?>
 
@@ -189,39 +191,65 @@ while($row = mysqli_fetch_array($sqlReviewUser))
 
         </div>
           <p class="reviewText"> <?php echo $review; ?> </p>
-
-        <?php if($uid === $specUid /*|| isAdmin*/ ) {?>
-        <a href="php/delReview.php?uid=<?php echo $specUid;?>&exid=<?php echo $exid;?>"><button type="button" class="deleteReviewBtn" name="button">delete</button></a>
+        <?php if($uid === $specUid || $_SESSION['userrole'] == 'admin') {?>
+          <button type="button" class="" data-toggle="modal" data-target="#ConfirmReviewDelete<?php echo $specUid;?>">Delete</button>
         <?php  }?>
 
         </div>
 
       <?php if($rating == 3 || $rating == 2 || $rating == 1){ ?>
-        <div class="col-xs-2 userRatingRED"> <!-- if its 10 do something else -->
+        <div class="col-xs-4 userRatingRED"> <!-- if its 10 do something else -->
           <span><?php echo $rating; ?></span>
         </div>
       <?php } ?>
 
       <?php if($rating == 6 || $rating == 5 || $rating == 4){ ?>
-        <div class="col-xs-2 userRatingORANGE"> <!-- if its 10 do something else -->
+        <div class="col-xs-4 userRatingORANGE"> <!-- if its 10 do something else -->
           <span><?php echo $rating; ?></span>
         </div>
       <?php } ?>
 
     <?php if($rating == 7 || $rating == 8 || $rating == 9){ ?>
-      <div class="col-xs-2 userRatingGREEN"> <!-- if its 10 do something else -->
+      <div class="col-xs-4 userRatingGREEN"> <!-- if its 10 do something else -->
         <span><?php echo $rating; ?></span>
       </div>
     <?php } ?>
 
     <?php if($rating == 10){ ?>
-      <div class="col-xs-2 userRatingTEN"> <!-- if its 10 do something else -->
+      <div class="col-xs-8 userRatingTEN"> <!-- if its 10 do something else -->
         <span><?php echo $rating; ?></span>
       </div>
     <?php } ?>
 
     </div>
+
+
+    <div id="ConfirmReviewDelete<?php echo $specUid; ?>" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Confirm Delete</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you wish to delete this review?</p>
+
+          <a href="php/delReview.php?uid=<?php echo $specUid;?>&exid=<?php echo $exid;?>"><button type="button" class="deleteReviewBtn" name="button">Delete it</button></a>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+</div></div>
   <?php } ?>
+
+
+
+
+
 
   </div>
 </div>

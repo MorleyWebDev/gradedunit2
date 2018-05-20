@@ -14,12 +14,12 @@ session_start();
      		   <a class="nav-item nav-link" href="exhibitionsMain.php">Exhibitions</a>
             </li>
             <li class="nav-item">
-    		    <a class="nav-item nav-link" href="#">Chatbot</a>
+    		    <a class="nav-item nav-link" href="chatbot/bot.php">Chatbot</a>
             </li>
         </ul>
     </div>
     <div class="mx-auto order-0">
-        <a class="navbar-brand mx-auto" href="#">National Museums Scotland</a>
+        <a class="navbar-brand mx-auto" href="#">NMS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -63,6 +63,13 @@ session_start();
 </div>
   </nav>
 
+  <section class="navSearchBar">
+    <form class="" action="filteredExhibitions.php" method="post">
+      <input type="text" class="searchBarInput" placeholder="search" name="searchBarInput" value="">
+      <input type="submit" class="searchBarSubmit" name="" value="Submit">
+    </form>
+  </section>
+
   <?php
 } else if(($_SESSION['userrole'] === 'creator'
         || $_SESSION['userrole'] === 'readonly')) {
@@ -79,18 +86,18 @@ session_start();
                 <a class="nav-link" href="exhibitionsMain.php">Exhibitons</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Chatbot</a>
+                <a class="nav-link" href="chatbot/bot.php">Chatbot</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link"
                   href="userprofile.php">
-                  @<?php echo $_SESSION['username'];?>
+                  <?php echo $_SESSION['username'];?>
                 </a>
             </li
         </ul>
     </div>
     <div class="mx-auto order-0">
-        <a class="navbar-brand mx-auto" href="#">National Museums Scotland</a>
+        <a class="navbar-brand mx-auto" href="#">NMS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -115,6 +122,12 @@ session_start();
         </ul>
     </div>
 </nav>
+<section class="navSearchBar">
+  <form class="" action="filteredExhibitions.php" method="post">
+    <input type="text" class="searchBarInput" placeholder="search" name="searchBarInput" value="">
+    <input type="submit" class="searchBarSubmit" name="" value="Submit">
+  </form>
+</section>
 
 <!--admin LOGIN  -->
   <?php
@@ -125,30 +138,28 @@ session_start();
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="index.php">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="exhibitionsMain.php">Exhibitons</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Chatbot</a>
+                <a class="nav-link" href="chatbot/bot.php">Chatbot</a>
             </li>
             <li class="nav-item">
               <a class="nav-link"
                 href="userprofile.php">
-                @<?php echo $_SESSION['username'];?>
+                <?php echo $_SESSION['username'];?>
               </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="admin.php">*administration</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
+
         </ul>
     </div>
     <div class="mx-auto order-0">
-        <a class="navbar-brand mx-auto" href="#">National Museums Scotland</a>
+        <a class="navbar-brand mx-auto" href="#">NMS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -156,7 +167,6 @@ session_start();
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <?php var_dump($_SESSION['needsNotify']); ?>
             <?php if($_SESSION['needsNotify'] == 0){ ?>
               <img class="letterBox letterNoAlert" id="letterBox" src="img/letter.png" alt="letter">
             <?php } ?>
@@ -172,6 +182,12 @@ session_start();
         </ul>
     </div>
 </nav>
+<section class="navSearchBar">
+  <form class="" action="filteredExhibitions.php" method="post">
+    <input type="text" class="searchBarInput" placeholder="search" name="searchBarInput" value="">
+    <input type="submit" class="searchBarSubmit" name="searchBarSubmit" value="Submit">
+  </form>
+</section>
 <?php } ?>
 
 <div class="modal fade" id="letterAlertModal" role="dialog">

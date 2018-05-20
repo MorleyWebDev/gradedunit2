@@ -7,11 +7,33 @@ if(!isset($_GET['exid'])){
 }
 
   $exid = htmlspecialchars($_GET["exid"]);
+ #get all data from exhibitions.
+  $sqlex = mysqli_query($conn,  "SELECT * FROM exhibitions where exhibitionid LIKE $exid");
 
+  #if the value in the get querystring doesnt exist redirect them to  the main exhibitions page
+  $doesExidExist = mysqli_num_rows($sqlex);
+  if($doesExidExist == 0){
+    header('location: exhibitionsMain.php?alertBarMsg=That exhibition id does not exist on our servers. (Something went wrong!)');
+  }
+
+
+
+  #set id to variable if user has one.
   if(isset($_SESSION['id']))
   {
     $uid = $_SESSION['id'];
   }
+
+  #sql query to get users role into a string variable
+  $userRole = mysqli_query($conn, "select role, avatar from users where userid = $uid");
+  while($row = mysqli_fetch_row($userRole)){
+    #get user role on string
+    $uRole = $row[0];
+    #get user avatar URL on string
+    $userimage = $row[1];
+  }
+
+
 
 
   $sqlRating = mysqli_query($conn, "SELECT ROUND(AVG(ratings.rating),1) FROM Exhibitions INNER JOIN ratings ON
@@ -24,7 +46,7 @@ if(!isset($_GET['exid'])){
                               FROM exhibitions E LEFT JOIN ratings R ON E.exhibitionid = R.exhibitionid
                               GROUP By E.exhibitionid, title ORDER BY average DESC LIMIT 1");
 
-  $sqlex = mysqli_query($conn,  "SELECT * FROM exhibitions where exhibitionid LIKE $exid");
+
   $checkReviewsExist = mysqli_num_rows(mysqli_query($conn, "SELECT review from ratings where exhibitionid = $exid"));
 
   if($checkReviewsExist == 0){
@@ -34,11 +56,16 @@ if(!isset($_GET['exid'])){
   }
 
 
-  $CheckBooked = mysqli_query($conn, "SELECT * FROM tickets where userid = $uid and exhibitionid = $exid");
-  if(mysqli_num_rows($CheckBooked) == 0){
+  $CheckBook = mysqli_query($conn, "SELECT * FROM tickets where userid = $uid and exhibitionid = $exid");
+  if(mysqli_num_rows($CheckBook) == 0){
     $CheckBooked = 0;
   } else {
     $CheckBooked = 1;
+  }
+
+  while($row = mysqli_fetch_row($CheckBook)){
+    #row2 is the number of tickets the user booked for this exhibition.
+    $ticketsUserHasBooked = $row[2];
   }
 
   // $sqlex1 = mysqli_query($conn, "SELECT * FROM exhibitions where exhibitionid LIKE $exid");
@@ -47,8 +74,8 @@ if(!isset($_GET['exid'])){
 
   while($row = mysqli_fetch_array($sqlex)){
     global $title; global $image; global $type; global $description;
-    global $startdate; global $enddate; global $price; global $spacesleft;
-
+    global $startdate; global $enddateTIME; global $price; global $spacesleft;
+    $isActive = $row['active'];
     $title = $row['title'];
     $image = $row['image'];
     $type = $row['type'];
@@ -58,6 +85,14 @@ if(!isset($_GET['exid'])){
     $price = $row['price'];
     $spacesleft = $row['spacesleft'];
     $cancel = $row['cancel'];
+    $canceledOn = $row['canceledOn'];
+
+    $enddateTIME = strtotime($enddate);
+    $startdateTIME = strtotime($startdate);
+  }
+
+  if($isActive == 0){
+    header('location: exhibitionsMain.php?alertBarMsg=This exhibition has been deleted. We wont force you to remove the booking from your profile page. But the page itself will not work anymore');
   }
 
 
@@ -82,11 +117,30 @@ if(!isset($_GET['exid'])){
       <div class='specExHeader row'>
         <div class='flexColumn col-sm-4 d-flex align-items-center justify-content-center'>
           <h1 class='specExTitle'> <?php echo $title; ?> </h1>
-          <p class='specExStatus'><span class='bold'>Exhibition field:</span> <?php echo $type; ?> </p> <!--if statement here for spaces free / cancelled-->
+          <p class="centerText"><span class='bold'>Status:</span>
+          <?php if($cancel == 1) {
+            $now = time();
+            $canceledOnTIME = strtotime($canceledOn);
+            $datedDiff = $canceledOnTIME- $now;
+            $daysBetween = round($datedDiff / (60 * 60 * 24));
+            $daysTillDeleted = $daysBetween + 31;
+            $shouldBeGone = 0;
+            if($daysTillDeleted <= 0 ){$shouldBeGone = 1;}
+            if($shouldBeGone = 1){ echo "This exhibiton has been canceled for over 30 days and will be deleted shortly.";}
+            else {
+            echo "Cancelled, this page will be deleted in - <span class='bold'>" . $daysTillDeleted . "</span> days. Sorry!";
+
+          } }   if($enddateTIME < strtotime('today GMT')) {echo "Exhibition has ended.";}
+                else if($spacesleft > 5 && $shouldBeGone == 0) {echo $spacesleft . " tickets remaining";}
+                else if($spacesleft <= 5 && $spacesleft > 0 && $shouldBeGone == 0) {echo "Only " . $spacesleft . " tickets remaining - Book soon before its too late!" ;}
+                else if($shouldBeGone == 0) {echo "Exhibition Full";}
+           ?>
+         </p>
+
         </div><!-- end column -->
 
-        <div class="col-sm-4">
-          <img class='specExImg' src=<?php echo"'img/". $image . "'"; ?> alt='exhibitonimage'>
+        <div class="col-sm-4 align-self-center specExImgBox">
+          <img class='specExImg' src=<?php echo"'img/exhibitions/". $image . "'"; ?> alt='exhibitonimage'>
         </div>
 <div class="col-sm-4 align-self-center forceColumn">
     <?php
@@ -112,17 +166,11 @@ if(!isset($_GET['exid'])){
           <a href="javascript:history.go(-1)"><span class="backbtn">Back</span></a><br/>
           <div class='row margintop paddingbottom align-items-center'>
             <div class='col align-self-center'>
-              <span class='specExType bold'>Status:
-                <span class="light">
-                <?php if($cancel == 1) {echo "Cancelled - Sorry!";}
-                      else if($spacesleft > 5) {echo $spacesleft . " tickets remaining";}
-                      else if($spacesleft <= 5 && $spacesleft > 0) {echo "Only " . $spacesleft . " tickets remaining - Book soon before its too late!" ;}
-                      else {echo "Exhibition Full";}
-
-                      if($CheckBooked == 1){echo "<br/> You have booked x tickets for this exhibition";}
-                 ?>
-
-              </span></span>
+              <span class='specExType bold'>Exhibition Field:</span>
+                <span>
+                    <?php echo $type; ?>
+ <!--if statement here for spaces free / cancelled-->
+                </span>
 
 
                <!--if statement here for spaces free / cancelled-->
@@ -132,8 +180,12 @@ if(!isset($_GET['exid'])){
 
 
 
-    <div class="col-md-2">
+    <div class="col-md-5">
         <div class='specExDateTime NMScard'>
+          <?php if($CheckBooked == 1){
+            echo "<p class='YouHaveBooked'>
+            You have booked"?> <?php echo $ticketsUserHasBooked; ?> <?php  echo "tickets for this exhibition</p>";
+          } ?>
           <p class='bold'> Opens: </p>
           <p> <?php echo $startdate; ?> </p>
           <br><p class='bold'> Closing date: </p>
@@ -159,7 +211,7 @@ if(!isset($_GET['exid'])){
     <form class="reviewForm" action="php/reviewsLogic.php?exid=<?php echo$exid ?>" method="post">
       <div class="postReviewBox row">
           <div class="col-xs-3">
-            <img class="userAvatar" src=<?php echo"'img/" . $image . "'"; ?> alt="">
+            <img class="userAvatar userAvatarMine" src=<?php echo"'img/userUploaded/" . $userimage . "'"; ?> alt="">
           </div>
           <div class="col notOnMobile">
 
@@ -184,16 +236,34 @@ if(!isset($_GET['exid'])){
               </select> <br/>
             </div>
             <div class="reviewInputBtn">
-              <input type="button" name="cancel" value="cancel"> <!--js for this? CLEAR input -->
-              <input type="submit" name="submit" value="submit">
+              <input type="button" name="cancel" class="cnclReviewTextBtn" value="cancel"> <!--js for this? CLEAR input -->
+              <?php
+              if(ISSET($_SESSION['id'])){
+                if($uRole == 'admin' || $uRole == 'creator'){
+                  if($CheckBooked == 1) {
+                    if(strtotime('today GMT') > strtotime($startdate)){
+                      echo '<input type="submit" name="submit" class="" value="submit">';
+                    } else {
+                      echo '<input type="button" name="submit" class="btnDisable revwBtnNotStartedYet" value="submit">';
+                    }
+                  } else {
+                    echo '<input type="button" name="submit" class="btnDisable revwBtnNoBooking" value="submit">';
+                  }
+                } else {
+                  echo '<input type="button" name="submit" class="btnDisable revwBtnReadOnly" value="submit">';
+                }
+              } else {
+                echo '<input type="button" name="submit" class="btnDisable revwBtnNotLogged" value="submit">';
+              }
+              ?>
             </div>
           </div>
       </div>
-      <span><?php
+      <p class='reviewBtnErr hideOnClick'><?php
             if(isset($_GET['err'])){
               $emptyErr = $_GET['err'];
               echo   $emptyErr; // form
-            } ?></span>
+            } ?></p>
     </form>
   </div>
 

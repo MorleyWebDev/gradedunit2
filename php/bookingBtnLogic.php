@@ -10,69 +10,48 @@ while($row = mysqli_fetch_array($sqlGetDates)){
   global $sdate; global $edate; global $sleft; global $cncl;
 
   $sdate = $row['startdate'];
-  $edate = $row['enddate'];
+  $edate = strtotime($row['enddate']);
   $sleft = $row['spacesleft'];
   $cncl = $row['cancel'];
-}
 
+}
 // echo $sdate;
 // echo $edate;
 // echo $sleft;
-// echo $cncl;
+//echo $cncl;
 // echo $exid;
 // echo $uid;
-
 //change echo to innerhtml of error div
 //also add buttons - disabled etc class="disabled"
+
+#five conditions need to be met for the real button to be echoed.
 if(ISSET($_SESSION['id'])){
-  if($edate > date("Y-m-d")){
-    if($sleft > 0 ){
-      echo '<a href="bookingForm.php?exid=' . $exid  . '"><input type="button" name="booktickets" value="Book Tickets"></a>';
+  if($CheckBooked == 0){
+    if($cncl == 0){
+      if($edate > strtotime('today GMT')){
+        if($sleft > 0 ){
+          #if user meets all conditions allow them to book
+          echo '<a href="bookingForm.php?exid=' . $exid  . '"><input type="button" name="booktickets" value="Book Tickets"></a>';
+        } else {
+          #if no spaces left
+          echo '<input type="button" name="booktickets" class="btnDisable bookcaseNoSpace" value="Book Tickets">';
+        }
+      } else {
+        #if exhibition has ended
+        echo '<input type="button" name="booktickets" class="btnDisable bookcaseEnded" value="Book Tickets">';
+      }
     } else {
-      echo '<button type="button" name="booktickets" class="btn disabled btnDisable bookcase3" value="Book Tickets">Book Tickets</button>';
+      #if exhibition is canceled
+      echo '<input type="button" name="booktickets" class="btnDisable bookcaseCncl" value="Book Tickets">';
     }
   } else {
-    echo '<button type="button" name="booktickets" class="btn disabled btnDisable bookcase2" value="Book Tickets">Book Tickets</button>';
-  }
-} else {
-  echo '<button type="button" name="booktickets" class="btn disabled btnDisable bookcase1" value="Book Tickets">Book Tickets</button>';
+    #if user has booked a ticket - no button. As they can only purchase one set of tickets
+    echo "";
+  } }
+else {
+  #if user is logged out
+ echo '<input type="button" name="booktickets" class="btnDisable bookcaseLoggedOut" value="Book Tickets">';
 }
 
-//if user has booked the exhibition replace the book tickets with "you are going to this event!"
-
-
-// if(ISSET($_SESSION['id']))
-// {
-//   #user is logged in -
-//   if($edate > date("Y-m-d"))
-//   {
-//     #exhibit is on - further validation required
-//     if($sleft > 0)
-//     {
-//       #has spaces left
-//       echo "you good";
-//     }
-//     else
-//     {
-//       #
-//       echo "DISABLED BUTTON - no spaces";
-//     }
-//   }
-//   else
-//   {
-//     #change inner html of error div / add active class to error
-//     echo "DISABLED BUTTON - ENDED";
-//   }
-// else
-// {
-//     echo "DISABLED BUTTON - LOG IN BRO";
-// }
-// }
-
- ?>
-
-
-<?php
-#else
-#echo button as disabled
- ?>
+?>
+<p class="bookingLogicErr hideOnClick"></p>

@@ -7,40 +7,42 @@ require('includes/dbconx.php');
 require('includes/consolelog.php');
 
 
-$unameErr = $passwordErr = $emailErr = $firstnameErr = $lastnameErr = $noErr = $roleErr = "";
-$uname = $password = $email = $firstname = $lastname = $no = $role = "";
-$unameV = $passwordV = $emailV = $firstnameV = $lastnameV = $noV = $roleV = $unameSyntax = 0;
 
 
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $unameErr = $passwordErr = $emailErr = $firstnameErr = $lastnameErr = $noErr = $roleErr = "";
+  $uname = $password = $email = $firstname = $lastname = $no = $role = "";
+  $unameV = $passwordV = $emailV = $firstnameV = $lastnameV = $noV = $roleV = $unameSyntax = 0;
+
+
     if (empty($_POST["firstname"])) {
-        $firstnameErr = "A first name is required";
+        $firstnameErr = "- required field";
     } else {
         $firstname = test_input($_POST["firstname"]);
         $firstnameV = 1;
     }
     if (empty($_POST["email"])) {
-        $emailErr = "An email is required";
+        $emailErr = "- required field";
     } else {
         $email = test_input($_POST["email"]);
         $emailV = 1;
     }
     if (empty($_POST["phonenumber"])) {
-        $noErr = "A phone number is required";
+        $noErr = "- required field";
     } else {
         $no = test_input($_POST["phonenumber"]);
         $noV = 1;
     }
     if (empty($_POST["lastname"])) {
-        $lastnameErr = "A last name is required";
+        $lastnameErr = "- required field";
     } else {
         $lastname = test_input($_POST["lastname"]);
         $lastnameV = 1;
     }
     if (empty($_POST["username"])) {
-        $unameErr = "A username is required";
+        $unameErr = "- required field";
     } else
     {
         $uname = test_input($_POST["username"]);
@@ -52,10 +54,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $unameSyntax = 1;
     }
     if (empty($_POST["password"])) {
-        $passwordErr = "A password is required";
+        $passwordErr = "- required field";
     } else {
-        $password = test_input($_POST["password"]);
-        $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+        $passwordNew = test_input($_POST["password"]);
+        $hashPassword = password_hash($passwordNew, PASSWORD_DEFAULT);
         $passwordV = 1;
     }
 }
@@ -104,12 +106,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ) {
       if (checkExists($uname) ==1 ) {
           if (checkuname($uname) == 1) {
-              $sql = "insert into users (username, password, firstname, lastname, email, phonenumber, role)
-                      VALUE ('$uname', '$hashPassword', '$firstname', '$lastname', '$email', '$no', 'creator')";
+              $sql = "insert into users (username, password, firstname, lastname, email, phonenumber, role, avatar)
+                      VALUE ('$uname', '$hashPassword', '$firstname', '$lastname', '$email', '$no', 'creator', 'defaultAvatar.png')";
 
               $result = mysqli_query($conn, $sql);
               if ($result) {
-                  header("location: register.php?message=Account Created, you can now login");
+                 $uname = $passwordNew = $firstname = $lastname = $email = $password = $firstname = $no = "";
+                  echo "<div class='container'><div class='registerSuccess'>Account created. Try logging in with your username and password!</div></div>";
 
               } else {
                   echo "something went wrong iwth insert... - " . $result;

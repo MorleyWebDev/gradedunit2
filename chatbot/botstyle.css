@@ -1,0 +1,87 @@
+
+	bot.body {width: 500px; margin: 0 auto; margin-top: 20px;}
+	bot.div {position: absolute;}
+	bot.input {width: 400px;}
+	bot.button {width: 50px;}
+
+	#botSmile{color:hotpink; margin-bottom: 1.4em;}
+	#meSmile{color:white;}
+
+
+
+.botContainer{
+	display: block;
+	position: absolute;
+	top:0px;
+
+	justify-content: space-between;
+}
+
+.botBack{
+	position: absolute;
+	top:5em;
+	left: 1em;
+	padding: 10px;
+	background: transparent;
+	border: 1px white solid;
+	color:white;
+	border-radius: 4px;
+}
+
+#output{
+	position: absolute;
+	top:0.5em;
+	right: 0;
+	font-size: 30px;
+	overflow-y: visible;
+	line-height: 100%;
+	margin-right: 0.8em;
+	max-width:500px;
+  word-wrap:break-word;
+}
+
+.botInputs{
+  position: relative;
+	top:90vh;
+}
+
+#input{
+	background: transparent;
+	border: 0px;
+	border-bottom: 1px white solid;
+	width: 40%;
+	font-size: 30px;
+	color: white;
+	margin-right: 1em;
+}
+
+#rec, #clearChat{
+	font-size: 28px;
+	padding: 8px;
+	background: transparent;
+	color:hotpink;
+	border: 1px hotpink solid;
+	border-radius: 4px;
+}
+
+#clearChat{color:white; border: 1px white solid;}
+
+
+@media only screen and (max-width: 576px)  {
+
+	.botUserInput{
+	    font-size: 21px !important;
+			margin-right: 0em !important;
+			width: 49% !important;
+
+	  }
+
+	  #rec, #clearChat{
+	    font-size: 12px !important;
+
+	  }
+
+	.botBack{
+		position: absolute;
+		top:6em;
+}

@@ -13,7 +13,7 @@ $exid = $_GET['exid'];
 
 #set cancel to 1
 #change this to update the cancelTime
-$setCancel = mysqli_query($conn, "UPDATE exhibitions SET cancel = 1 WHERE exhibitionid = $exid");
+$setCancel = mysqli_query($conn, "UPDATE exhibitions SET cancel = 1, canceledOn = now() WHERE exhibitionid = $exid");
 
 if($setCancel){
   #select users who have booked a ticket
@@ -29,7 +29,7 @@ if($setCancel){
     $notifyUsers = mysqli_query($conn, "UPDATE users SET needsNotified = 1 where userid = $notifyUid");
     $notifyUsers;
   }
-  header('location: ../admin.php?alertBarMsg=Cancelled Exhibition and notified users.');
+  header('location: ../admin.php?alertBarMsg=Cancelled Exhibition and notified attending users.');
 
 
 
@@ -37,7 +37,7 @@ if($setCancel){
 #  echo $cancelExUserid;
 
 } else {
-  header('location: ../admin.php?alertBarMsg="server error"');
+  header('location: ../admin.php?alertBarMsg=server error - try again later');
 }
 
 #set cancelledOn to the present date/time

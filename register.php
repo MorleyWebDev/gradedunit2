@@ -11,47 +11,52 @@
     <?php
     require("includes/nav.php");
     require('includes/dbconx.php');
-    require('php/registerUser.php');
     ?>
 
+
+      <div class="jumbotron">
+        <h2>Register form</h2>
+      </div>
+
     <div class="container">
-      <h2>Register form</h2>
+      <a href="javascript:history.go(-1)"><span class="backbtn">Back</span></a>
+    <?php  require('php/registerUser.php'); ?>
       <form class="form-horizontal registerform" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
         <div class="form-group">
-          <span class="control-label col-sm-2" for="email"> <?php echo $emailErr ?> </span>
-          <div class="col-sm-10">
+          <span class="control-label col-sm-2" for="email">Email <?php echo $emailErr ?> </span>
+          <div class="col-sm-12">
             <input type="email" value=" <?php echo $email ?> " class="form-control" id="email" placeholder="Enter email" name="email">
           </div>
         </div>
         <div class="form-group">
-          <span class="control-label col-sm-2" for="firstname"> <?php echo $firstnameErr ?> </span>
-          <div class="col-sm-10">
+          <span class="control-label col-sm-2" for="firstname">First Name <?php echo $firstnameErr ?> </span>
+          <div class="col-sm-12">
             <input type="text" value="<?php echo $firstname ?>" class="form-control" id="firstname" placeholder="Enter first name" name="firstname">
           </div>
         </div>
         <div class="form-group">
-          <span class="control-label col-sm-2" for="lastname"> <?php echo $lastnameErr ?> </span>
-          <div class="col-sm-10">
+          <span class="control-label col-sm-2" for="lastname">Last Name <?php echo $lastnameErr ?> </span>
+          <div class="col-sm-12">
             <input type="text" class="form-control" id="lastname"  value="<?php echo $lastname ?>" placeholder="Enter last name" name="lastname">
           </div>
         </div>
         <div class="form-group">
-          <span class="control-label col-sm-2" for="phonenumber"> <?php echo $noErr ?> </span>
-          <div class="col-sm-10">
-            <input type="text" value="<?php echo $no ?>" class="form-control" id="phonenumber" placeholder="Enter phone number" name="phonenumber">
+          <span class="control-label col-sm-2" for="phonenumber">Phone Number <?php echo $noErr ?> </span>
+          <div class="col-sm-12">
+            <input type="number" value="<?php echo $no ?>" class="form-control" id="phonenumber" placeholder="Enter phone number" name="phonenumber">
           </div>
         </div>
         <div class="form-group">
-          <span class="control-label col-sm-2" for="username"> <?php echo $unameErr ?> </span>
-          <div class="col-sm-10">
+          <span class="control-label col-sm-2" for="username">Username <?php echo $unameErr ?> </span>
+          <div class="col-sm-12">
             <input type="text" value="<?php echo $uname ?>" class="form-control" id="username" placeholder="Enter username" name="username">
           </div>
         </div>
 
         <div class="form-group">
-          <span class="control-label col-sm-2" for="password"> <?php echo $passwordErr ?>  </span>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" value="<?php echo $password ?>" id="password" placeholder="Enter password" name="password">
+          <span class="control-label col-sm-2" for="password">Password  <?php echo $passwordErr ?>  </span>
+          <div class="col-sm-12">
+            <input type="text" class="form-control" value="<?php echo $passwordNew; ?>" id="password" placeholder="Enter password" name="password">
           </div>
         </div>
         <div class="form-group">
@@ -76,6 +81,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
+      <script src="js/bookingAlerts.js"></script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="js/loginForm.js"></script>
   </body>

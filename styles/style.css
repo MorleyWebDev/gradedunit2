@@ -1,17 +1,94 @@
 /* 398ea7 - cyan to be used. */
 /* 8C8C8C - liight grey to be used. */
 body {background-color: #EEEEEE;}
+
 .bold {font-weight: bold;}
 .light {font-weight: lighter; color: #8C8C8C;}
 .flexColumn {display: flex; flex-direction: column;}
+.vLarge {font-size: 4rem !important;}
 
 .margintop {margin-top: 1em;}
+.marginbottom {margin-bottom: 1em;}
 .paddingbottom {padding-bottom: 3rem;}
 
 .whitebg {background-color: white;}
+.whiteText {color: white;}
 .redbg{background-color: red;}
 .marginauto {margin:auto;}
 .centerText{text-align: center;}
+.posDown{position: relative; top: 2rem;}
+#alertBar, .alertBar {background-color: #398ea7; color: white; text-align: center;}
+
+.registerSuccess {
+  background-color: #398ea7;
+   border-radius: 15px;
+   position: relative;
+   top: 1rem;
+   margin-bottom: 3rem;
+   color: white;
+   padding: 5px;
+   text-align: center;
+ }
+
+ .registerform{
+   background-color: white;
+   padding: 10px;
+   margin-top: 1.9rem;
+   border-left: 5px solid #398ea7;
+   border-radius: 10px;
+   box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
+ }
+
+ .indexShowcase {
+   font-family: 'Lancelot', cursive;
+   color: white;
+   text-align: center;
+   text-shadow: 3px 0 0 blue, 0 -2px 0 #000, 0 2px 0 #000, -2px 0 0 #000;
+   padding: 11rem 0rem 11rem 0rem;
+   background-image: url('../img/showcase1.jpg') !important;
+   background-position: center !important;
+   background-size: 100% cover !important;
+   background-repeat: no-repeat !important;
+ }
+
+ .indexExhibitList{
+   background-color: white;
+   background-image: linear-gradient(to right, #333 35%, rgba(255, 255, 255, 0) 0%);
+   background-position: top;
+   background-size: 10px 2px;
+   background-repeat: repeat-x;
+ }
+
+ .midIndex {padding: 50px;}
+
+ .hotExCard {background-color: #EEEEEE; text-align: center; margin-bottom: 3rem;}
+
+.viewAllExhibitionsBtn{margin-bottom: 5rem;}
+ .IndexExImg {
+   width: 60%;
+   padding: 20px 5px 5px 5px;
+   align-self: center;
+ }
+
+ .loginForm {
+   text-align: center;
+   padding: 5px;
+   position: relative;
+   top: 1.5rem;
+ }
+ .loginForm button {
+position: relative;
+top: 1rem;
+ }
+
+ .loginForm input {
+  margin-bottom: 1rem;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #8C8C8C;
+ }
+
+
 .letterBox, .ALERTEDletterBox {
   width:35px;
   margin-top:0.75rem;
@@ -31,7 +108,6 @@ text-align: center; flex-direction: column; display: flex; align-self: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
 /* .cutpage{
@@ -42,7 +118,42 @@ text-align: center; flex-direction: column; display: flex; align-self: center;
 } */
 
 .jumbotron h6 {color: #999999;}
-.btnDisable {background-color: white; outline: none;}
+
+.navSearchBar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #398ea7;
+}
+.navSearchBar form{
+margin-top: auto;
+margin-bottom: auto;
+padding: 4px 0px 4px 0px;
+}
+
+.searchBarSubmit{
+  background: #398ea7 !important;
+  color: white !important;
+  border: 2px solid white !important;
+  border-radius: 0px 20px 20px 0px !important;
+  padding: 2px !important;
+  margin: 10px 0px 10px 0px;
+  position: relative;
+  right: 5px;
+  width:75px;
+
+}
+
+.searchBarInput{
+  min-height: 24px;
+  padding: 4px 0px 4px 0px;
+  border-radius: 20px 0px 0px 20px;
+  border: 0!important;
+}
+
+.searchBarInput::placeholder {position: relative; left: 10px;}
+
+
 
 
 input[type="button" i], input[type="submit" i], .updateProfPic,
@@ -56,6 +167,27 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
     -webkit-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
     -moz-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
     box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
+  }
+
+ .btnDisable {
+    background: White !important;
+    color:red !important;
+    border: 1px solid red !important;
+    border-radius: 4px;
+  }
+
+  .bookingLogicErr, .reviewBtnErr {
+    display:none;
+    background-color: red;
+    border-radius: 14px;
+    color: white;
+    margin:auto;
+    padding: 5px;
+  }
+
+  .reviewBtnErr{
+    width:auto;
+    text-align: center;
   }
 
  /*jQuery changes this when required*/
@@ -95,6 +227,10 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
   background: #398ea7;
 }
 
+.mainExCard{
+  margin: 10px 0px 10px 0px;
+}
+
 .hdrUnderBackBtn {margin-top: 3rem;}
 
 .underBackbtn {
@@ -102,10 +238,10 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
 }
 /* b o o k i n g f o r m */
 .bookingForm {
-  text-align: center;
+  /* text-align: center; */
   background-color: white;
   margin: auto;
-  line-height: 50%;
+  line-height: 100%;
   padding: 20px;
 }
 
@@ -161,7 +297,7 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
 }
 
 
-.specExType {margin-bottom: 2rem; position: relative; bottom: 4.8rem;}
+.specExType {margin-bottom: 2rem; position: relative;}
 .specExDesc {align-self: center;}
 
 .specExTitle {
@@ -170,10 +306,19 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
   align-self: center;
   text-align:center;
   position: relative;
-  left: 0.4em;
+  right: 0.2em;
 }
 
 .specExStatus {margin-bottom: 0;}
+.YouHaveBooked {
+  background-color: #398ea7;
+  color: white;
+  padding: 5px 0px 5px 0px;
+  border-radius: 9px 8px 0px 0px;
+  position: relative;
+  bottom: 17px;
+  margin: 0px -16px 0px -17px;
+}
 
 
 
@@ -205,9 +350,6 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
   width: 100%;
   text-align: center;
 }
-.postReviewBox input[type='text'],
-.postReviewBox input[type='submit'],
-.postReviewBox input[type='button'] {padding: 10px;}
 
 .postReviewBox textarea {
   outline: none;
@@ -231,10 +373,6 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
 
 .reviewInputBtn {
   align-items: flex-end;
-}
-.reviewInputBtn input {
-  background-color: white;
-  color: black;
 }
 
 
@@ -286,7 +424,7 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
 
 .reviewText{
  word-wrap: break-word;
- width:100%;;
+ width:100%;
 }
 
 .userAvatar{
@@ -361,15 +499,13 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
    -moz-box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
    box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
  }
-  .updatePw {margin-top:3.4rem;}
 
   .bookedExImage {width: 150px; height: 150px}
 
   .mybookings, .mybookingsH{
-    position: relative;
-    top: 3rem;
+
   }
-  .mybookingsH {margin-bottom: 1.5rem;}
+  .mybookingsH {margin-bottom: 1.5rem; margin-top:5rem;}
 
   .profPicBox {
     flex-direction: column;
@@ -395,7 +531,8 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
   -webkit-box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
   -moz-box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
   box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
-  border-left: 5px solid #398ea7;
+  border-bottom: 4px solid #398ea7;
+  border-left: 4px solid #398ea7;
   margin-bottom: 50px;
   border-radius: 10px;
 }
@@ -410,6 +547,10 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
     border: 1px solid #398ea7 !important;
   }
 
+  .adminExAccord {
+   height: auto;
+  }
+
   .adminCreateExFrm input {
     width: 100%;
   }
@@ -420,16 +561,37 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
  /*  */
  /*  */
  /* Small devices (landscape phones, 576px and up)*/
+
+
 @media (max-width: 576px) {
   .specExImg{
     height:  125px;
     margin: auto;
   }
 
+.midIndex h2{
+  text-align: center;
+}
+
   .specExHeader {
-    padding-bottom: 140px ;
-    padding-top: 140px ;
+    padding-bottom: 50px ;
+    padding-top: 50px ;
     justify-content: column !important;
+  }
+
+  .userAvatarMine{display:none;}
+  .userAvatar {height: 65px; width: 65px;}
+
+
+  .userRatingGREEN, .userRatingORANGE, .userRatingRED, .userRatingTEN{margin:auto;}
+
+
+
+
+
+  .specExImgBox {
+    text-align: center;
+    margin: 14px 0px 44px 0px;
   }
 
   .bestNewBox{

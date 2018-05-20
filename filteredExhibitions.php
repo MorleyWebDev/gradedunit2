@@ -3,9 +3,23 @@
   <head>
     <?php
       require('includes/dbconx.php');
+      $emptyRequest = 0;
+
+      if(!isset($_POST['searchBarInput'])){
+        header('location: index.php?alertBarMsg=We didnt quite catch that search query. Could you try again?');
+      }
+
+      if(empty($_POST['searchBarInput'])){
+        $emptyRequest = 1;
+      }
+
+      $userQuery = htmlspecialchars($_POST['searchBarInput']);
+
+
       $sql = mysqli_query($conn, "SELECT E.exhibitionid, image, title, spacesleft, type, title, ROUND(AVG(rating),1) as average
       FROM exhibitions E LEFT JOIN ratings R ON E.exhibitionid = R.exhibitionid
-      WHERE ACTIVE = 1 GROUP By E.exhibitionid, title ORDER BY cancel, average DESC");
+      WHERE ACTIVE = 1 AND title like '%$userQuery%' OR type like '%$userQuery%'
+      GROUP By E.exhibitionid, title ORDER BY cancel, average DESC");
     ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,14 +32,28 @@
     <?php require("includes/nav.php") ?>
 
     <div class="jumbotron">
-      <h1>All Exhibitions</h1>
-      <p class='light'>Here's everything, cancelled exhibtions and exhibitions which have ended are on this page too. But they will be at the bottom</p>
+      <h1>Filtered Exhibitions</h1>
+
     </div>
 
     <div class="container">
       <a href="javascript:history.go(-1)"><span class="backbtn">Back</span></a>
+      <?php if($emptyRequest == 1){ ?>
+        <h3 class='centerText'>You forgot to type something into the search bar.</h3>
+        <p class='centerText light'>It's an easy mistake to make, don't worry.</p>
+        
+      <?php } else { ?>
+      <h3 class='centerText'>You searched for <?php echo $userQuery; ?></h3>
+    <?php } ?>
 
-      <h3>Here are all the exhibitions, </h3>
+<?php $rowcount = mysqli_num_rows($sql); ?>
+    <?php  if($rowcount == 0 || $emptyRequest == 1){ ?>
+          <div class="card posDown">
+            <p class='centerText'>No results found.</p>
+          </div>
+  <?php  } else { ?>
+
+
 
   <div class="shopContainer row justify-content-center">
     <?php
@@ -57,7 +85,7 @@
 
 </div>
 
-<?php } ?>
+<?php } } ?>
 
 
 

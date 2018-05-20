@@ -37,10 +37,10 @@ if($numRows == 1){
     $_SESSION['userrole'] = $row['role'];
     $_SESSION['needsNotify'] = $row['needsNotified'];
     //take user back to previous page
-    header('Location: ../userProfile.php?uid='. $row['userid']);
+    header('Location: ../index.php?alertBarMsg=Log in succesful! We will occasionally post notifications up here. Just click to close them');
   } else {
   $message = "Incorrect username/password combination, please try again";
-  header("location: ../register.php?message={$message}");
+  header("location: ../register.php?alertBarMsg={$message}");
   }
 }
 ?>
