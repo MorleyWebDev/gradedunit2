@@ -105,9 +105,10 @@ $( function() {
 
     <div class="jumbotron">
        <h1> Administration </h1>
+       <p class="light">Don't be evil</p>
     </div>
     <div class="container">
-    <h3>All users</h3>
+    <h3 class="marginbottom centerText">All users</h3>
 
     <div class="accordion">
     <?php
@@ -172,7 +173,7 @@ $( function() {
 <?php } ?>
    </div> <!-- end of all users accordion -->
 
-    <h3>All exhibitons</h3>
+    <h3 class="centerText margintop marginbottom">All exhibitons</h3>
    <div class="accordion">
    <?php
      $allexhibitions = mysqli_query($conn, "SELECT * from exhibitions where active = 1");
@@ -263,7 +264,7 @@ $( function() {
 
   <div class="whitebgCutPage">
     <div class="container">
-      <h3> Create new exhibition</h3>
+      <h3 class="margintop centerText"> Create new exhibition</h3>
       <?php include('php/createExhibition.php'); ?>
       <form class="adminCreateExFrm"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data" method="post">
         <div class="form-group">

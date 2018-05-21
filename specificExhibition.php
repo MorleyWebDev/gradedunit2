@@ -166,8 +166,7 @@ if(!isset($_GET['exid'])){
           <a href="javascript:history.go(-1)"><span class="backbtn">Back</span></a><br/>
           <div class='row margintop paddingbottom align-items-center'>
             <div class='col align-self-center'>
-              <span class='specExType bold'>Exhibition Field:</span>
-                <span>
+            <span class="specExType">  <span class=' bold'>Exhibition Field:</span>
                     <?php echo $type; ?>
  <!--if statement here for spaces free / cancelled-->
                 </span>

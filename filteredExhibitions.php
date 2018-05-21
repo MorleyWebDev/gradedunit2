@@ -41,7 +41,7 @@
       <?php if($emptyRequest == 1){ ?>
         <h3 class='centerText'>You forgot to type something into the search bar.</h3>
         <p class='centerText light'>It's an easy mistake to make, don't worry.</p>
-        
+
       <?php } else { ?>
       <h3 class='centerText'>You searched for <?php echo $userQuery; ?></h3>
     <?php } ?>
@@ -49,7 +49,7 @@
 <?php $rowcount = mysqli_num_rows($sql); ?>
     <?php  if($rowcount == 0 || $emptyRequest == 1){ ?>
           <div class="card posDown">
-            <p class='centerText'>No results found.</p>
+            <p class='centerText pNoMarginBelow padding'>No results found.</p>
           </div>
   <?php  } else { ?>
 
@@ -66,13 +66,15 @@
         $averageMain = $row['average'];
 
 ?>
-<div class="col-md-4 mainExCard">
-  <div class="card centerText">
+<div class="col-md-4">
+  <div class="card centerText mainPageCard">
     <img class="IndexExImg" src="img/exhibitions/<?php echo $imageMain; ?>" alt="exhibition_image">
     <div class="card-body">
       <h5 class="card-title"><?php echo $titleMain; ?></h5>
       <p class="card-text">Exhibition field: <?php echo $typeMain; ?> </p>
+      <?php  if(($averageMain != "")){ ?>
       <p class="score">Rating: <?php echo $averageMain; ?> / 10</p>
+    <?php } else { echo "<br/>"; } ?>
       <?php if($spaceLeftMain > 0){ ?>
       <p class="card-text">Tickets left <?php echo $spaceLeftMain; ?></p>
     <?php }else{  ?>

@@ -32,12 +32,19 @@
         <h3 class="marginbottom posDown centerText">🔥Hot Exhibits🔥</h3>
         <div class="row justify-content-center">
         <!-- get top 3 exhibits - active only, non cancelled for front page. -->
-        <?php $sqlTop3 = mysqli_query($conn, "SELECT E.exhibitionid, image, spacesleft, type, title, ROUND(AVG(rating),1) as average
+        <?php $sqlTop1 = mysqli_query($conn, "SELECT E.exhibitionid, image, spacesleft, type, title, ROUND(AVG(rating),1) as average
                                     FROM exhibitions E LEFT JOIN ratings R ON E.exhibitionid = R.exhibitionid
                                     WHERE active = 1 AND cancel = 0 AND enddate > CURDATE()
-                                    GROUP By E.exhibitionid, title ORDER BY average DESC LIMIT 3");
+                                    GROUP By E.exhibitionid, title ORDER BY average DESC LIMIT 1");
 
-       while($row = mysqli_fetch_array($sqlTop3)){
+              $sql2and3 = mysqli_query($conn, "SELECT E.exhibitionid, image, spacesleft, type, title, ROUND(AVG(rating),1) as average
+                                          FROM exhibitions E LEFT JOIN ratings R ON E.exhibitionid = R.exhibitionid
+                                          WHERE active = 1 AND cancel = 0 AND enddate > CURDATE()
+                                          GROUP By E.exhibitionid, title ORDER BY average DESC LIMIT 2 OFFSET 1");
+
+
+
+       while($row = mysqli_fetch_array($sqlTop1)){
               $Exid = $row['exhibitionid'];
               $ExIMG = $row['image'];
               $ExTitle = $row['title'];
@@ -45,7 +52,7 @@
               $spaceLeft = $row['spacesleft'];
               $averageScr = $row['average'];?>
                 <div class="col-md-4 posDown">
-                  <div class="card hotExCard">
+                  <div class="card hotExCardTOP">
                     <img class="IndexExImg"src="img/exhibitions/<?php echo $ExIMG ?>" class="card-img-top" alt="exhibition_image">
                     <div class="card-body">
                       <h5 class="card-title marginbottom"> <?php echo $ExTitle ?> </h5>
@@ -66,6 +73,36 @@
 
 
           <?php } ?>
+
+        <?php  while($row = mysqli_fetch_array($sql2and3)){
+                 $Exid = $row['exhibitionid'];
+                 $ExIMG = $row['image'];
+                 $ExTitle = $row['title'];
+                 $ExType = $row['type'];
+                 $spaceLeft = $row['spacesleft'];
+                 $averageScr = $row['average'];?>
+                   <div class="col-md-4 posDown">
+                     <div class="card hotExCard">
+                       <img class="IndexExImg"src="img/exhibitions/<?php echo $ExIMG ?>" class="card-img-top" alt="exhibition_image">
+                       <div class="card-body">
+                         <h5 class="card-title marginbottom"> <?php echo $ExTitle ?> </h5>
+                         <p class="card-text">Exhibition field: <?php echo $ExType; ?> </p>
+                         <p class="score">Rating: <?php echo $averageScr; ?> / 10</p>
+                         <?php if($spaceLeft > 0){
+                            ?>
+                            <p>Tickets left: <?php echo $spaceLeft; ?></p>
+                          <?php } else {?>
+                             <p>Sold out!</p>
+                           <?php } ?>
+                       <a href="specificExhibition.php?exid=<?php echo $Exid; ?>"><button type="button" name="button">View exhibition</button></a>
+                       </div>
+
+                     </div>
+                   </div>
+
+
+
+             <?php } ?>
 
       </div>
     <div class="row justify-content-center posDown">

@@ -24,9 +24,8 @@
 
     <div class="container">
       <a href="javascript:history.go(-1)"><span class="backbtn">Back</span></a>
-
-      <h3>Here are all the exhibitions, </h3>
-
+      <br/><br/>
+      
   <div class="shopContainer row justify-content-center">
     <?php
       while($row = mysqli_fetch_array($sql)){
@@ -38,13 +37,16 @@
         $averageMain = $row['average'];
 
 ?>
-<div class="col-md-4 mainExCard">
-  <div class="card centerText">
+<div class="col-md-4">
+  <div class="card centerText mainPageCard">
     <img class="IndexExImg" src="img/exhibitions/<?php echo $imageMain; ?>" alt="exhibition_image">
     <div class="card-body">
       <h5 class="card-title"><?php echo $titleMain; ?></h5>
       <p class="card-text">Exhibition field: <?php echo $typeMain; ?> </p>
+        <?php  if(($averageMain != "")){ ?>
       <p class="score">Rating: <?php echo $averageMain; ?> / 10</p>
+      <!-- Line break to replace the "rating" p tag -->
+    <?php } else { echo "<br/>"; } ?>
       <?php if($spaceLeftMain > 0){ ?>
       <p class="card-text">Tickets left <?php echo $spaceLeftMain; ?></p>
     <?php }else{  ?>

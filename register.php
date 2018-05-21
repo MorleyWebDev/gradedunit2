@@ -16,6 +16,7 @@
 
       <div class="jumbotron">
         <h2>Register form</h2>
+        <p class="light">Complete the form below and click submit to register a new account with us.</p>
       </div>
 
     <div class="container">

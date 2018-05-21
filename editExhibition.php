@@ -3,19 +3,13 @@
    <head>
      <?php
      session_start();
-
      $role = $_SESSION['userrole'];
-
      if($role != 'admin'){
        header('location: userProfile.php');
      }
-
      $exid = $_GET['exid'];
-
      include('includes/dbconx.php');
-
      $getEx = mysqli_query($conn, "SELECT exhibitionid, title, description, spacesleft, price, type, startdate, enddate FROM exhibitions where active = 1 AND exhibitionid = $exid");
-
      while($row = mysqli_fetch_array($getEx)){
        $title = $row['title'];
        $desc = $row['description'];
@@ -26,8 +20,6 @@
        $edate = $row['enddate'];
        $exid = $row['exhibitionid'];
      }
-
-
       ?>
 
       <meta charset="utf-8">
