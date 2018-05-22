@@ -7,9 +7,21 @@
      if($role != 'admin'){
        header('location: userProfile.php');
      }
-     $exid = $_GET['exid'];
+
+
+     if(!isset($_GET['exid'])){
+       header('location: admin.php');
+     } else {
+       $exid = $_GET['exid'];
+     }
+
      include('includes/dbconx.php');
      $getEx = mysqli_query($conn, "SELECT exhibitionid, title, description, spacesleft, price, type, startdate, enddate FROM exhibitions where active = 1 AND exhibitionid = $exid");
+
+     if(mysqli_num_rows($getEx) == 0) {
+       header('location: admin.php?alertBarMsg=We dont have that exhibition id on our server. Try one from the "all exhibitions list"');
+     }
+
      while($row = mysqli_fetch_array($getEx)){
        $title = $row['title'];
        $desc = $row['description'];
@@ -38,10 +50,10 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<?php include('php/editExAttempt.php') ?>
+
      <div class="container">
        <h3> editing <?php echo $title; ?></h3>
-       <form class="adminCreateExFrm"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+       <form class="adminCreateExFrm"  action="php/editExAttempt.php" method="post">
 
          <input type="hidden" name="exid" value="<?php echo $exid; ?>">
 
@@ -93,10 +105,18 @@
      } );
      </script>
 
-     <?php include('js/letterBoxAlerts.php'); ?>
+     <script src="js/letterBoxAlerts.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
  <script src="js/modalHandle.js"></script>
  <script src="js/bookingAlerts.js"></script>
  <script src="js/loginForm.js"></script>
+
+ <script>
+ // Highlight the navpage page link
+ $(document).ready(function(){
+     $('a[href^="admin.php"]').addClass('active');
+ });
+ </script>
+
    </body>
  </html>

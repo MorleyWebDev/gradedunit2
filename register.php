@@ -16,7 +16,7 @@
 
       <div class="jumbotron">
         <h2>Register form</h2>
-        <p class="light">Complete the form below and click submit to register a new account with us.</p>
+        <p class="light pNoMarginBelow">Complete the form below and click submit to register a new account with us.</p>
       </div>
 
     <div class="container">
@@ -83,8 +83,16 @@
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
       <script src="js/bookingAlerts.js"></script>
-
+      <script src="js/letterBoxAlerts.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="js/loginForm.js"></script>
+
+    <script>
+    // Highlight the navpage page link
+    $(document).ready(function(){
+        $('a[href^="register.php"]').addClass('active');
+    });
+    </script>
+
   </body>
 </html>

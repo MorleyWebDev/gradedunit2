@@ -23,7 +23,7 @@ if($newRole != 'none'){
       echo "server error?" . $newRole . $uidToEdit;
     }
 } else {
-      header('location: ../admin.php?alertBarMsg=You were warned bucko. Make sure you select a real role next time.');
+      header('location: ../admin.php?alertBarMsg=Make sure you select a role for the user.');
 }
 
 }

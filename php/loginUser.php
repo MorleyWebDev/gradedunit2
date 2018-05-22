@@ -6,7 +6,6 @@ session_start();
 
 include('../includes/dbconx.php');
 
-$username = $password = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $name = test_input($_POST["un"]);
@@ -39,8 +38,7 @@ if($numRows == 1){
     //take user back to previous page
     header('Location: ../index.php?alertBarMsg=Log in succesful! We will occasionally post notifications up here. Just click to close them');
   } else {
-  $message = "Incorrect username/password combination, please try again";
-  header("location: ../register.php?alertBarMsg={$message}");
+  header("location: ../register.php?alertBarMsg=Incorrect username/password combination, please try again Hits");
   }
-}
+} else {  header("location: ../register.php?alertBarMsg=Incorrect username / password combination, please try again"); }
 ?>

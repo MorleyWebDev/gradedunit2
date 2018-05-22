@@ -19,13 +19,13 @@
 
     <div class="jumbotron">
       <h1>All Exhibitions</h1>
-      <p class='light'>Here's everything, cancelled exhibtions and exhibitions which have ended are on this page too. But they will be at the bottom</p>
+      <p class='light centerText'>Here's everything, cancelled exhibtions and exhibitions which have ended are on this page too. But they will be at the bottom</p>
     </div>
 
     <div class="container">
       <a href="javascript:history.go(-1)"><span class="backbtn">Back</span></a>
       <br/><br/>
-      
+
   <div class="shopContainer row justify-content-center">
     <?php
       while($row = mysqli_fetch_array($sql)){
@@ -70,7 +70,15 @@
      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
      crossorigin="anonymous"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-   <?php include('js/letterBoxAlerts.php'); ?>
+   <script src="js/letterBoxAlerts.js"></script>
    <script src="js/loginForm.js"></script>
+
+   <script>
+   // Highlight the navpage page link
+   $(document).ready(function(){
+       $('a[href^="exhibitionsMain.php"]').addClass('active');
+   });
+   </script>
+
   </body>
 </html>

@@ -100,15 +100,17 @@ $( function() {
   $( ".accordion" ).accordion({
     collapsible: true
   });
-} );
+});
 </script>
 
     <div class="jumbotron">
-       <h1> Administration </h1>
-       <p class="light">Don't be evil</p>
+       <h1 > Administration </h1>
+       <p class="pNoMarginBelow light">"A great opera house isn't run by a director, but by a great administrator."</p>
+       <p class="light pNoMarginBelow">-Steven Berkoff</p>
     </div>
     <div class="container">
-    <h3 class="marginbottom centerText">All users</h3>
+    <h3 class="centerText">All users</h3>
+    <p class="centerText marginbottom light">Here you can edit the roles of each user on the website</p>
 
     <div class="accordion">
     <?php
@@ -173,7 +175,8 @@ $( function() {
 <?php } ?>
    </div> <!-- end of all users accordion -->
 
-    <h3 class="centerText margintop marginbottom">All exhibitons</h3>
+    <h3 class="centerText margintop">All exhibitons</h3>
+    <p class="centerText marginbottom light">Here you can cancel, delete or edit each exhibition on the website.</p>
    <div class="accordion">
    <?php
      $allexhibitions = mysqli_query($conn, "SELECT * from exhibitions where active = 1");
@@ -265,6 +268,7 @@ $( function() {
   <div class="whitebgCutPage">
     <div class="container">
       <h3 class="margintop centerText"> Create new exhibition</h3>
+      <p class="centerText light"></p>
       <?php include('php/createExhibition.php'); ?>
       <form class="adminCreateExFrm"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data" method="post">
         <div class="form-group">
@@ -318,7 +322,7 @@ $( function() {
   </body>
 
 
-      <?php include('js/letterBoxAlerts.php'); ?>
+  <script src="js/letterBoxAlerts.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="js/modalHandle.js"></script>
   <script src="js/bookingAlerts.js"></script>
@@ -332,15 +336,12 @@ $( function() {
      } );
      </script>
 
+
      <script>
-      $('.changeUsrBtn').on('click', function(){
-
-        var chosenRole = $('.changeuserrole').val()
-        if(chosenRole == 'none'){
-          alert('Make sure you select a new role for the user. Trying to change it to "select a new role" will not work');
-        }
-
-
-      });
+     // Highlight the navpage page link
+     $(document).ready(function(){
+         $('a[href^="admin.php"]').addClass('active');
+     });
      </script>
+
 </html>

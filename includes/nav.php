@@ -7,8 +7,8 @@ session_start();
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-    	   		<a class="nav-item nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+    	   		   <a class="nav-item nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
      		   <a class="nav-item nav-link" href="exhibitionsMain.php">Exhibitions</a>
@@ -27,7 +27,7 @@ session_start();
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-       			 <a  class="nav-item nav-link " href="register.php">Register</a>
+       			    <a  class="nav-item nav-link " href="register.php">Register</a>
             </li>
 
             <li class="nav-item">
@@ -48,8 +48,8 @@ session_start();
         <div class="modal-body">
           <form class="loginForm form-horizontal" action="php/loginUser.php" method="post">
             <div class="form-group">
-              <input type="text" name="un" placeholder="username" value="">
-              <input type="text" name="pw" placeholder="password" value=""><br>
+              <input type="text" name="un" placeholder="username" required>
+              <input type="password" name="pw" placeholder="password" required><br>
               <button type="submit" name="button">Login!</button>
             </div>
           </form>
@@ -63,12 +63,12 @@ session_start();
 </div>
   </nav>
 
-  <section class="navSearchBar">
+  <div class="navSearchBar">
     <form class="" action="filteredExhibitions.php" method="post">
-      <input type="text" class="searchBarInput" placeholder="search" name="searchBarInput" value="">
-      <input type="submit" class="searchBarSubmit" name="" value="Submit">
+      <input type="text" class="searchBarInput" placeholder="search" name="searchBarInput">
+      <input type="submit" class="searchBarSubmit" value="Submit">
     </form>
-  </section>
+  </div>
 
   <?php
 } else if(($_SESSION['userrole'] === 'creator'
@@ -122,12 +122,12 @@ session_start();
         </ul>
     </div>
 </nav>
-<section class="navSearchBar">
+<div class="navSearchBar">
   <form class="" action="filteredExhibitions.php" method="post">
-    <input type="text" class="searchBarInput" placeholder="search" name="searchBarInput" value="">
-    <input type="submit" class="searchBarSubmit" name="" value="Submit">
+    <input type="text" class="searchBarInput" placeholder="search" name="searchBarInput">
+    <input type="submit" class="searchBarSubmit" value="Submit">
   </form>
-</section>
+</div>
 
 <!--admin LOGIN  -->
   <?php
@@ -182,12 +182,12 @@ session_start();
         </ul>
     </div>
 </nav>
-<section class="navSearchBar">
+<div class="navSearchBar">
   <form class="" action="filteredExhibitions.php" method="post">
-    <input type="text" class="searchBarInput" placeholder="search" name="searchBarInput" value="">
+    <input type="text" class="searchBarInput" placeholder="search" name="searchBarInput">
     <input type="submit" class="searchBarSubmit" name="searchBarSubmit" value="Submit">
   </form>
-</section>
+</div>
 <?php } ?>
 
 <div class="modal fade" id="letterAlertModal" role="dialog">

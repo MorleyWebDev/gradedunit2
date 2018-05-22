@@ -1,4 +1,6 @@
-<html>
+<!doctype html>
+
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,23 +15,23 @@
     <?php
     session_start();
     require("includes/nav.php");
-    require('includes/dbconx.php');
 
-    #if ended for more than 30 days delete`
-
-    //js script here to add class "active to all the "home" links in the
     ?>
+
     <div class="indexShowcase">
       <h1 class="vLarge">National Museum Of Scotland</h1>
     </div>
 
     <?php
+    require('includes/dbconx.php');
+    #get mid page index content - will change depending on login state
     require("includes/landing.php");
     ?>
 
     <div class="indexExhibitList">
       <div class="container posDown">
-        <h3 class="marginbottom posDown centerText">🔥Hot Exhibits🔥</h3>
+        <h3 class="marginbottom posDown centerText">Hot Exhibits</h3>
+        <p class="light posDown marginbottom centerText">Top three exhibits currently running.</p>
         <div class="row justify-content-center">
         <!-- get top 3 exhibits - active only, non cancelled for front page. -->
         <?php $sqlTop1 = mysqli_query($conn, "SELECT E.exhibitionid, image, spacesleft, type, title, ROUND(AVG(rating),1) as average
@@ -64,7 +66,7 @@
                        <?php } else {?>
                           <p>Sold out!</p>
                         <?php } ?>
-                    <a href="specificExhibition.php?exid=<?php echo $Exid; ?>"><button type="button" name="button">View exhibition</button></a>
+                        <a  class="btn aWhiteHover" href="specificExhibition.php?exid=<?php echo $Exid; ?>">View Exhibition</a>
                     </div>
 
                   </div>
@@ -87,14 +89,16 @@
                        <div class="card-body">
                          <h5 class="card-title marginbottom"> <?php echo $ExTitle ?> </h5>
                          <p class="card-text">Exhibition field: <?php echo $ExType; ?> </p>
-                         <p class="score">Rating: <?php echo $averageScr; ?> / 10</p>
+                         <?php if($averageScr != ""){ ?>
+                           <p class="score">Rating: <?php echo $averageScr; ?> / 10</p>
+                         <?php } else {echo "<br/>";} ?>
                          <?php if($spaceLeft > 0){
                             ?>
                             <p>Tickets left: <?php echo $spaceLeft; ?></p>
                           <?php } else {?>
                              <p>Sold out!</p>
                            <?php } ?>
-                       <a href="specificExhibition.php?exid=<?php echo $Exid; ?>"><button type="button" name="button">View exhibition</button></a>
+                       <a  class="btn aWhiteHover" href="specificExhibition.php?exid=<?php echo $Exid; ?>">View Exhibition</a>
                        </div>
 
                      </div>
@@ -106,7 +110,7 @@
 
       </div>
     <div class="row justify-content-center posDown">
-      <a class="viewAllExhibitionsBtn"href="exhibitionsMain.php"> <button type="button" name="button">View All Exhibitions</button> </a>
+      <a class="viewAllExhibitionsBtn btn aWhiteHover" href="exhibitionsMain.php">View All Exhibitions </a>
     </div>
     </div>
   </div>
@@ -119,9 +123,17 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
-    <?php include('js/letterBoxAlerts.php'); ?>
+  <script src="js/letterBoxAlerts.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="js/modalHandle.js"></script>
 <script src="js/bookingAlerts.js"></script>
 <script src="js/loginForm.js"></script>
+
+<script>
+// Highlight the navpage page link
+$(document).ready(function(){
+    $('a[href^="index.php"]').addClass('active');
+});
+</script>
+
 </html>

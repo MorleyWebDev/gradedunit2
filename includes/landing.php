@@ -11,8 +11,8 @@ session_start();
   </div>
   <div class="container midIndex">
     <div class="midIndexContent">
-      <h3 class="centerText marginbottom">That all sounds great, but why should I register an account?</h3>
-      <p class="margintop">An excellent question, most of our exhibitions have a limited amount of tickets avaliable, we need to keep track of who is attending which exhibits and when. So whilst creating an account is mostly to help us stay organized. Creating an account will also allow you to
+      <h3 class="centerText marginbottom">This all sounds great, but why should I register an account?</h3>
+      <p class="margintop">Our exhibitions have a limited amount of tickets avaliable, we need to keep track of who is attending which exhibits and when. So whilst creating an account is mostly to help us stay organized. Creating an account will also allow you to
         <ul>
           <li>Book/cancel tickets for exhibitions / display them on your profile page so you wont forget when they open/close.</li>
           <li>Post Reviews for exhibitions</li>
@@ -20,7 +20,7 @@ session_start();
           <li>Stay notified - You will be messaged on the site if any exhibitions you book have urgent changes</li>
         </ul>
         <p>Still not convinced? You could always ask our <a href="chatbot/bot.php">chatbot</a> if he knows any other benefits of registering. But for everyone else:</p>
-        <a href="register.php"><button type="button" name="button">Let's Register!</button></a>
+        <a href="register.php" class="btn aWhiteHover">Lets Register</a>
     </div>
   </div>
 

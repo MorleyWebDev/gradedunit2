@@ -274,8 +274,15 @@ if(!isset($_GET['exid'])){
     crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="js/loginForm.js"></script>
-    <?php include('js/letterBoxAlerts.php'); ?>
+    <script src="js/letterBoxAlerts.js"></script>
     <script src="js/bookingAlerts.js"></script>
+
+    <script>
+    // Highlight the navpage page link
+    $(document).ready(function(){
+        $('a[href^="exhibitionsMain.php"]').addClass('active');
+    });
+    </script>
 
 
 

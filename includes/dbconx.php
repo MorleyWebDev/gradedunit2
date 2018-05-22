@@ -9,7 +9,9 @@ global $conn;
 $conn = new mysqli($servername, $username, $password, $dbase);
 // Check connection
 if ($conn->connect_error) {
-die("<p> error connecting to db try</p>
-    <p><a href='../index.php'>this</a></p>");
+die("<p class='centerText'>We can't connect to our database. This website is almost entirely
+serverside, you will not be able to browse it without first connecting.
+Please try again later</p><p class='light centerText'>If this problem persists
+you could try asking our chatbot for information about exhibitions!</p> ");
 }
 ?>

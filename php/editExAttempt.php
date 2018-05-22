@@ -1,10 +1,10 @@
 
 <?php
-require('includes/dbconx.php');
+require('../includes/dbconx.php');
 session_start();
 $role = $_SESSION['userrole'];
 if($role != 'admin'){
-  header('location: userProfile.php');
+  header('location: ../userProfile.php');
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    if (empty($_POST["title"])) {
@@ -49,6 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $spacesleft = test_input($_POST['ticketlimit']);
     $limitV = 1;
   }
+    $exid = $_POST['exid'];
+
   if(
     $titleV == 1 &&
     $descV == 1 &&
@@ -58,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $priceV == 1 &&
     $limitV = 1
   ){
-    $exid = $_POST['exid'];
+
 #update
   $updateEx = mysqli_query($conn,
   "UPDATE exhibitions SET title = '$title',
@@ -70,12 +72,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   price = '$price'
    WHERE exhibitionid = $exid");
   if($updateEx){
-    echo "Exhibition Edited.";
+    header('location: ../editExhibition.php?exid='.$exid);
   } else {
 echo "Server error, please try again later.";
   }
- }
+} else {
+  header('location: ../editExhibition.php?exid='. $exid . '&alertBarMsg=Make sure you will out all the form fields before editing');
 }
+}
+
+
 function test_input($data)
 {
     $data = trim($data);

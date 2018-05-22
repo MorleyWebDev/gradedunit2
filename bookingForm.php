@@ -123,7 +123,7 @@
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <?php include('js/letterBoxAlerts.php'); ?>
+<script src="js/letterBoxAlerts.js"></script>
   <script src="js/loginForm.js"></script>
 
   <script type="text/javascript">
@@ -147,4 +147,12 @@
 
     //echo total cost into #echoTotalCost
   </script>
+
+  <script>
+  // Highlight the navpage page link
+  $(document).ready(function(){
+      $('a[href^="exhibitionsMain.php"]').addClass('active');
+  });
+  </script>
+
   </html>
