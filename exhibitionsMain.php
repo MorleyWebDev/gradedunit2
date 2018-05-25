@@ -53,7 +53,7 @@
       <p>Sold out!</p>
     <?php } ?>
     </div>
-    <a href="specificExhibition.php?exid=<?php echo $exid; ?>"> <button type="button" name="button">View Exhibition</button> </a>
+    <a  class="btnStyle aWhiteHover" href="specificExhibition.php?exid=<?php echo $exid; ?>">View Exhibition </a>
 
   </div>
 

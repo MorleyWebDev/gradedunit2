@@ -190,7 +190,7 @@ if(!isset($_GET['exid'])){
           <br><p class='bold'> Closing date: </p>
           <p> <?php echo $enddate; ?> </p>
           <br><p class='bold'>Price:</p>
-          <p>£ <?php echo $price; ?> <p>
+          <p class="marginbottom">£ <?php echo $price; ?> <p>
 
 
     <?php  require_once('php/bookingBtnLogic.php');?> <!--booking Button logic-->
@@ -215,7 +215,7 @@ if(!isset($_GET['exid'])){
           <div class="col notOnMobile">
 
 
-              <textarea  class="reviewInput" rows='5' name="reviewPost" value="" placeholder="Add a public review here - be sure to attach a score!"></textarea>
+              <textarea required class="reviewInput" rows='5' name="reviewPost" value="" placeholder="Add a public review here - be sure to attach a score!"></textarea>
           </div>
 
           <div class="col-xs-3">
@@ -235,7 +235,7 @@ if(!isset($_GET['exid'])){
               </select> <br/>
             </div>
             <div class="reviewInputBtn">
-              <input type="button" name="cancel" class="cnclReviewTextBtn" value="cancel"> <!--js for this? CLEAR input -->
+              <input type="button" name="cancel" class="cnclReviewTextBtn btnStyle" value="cancel"> <!--js for this? CLEAR input -->
               <?php
               if(ISSET($_SESSION['id'])){
                 if($uRole == 'admin' || $uRole == 'creator'){

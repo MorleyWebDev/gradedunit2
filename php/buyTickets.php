@@ -27,11 +27,7 @@ if ($realSpacesLeft < $ticketNo || $ticketNo > 7){
   die();
 }
 
-?>
 
-
-
-<?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") { //prevents scrips from running without POST request
   if(empty($_POST['bookPassword'])){
     header('location: ../bookingForm.php?exid=' .$exid . '&alertBarMsg=You need to enter your password!');

@@ -48,6 +48,7 @@ session_start();
    }
 
 
+
   if(empty($_POST['reviewPost'])){
     header('Location: ' . $_SERVER['HTTP_REFERER'] ."&alertBarMsg=Make Sure you type a review before posting!");
   }
@@ -66,9 +67,9 @@ session_start();
      else {
       /*REGEX HERE?*/
       $dateTime = gmdate('Y-m-d h:i:s \G\M\T', time());
-       test_input($_POST['reviewPost']);
+      $reviewP = test_input($_POST['reviewPost']);
+      $reviewP = mysqli_real_escape_string($conn, $reviewP);
        $ratingP = $_POST['ratingPost'];
-       $reviewP = $_POST['reviewPost'];
 
        $reviewInsert = mysqli_query($conn, "insert into ratings (userid, exhibitionid, rating, review, datePosted)
        VALUE ('$uid', '$exid', '$ratingP', '$reviewP', now() )");
@@ -192,7 +193,7 @@ while($row = mysqli_fetch_array($sqlReviewUser))
         </div>
           <p class="reviewText"> <?php echo $review; ?> </p>
         <?php if($uid === $specUid || $_SESSION['userrole'] == 'admin') {?>
-          <button type="button" class="" data-toggle="modal" data-target="#ConfirmReviewDelete<?php echo $specUid;?>">Delete</button>
+          <button type="button" class="btnStyle" data-toggle="modal" data-target="#ConfirmReviewDelete<?php echo $specUid;?>">Delete</button>
         <?php  }?>
 
         </div>
@@ -236,11 +237,11 @@ while($row = mysqli_fetch_array($sqlReviewUser))
       <div class="modal-body">
         <p>Are you sure you wish to delete this review?</p>
 
-          <a href="php/delReview.php?uid=<?php echo $specUid;?>&exid=<?php echo $exid;?>"><button type="button" class="deleteReviewBtn" name="button">Delete it</button></a>
+          <a class="btnStyle" href="php/delReview.php?uid=<?php echo $specUid;?>&exid=<?php echo $exid;?>">Delete it</a>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btnStyle btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
 </div></div>

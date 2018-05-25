@@ -15,7 +15,16 @@
          $vTitle = $row['title'];
          $ticketsLeft = $row['spacesleft'];
        }
+$checkExists = mysqli_num_rows($sqlBookForm);
+
+#if query string doesnt link to a exhibitions
+#link user to main
+if($checkExists == 0){
+  header('location: exhibitionsMain.php');
+}
+
  ?>
+
 
  <!DOCTYPE html>
  <html lang="en" dir="ltr">
@@ -60,6 +69,7 @@
         <option value="7">7</option>
       </select> <br/>
     <?php } else { ?>
+
       <!-- if less than 7 tickets left find out how many tickets remain and only allow the user to purchase that many. -->
       <select name="bookingselec" id="bookingselec" class="bookingselec marginbottom">
           <?php for($x=1; $x<=$ticketsLeft; $x++) {
@@ -74,7 +84,7 @@
 
 
       <br/>
-      <button type="button" class="confirmBKBtn" name="button" data-toggle="modal" data-target ="#confirmBookingModal">Book Tickets</button>
+      <button type="button" class="confirmBKBtn btnStyle" name="button" data-toggle="modal" data-target ="#confirmBookingModal">Book Tickets</button>
 
       <!-- Modal -->
           <div id="confirmBookingModal" class="modal fade" role="dialog">
@@ -97,12 +107,12 @@
 
 
                 <label for="bookPassword">Re-enter your Password to reserve tickets</label>
-                <input type="text" name="bookPassword" id="bookPassword" class="marginbottom" placeholder="Enter your password" value="">
+                <input type="text" name="bookPassword" required id="bookPassword" class="marginbottom" placeholder="Enter your password" value="">
 
-                <input type="submit" class="purchaseTickets" name="Purchase tickets" value="Reserve">
+                <input type="submit" class="purchaseTickets btnStyle" name="Purchase tickets" value="Reserve">
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btnStyle btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
 

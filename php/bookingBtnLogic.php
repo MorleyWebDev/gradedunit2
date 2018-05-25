@@ -31,7 +31,7 @@ if(ISSET($_SESSION['id'])){
       if($edate > strtotime('today GMT')){
         if($sleft > 0 ){
           #if user meets all conditions allow them to book
-          echo '<a href="bookingForm.php?exid=' . $exid  . '"><input type="button" name="booktickets" value="Book Tickets"></a>';
+          echo '<a class="btnStyle workingBkBtn aWhiteHover" href="bookingForm.php?exid=' . $exid  . '">Book Tickets</a>';
         } else {
           #if no spaces left
           echo '<input type="button" name="booktickets" class="btnDisable bookcaseNoSpace" value="Book Tickets">';

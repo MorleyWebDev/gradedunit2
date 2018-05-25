@@ -48,15 +48,16 @@ body {background-color: #EEEEEE;}
  }
 
  .indexShowcase {
-   font-family: 'Lancelot', cursive;
+   font-family: 'Lancelot', sans-serif;
    color: white;
    text-align: center;
    text-shadow: 2px 0 0 blue, 0 2px 0 #000, 0 2px 0 #000, -2px 0 0 #000;
    padding: 11rem 0rem 11rem 0rem;
-   background-image: url('../img/showcase.jpg') !important;
+   background-image: url('../img/showcase1.jpg') !important;
    background-position: center !important;
    background-size: cover !important;
    background-repeat: no-repeat !important;
+   border-bottom: 2px black solid !important;
  }
 
  .indexExhibitList{
@@ -181,7 +182,7 @@ padding: 4px 0px 4px 0px;
 
 input[type="button" i]:active, input[type="submit" i]:active, .updateProfPic,
 input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:active,
-  button:active, .btn:active{
+  button:active, .btnStyle:active{
     background: white;
     border: 1px #398ea7 solid;
     padding: 10px;
@@ -192,24 +193,55 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
     box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
   }
 
-  input[type="button" i], input[type="submit" i], .updateProfPic,
+ input[type="submit" i], .updateProfPic,
   input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
-    button, .btn{
-      background: #398ea7;
+  .btnStyle{
+      background: #398ea7 !important;
       border: 0;
       padding: 10px;
       border-radius: 4px;
-      color: white;
+      color: white !important;
       -webkit-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
       -moz-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
       box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
     }
+
+  /* Firefox doesnt like the above css block. It wasnt styling the a tags. */
+  /* if you delete the two below blocks buttons will not style on firefox */
+    .btnStyle{  background: #398ea7 !important;
+      border: 0 !important;
+      padding: 10px;
+      border-radius: 4px !important;
+      color: white !important;
+      -webkit-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
+      -moz-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
+      box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
+    }
+
+    .btnStyle:active {
+      background: white !important;
+      border: 1px #398ea7 solid !important;
+      padding: 10px !important;
+      border-radius: 4px solid #398ea7 !important;
+      color: #398ea7 !important;
+      -webkit-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
+      -moz-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
+      box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
+    }
+
+    .workingBkBtn {
+      position: relative;
+      top: 17px;
+    }
+
+
 
  .btnDisable {
     background: White !important;
     color:red !important;
     border: 1px solid red !important;
     border-radius: 4px;
+    padding: 10px;
   }
 
   .bookingLogicErr, .reviewBtnErr {
@@ -220,6 +252,15 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
     margin:auto;
     padding: 5px;
   }
+
+  .updateBubble {
+    background-color: #398ea7;
+    border-radius: 14px;
+    color: white;
+    margin:auto;
+    padding: 5px;
+  }
+
 
   .reviewBtnErr{
     width:auto;
@@ -547,9 +588,7 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
 
   .bookedExImage {width: 150px; height: 150px}
 
-  .mybookings, .mybookingsH{
 
-  }
   .mybookingsH {margin-bottom: 1.5rem; margin-top:5rem;}
 
   .profPicBox {
@@ -616,6 +655,15 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
 
 
 @media (max-width: 576px) {
+
+  .indexShowcase{padding: 0px;}
+
+  .mybookings
+  {
+
+  }
+
+
   .specExImg{
     height:  125px;
     margin: auto;
@@ -664,6 +712,17 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
 
 /* Medium devices (tablets, 768px and up)*/
 @media (max-width: 768px) {
+
+  .indexShowcase {
+    padding: 3rem 0rem 3rem 0rem;
+
+  }
+
+  .updateInfo {
+    width: 100%;
+    margin:auto;
+    margin-top:2rem;
+  }
 
   .midIndexContent {
     padding: 46px; padding-left:56px; padding-right: 56px;

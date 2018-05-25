@@ -1,4 +1,3 @@
-
 <?php
 require('../includes/dbconx.php');
 session_start();
@@ -58,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $SDV == 1 &&
     $EDV == 1 &&
     $priceV == 1 &&
-    $limitV = 1
+    $limitV == 1
   ){
 
 #update
@@ -72,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   price = '$price'
    WHERE exhibitionid = $exid");
   if($updateEx){
-    header('location: ../editExhibition.php?exid='.$exid);
+    header('location: ../editExhibition.php?exid='.$exid . '&alertBarMsg=Updated.');
   } else {
 echo "Server error, please try again later.";
   }
@@ -84,9 +83,11 @@ echo "Server error, please try again later.";
 
 function test_input($data)
 {
+  global $conn;
     $data = trim($data);
     $data = stripslashes($data);
-    $data = (htmlspecialchars($data));
+    $data = htmlspecialchars($data);
+    $data = mysqli_real_escape_string($conn, $data);
     return $data;
 }
 ?>

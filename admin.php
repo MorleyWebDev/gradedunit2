@@ -35,7 +35,8 @@
 
             $SqlsetActive = mysqli_query($conn, "UPDATE exhibitions SET active = 0 WHERE exhibitionid = $delExid");
             #it is jarring for users to have a new message only to find they dont have any exhibitions on their profile.
-            $unNotifyUser = mysqli_query($conn, "UPDATE users SET needsNotified = 0 WHERE userid = $Unnotify"); //and user has no other canceled exs
+            #remove notification when its deleted
+            $unNotifyUser = mysqli_query($conn, "UPDATE users SET needsNotified = 0 WHERE userid = $Unnotify");
             echo "<div id='alertBar'>An exhibition has been canceled for 30 days and has been deleted.</div>";
 
           }
@@ -142,7 +143,7 @@ $( function() {
          </select>
          <input type="hidden" name="postuserId" value=" <?php echo $userid; ?> ">
 
-         <button type="button" class="changeUsrBtn" data-toggle="modal" data-target="#usrid<?php echo $userid?>" name="button">Change</button>
+         <button type="button" class="changeUsrBtn btnStyle" data-toggle="modal" data-target="#usrid<?php echo $userid?>" name="button">Change</button>
 
 
          <div id="usrid<?php echo $userid?>" class="modal fade" role="dialog">
@@ -156,10 +157,10 @@ $( function() {
                </div>
                <div class="modal-body">
                  <p> <?php echo $username ?> previously had the role of <?php echo $role; ?> Do you wish to modify this to your selected role?</p>
-                 <input type="submit" name="" value="Change role">
+                 <input type="submit" class="btnStyle" value="Change role">
                </div>
                <div class="modal-footer">
-                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                 <button type="button" class="btnStyle btn-default" data-dismiss="modal">Close</button>
                </div>
              </div>
 
@@ -199,19 +200,19 @@ $( function() {
         <p>start date: <?php echo $startdate; ?></p>
         <p>end date: <?php echo $enddate; ?> </p>
         <p>Price:  <?php echo $price; ?> </p>
-      <a href="editExhibition.php?exid=<?php echo $exid;?>"><button type="button" name="button">Edit Exhibition</button></a>
-        <button type="button" data-toggle="modal" data-target="#DELETEexid<?php echo $exid?>">Delete exhibition</button>
+      <a class="btnStyle" href="editExhibition.php?exid=<?php echo $exid;?>">Edit Exhibition</a>
+        <button class="btnStyle" type="button" data-toggle="modal" data-target="#DELETEexid<?php echo $exid?>">Delete exhibition</button>
       <?php if($cancel == 1){
         $now = time();
         $canceledOnTIME = strtotime($canceledOnALL);
         $datedDiff = $canceledOnTIME- $now;
         $daysBetween = round($datedDiff / (60 * 60 * 24));
-        $daysTillDeleted = $daysBetween + 31;
+        $daysTillDeleted = $daysBetween + 30;
         echo "<p>this exhibition was cancelled on " . $canceledOnALL . "</p>";
         echo "This exhibition will be deleted in <span class='bold'>"
         . $daysTillDeleted . "</span> days";
       } else {?>
-       <button type="button" data-toggle="modal" data-target="#exid<?php echo $exid?>">Cancel exhibition</button>
+       <button type="button" class="btnStyle" data-toggle="modal" data-target="#exid<?php echo $exid?>">Cancel exhibition</button>
         <?php } ?>
 
          <div id="exid<?php echo $exid?>" class="modal fade" role="dialog">
@@ -226,10 +227,10 @@ $( function() {
                <div class="modal-body">
                  <p>Exhibitions are deleted 30 days after they are cancelled. This action cannot be undone</p>
 
-                 <a href="php/cancelExhibition.php?exid=<?php echo $exid; ?>"> <input type="button" name="cancelEx" value="Cancel the exhibition"></a>
+                 <a class="btnStyle" href="php/cancelExhibition.php?exid=<?php echo $exid; ?>"> Cancel the exhibition</a>
                </div>
                <div class="modal-footer">
-                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                 <button type="button" class="btnStyle btn-default" data-dismiss="modal">Close</button>
                </div>
              </div>
 
@@ -249,10 +250,10 @@ $( function() {
                  <p>This will comnpletely delete the exhibition without providing 30 days notice to the users.
                    This should be used as a fail safe or if an exhibition has been mistakenly uploaded. Consider canceling the exhibition instead.</p>
 
-                 <a href="php/hardDeleteExhibition.php?exid=<?php echo $exid; ?>"> <input type="button" name="deleteEx" value="Delete the exhibition"></a>
+                 <a class="btnStyle" href="php/hardDeleteExhibition.php?exid=<?php echo $exid; ?>"> Delete the exhibition</a>
                </div>
                <div class="modal-footer">
-                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                 <button type="button" class="btnStyle btn-default" data-dismiss="modal">Close</button>
                </div>
              </div>
 
@@ -272,44 +273,44 @@ $( function() {
       <?php include('php/createExhibition.php'); ?>
       <form class="adminCreateExFrm"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data" method="post">
         <div class="form-group">
-          <input type="file" id="createExImage" class="FormInput" name="createExImage" value="">
+          <input type="file" required id="createExImage" class="FormInput" name="createExImage" value="">
         </div>
         <div class="form-group">
           <label for="title">Title <span> <?php echo $titleErr ?> </span> </label>
-          <input type="text" name="title" placeholder="Enter a title" value="<?php echo $titleCreate ?>">
+          <input type="text" required name="title" placeholder="Enter a title" value="<?php echo $titleCreate ?>">
         </div>
 
         <div class="form-group">
           <label for="description">Description <span> <?php echo $descErr ?> </span></label>
-          <input type="text" name="description" placeholder="Enter a title" value="<?php echo $desc?>">
+          <input type="text" required name="description" placeholder="Enter a title" value="<?php echo $desc?>">
         </div>
 
         <div class="form-group">
           <label for="type">Category <span> <?php echo $catErr ?> </span></label>
-          <input type="text" name="type" placeholder="Enter the exhibition type" value="<?php echo $cat ?>">
+          <input type="text" required name="type" placeholder="Enter the exhibition type" value="<?php echo $cat ?>">
         </div>
 
         <div class="form-group">
           <label for="stardate">Starting date <span> <?php echo $SDErr ?> </span></label>
-          <input type="text" name="startdate" class="datepicker" placeholder="Enter an opening date" value="<?php echo $SD ?>">
+          <input type="text" required name="startdate" class="datepicker" placeholder="Enter an opening date" value="<?php echo $SD ?>">
         </div>
 
         <div class="form-group">
           <label for="enddate">Ending date <span> <?php echo $EDErr ?> </span></label>
-          <input type="text" name="enddate" class="datepicker" placeholder="Enter the closing date" value="<?php echo $ED ?>">
+          <input type="text" required name="enddate" class="datepicker" placeholder="Enter the closing date" value="<?php echo $ED ?>">
         </div>
 
         <div class="form-group">
           <label for="price">Price per ticket <span> <?php echo $priceErr ?> </span></label>
-          <input type="number" name="price" placeholder="Enter a price for the exhibition" value="<?php echo $priceCreate ?>">
+          <input type="number" required name="price" placeholder="Enter a price for the exhibition" value="<?php echo $priceCreate ?>">
         </div>
 
         <div class="form-group">
           <label for="ticketlimit">Ticket limit <span> <?php echo $limitErr ?> </span></label>
-          <input type="number" name="ticketlimit" placeholder="Enter the amount of tickets avaliable for purchase" value="<?php echo $limit ?>">
+          <input type="number" required name="ticketlimit" placeholder="Enter the amount of tickets avaliable for purchase" value="<?php echo $limit ?>">
         </div>
 
-        <input type="submit" name="submit" value="submit">
+        <input type="submit" class="btnStyle" name="submit" value="submit">
       </form>
 
     </div>

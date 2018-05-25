@@ -14,6 +14,7 @@
       }
 
       $userQuery = htmlspecialchars($_POST['searchBarInput']);
+      
 
 
       $sql = mysqli_query($conn, "SELECT E.exhibitionid, image, title, spacesleft, type, title, ROUND(AVG(rating),1) as average

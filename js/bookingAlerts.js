@@ -4,6 +4,10 @@ $('#alertBar').click(function(){
   $('#alertBar').hide(800);
 });
 
+$('.alertBar').click(function(){
+  $('#alertBar').hide(800);
+});
+
 $('.hideOnClick').click(function(){
   $('.hideOnClick').hide(800);
 });

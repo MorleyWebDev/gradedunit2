@@ -142,6 +142,7 @@ if(
 
     if($insertEx) {
       echo "Exhibition Uploaded Successfully!";
+
 } else {
   echo "server Error. Please try again later";
 }

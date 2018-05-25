@@ -20,7 +20,7 @@ session_start();
           <li>Stay notified - You will be messaged on the site if any exhibitions you book have urgent changes</li>
         </ul>
         <p>Still not convinced? You could always ask our <a href="chatbot/bot.php">chatbot</a> if he knows any other benefits of registering. But for everyone else:</p>
-        <a href="register.php" class="btn aWhiteHover">Lets Register</a>
+        <a href="register.php" class="btnStyle aWhiteHover">Lets Register</a>
     </div>
   </div>
 

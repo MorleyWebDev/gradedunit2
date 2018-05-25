@@ -1,8 +1,4 @@
 <?php
-ini_set('desplay_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 require('includes/dbconx.php');
 require('includes/consolelog.php');
 
@@ -64,9 +60,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 function test_input($data)
 {
+    global $conn;
     $data = trim($data);
     $data = stripslashes($data);
-    $data = (htmlspecialchars($data));
+    $data = htmlspecialchars($data);
+    $data = mysqli_real_escape_string($conn, $data);
     return $data;
 }
 
@@ -118,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   echo "something went wrong iwth insert... - " . $result;
               }
           } else {
-              $unameErr = "Username must be letters and numbers only, sorry!";
+              $unameErr = "Username must be letters and numbers only with no spaces. Sorry!";
           }
       } else{
           $unameErr = "Username already in use, sorry!";

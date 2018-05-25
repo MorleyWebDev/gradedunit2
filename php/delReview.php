@@ -14,17 +14,13 @@ if($uid == $specuid || $_SESSION['userrole'] == 'admin'){
   $deleteReview = mysqli_query($conn, "DELETE from ratings where userid like $specuid");
 
   if($deleteReview){
-
     header('location: ../specificExhibition.php?exid='.$exid . '&alertBarMsg=Comment deleted');
   } else {
-    echo "derp";
+    echo "server error. Please tryt again later";
   }
- }
+} else {
+  header('location: ../specificExhibition.php?exid='.$exid . '&alertBarMsg=You do not have permission to delete this comment!');
 
-
-
-
-
-
+}
 
  ?>

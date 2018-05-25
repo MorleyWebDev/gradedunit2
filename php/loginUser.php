@@ -18,6 +18,7 @@ function test_input($data) {
   $data = htmlspecialchars($data);
   return $data;
 }
+
 $username = mysqli_real_escape_string($conn, $name);
 $password = mysqli_real_escape_string($conn, $pw);
 
@@ -32,13 +33,13 @@ if($numRows == 1){
     $_SESSION['id'] = $row['userid'];
     $_SESSION['name'] = $row['firstname'];
     $_SESSION["username"] = $username;
-    $_SESSION['authuser'] = 1; //if statement above this one for admin login
+    $_SESSION['authuser'] = 1;
     $_SESSION['userrole'] = $row['role'];
     $_SESSION['needsNotify'] = $row['needsNotified'];
     //take user back to previous page
     header('Location: ../index.php?alertBarMsg=Log in succesful! We will occasionally post notifications up here. Just click to close them');
   } else {
-  header("location: ../register.php?alertBarMsg=Incorrect username/password combination, please try again Hits");
+  header("location: ../register.php?alertBarMsg=Incorrect username/password combination, please try again");
   }
 } else {  header("location: ../register.php?alertBarMsg=Incorrect username / password combination, please try again"); }
 ?>

@@ -26,7 +26,7 @@
 
     while($row = mysqli_fetch_array($sqluser)){
       global $un; global $email; global $firstN; global $lastN; global $phoneNo; global  $role;
-      $un = $row['username'];
+      $unGood = $row['username'];
       $email = $row['email'];
       $pw = $row['password'];
       $firstN = $row['firstname'];
@@ -34,7 +34,6 @@
       $phoneNo = $row['phonenumber'];
       $role = $row['role'];
       $imageUrl = $row['avatar'];
-
     }
 
    ?>
@@ -46,7 +45,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/style.css">
 
-  <title> <?php echo $un ?>- Profile </title>
+  <title> <?php echo $unGood ?>- Profile </title>
 </head>
 
 <body>
@@ -57,7 +56,7 @@
     ?>
 
     <div class="jumbotron">
-      <h1><?php echo $un ?></h1>
+      <h1><?php echo $unGood ?></h1>
       <p>Welcome to your profile page! Only you can see this </p>
     </div>
 
@@ -71,7 +70,7 @@
             <img class="profilePageAvatar" src="img/userUploaded/<?php echo $imageUrl; ?>" alt=""><br/>
 
             <form action="php/updateProfilePic.php" method="post" enctype="multipart/form-data">
-              <label for="profpicUpdater" class="updateProfPic">Update Profile Picture</label>
+              <label for="profpicUpdater" class="updateProfPic btnStyle">Update Profile Picture</label>
               <input style="display:none" type="file" id="profpicUpdater" placeholder="update your profile picture" onchange="this.form.submit()" id="updatedProfPic" name="updatedProfPic"></input>
             </form>
           </div>
@@ -80,42 +79,44 @@
             <h5>Change Password</h5>
             <div class="form-group">
               <label for="crrntPassword">Current Password</label>
-              <input class="form-control" type="text" name="crrntPassword" id="crrntPassword" value="">
+              <input class="form-control" type="text" name="crrntPassword" id="crrntPassword" required>
             </div>
             <div class="form-group">
               <label for="newPassword">New Password</label>
-              <input class="form-control" type="text" id="newPassword" name="newPassword" value="">
+              <input class="form-control" type="text" id="newPassword" name="newPassword" required>
             </div>
-            <input type="submit" name="" value="Update Password">
+            <input type="submit" class="btnStyle" value="Update Password">
           </form>
         </div>
 
-        <?php require('php/updateDetails.php'); ?>
+
 
         <div class="col-md-7 d-flex justify-content-end align-items-end">
           <form class="form-group updateInfo" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-            <h5>Update my personal information</h5>
+            <?php require('php/updateDetails.php'); ?>
+
+            <h5>Change my personal information</h5>
             <div class="form-group">
               <label for="frstName">First Name: <?php echo $firstnameEr ?> </label>
-              <input type="text" placeholder="Enter your first name" id="frstName" class="form-control" name="frstName" value="<?php echo htmlspecialchars($firstN); ?>">
+              <input required type="text" placeholder="Enter your first name" id="frstName" class="form-control" name="frstName" value="<?php echo htmlspecialchars($firstN); ?>">
             </div>
             <div class="form-group">
               <label for="scndName">Second Name: <?php echo $secondnameEr ?></label>
-              <input type="text" placeholder="Enter your second name" id="scndName" class="form-control" name="scndName" value="<?php echo htmlspecialchars($lastN); ?>">
+              <input required type="text" placeholder="Enter your second name" id="scndName" class="form-control" name="scndName" value="<?php echo htmlspecialchars($lastN); ?>">
             </div>
             <div class="form-group">
               <label for="usrname">Username: <?php echo $unEr ?></label>
-              <input type="text" placeholder="username" id="usrname" class="form-control" name="usrname" value="<?php echo htmlspecialchars($un); ?>">
+              <input required type="text" placeholder="username" id="usrname" class="form-control" name="usrname" value="<?php echo htmlspecialchars($unGood); ?>">
             </div>
             <div class="form-group">
               <label for="emailx">Email: <?php echo $emailEr ?> </label>
-              <input type="email" placeholder="email" id="emailx" class="form-control" name="emailx" value="<?php echo htmlspecialchars($email); ?>">
+              <input required type="email" placeholder="email" id="emailx" class="form-control" name="emailx" value="<?php echo htmlspecialchars($email); ?>">
             </div>
             <div class="form-group">
               <label for="phoneno">Phone Number: <?php echo $noEr; ?> </label>
-              <input type="number" placeholder="phone number" id="phoneNo" class="form-control" name="phoneNo" value="<?php echo htmlspecialchars($phoneNo); ?>">
+              <input required type="number" placeholder="phone number" id="phoneNo" class="form-control" name="phoneNo" value="<?php echo htmlspecialchars($phoneNo); ?>">
             </div>
-            <input class="updateDetailsBtn"type="submit" name="" value="Update Details">
+            <input class="updateDetailsBtn btnStyle" type="submit" value="Update Details">
           </form>
         </div>
       </div>
@@ -150,7 +151,7 @@
               </div>
               <div class="modal-body">
                 <p>Are you sure you wish to cancel your booking for <?php echo $title ?></p>
-                <a href="php/userCancelsBooking.php?exid=<?php echo $exid; ?>"> <input type="button" class="margintop" name="" value="cancel booking"></a>
+                <a class="btnStyle margintop " href="php/userCancelsBooking.php?exid=<?php echo $exid; ?>"> Cancel Booking</a>
               </div>
             </div>
           </div>
@@ -162,10 +163,10 @@
 
               <div class="col-sm-2">
                 <img class = "bookedExImage" src="img/exhibitions/<?php echo $eximage; ?>" alt="exhibition picture">
-          <?php if($cancel == 0) { ?> <input type="button" class="margintop" data-toggle="modal" data-target="#usrCancels<?php echo $exid ?>" name="" value="cancel booking"> <?php } ?>
+          <?php if($cancel == 0) { ?> <input type="button" class="margintop btnStyle" data-toggle="modal" data-target="#usrCancels<?php echo $exid ?>" value="cancel booking"> <?php } ?>
           <?php if($cancel == 1) { ?>
              <p class="pNoMarginBelow">This exhibition is cancelled, click the button below to remove it from your bookings list</p>
-             <a href="php/userCancelsBooking.php?exid=<?php echo $exid; ?>"> <input type="button" class="margintop" name="" value="Remove notification"></a>
+             <a class="btnStyle" href="php/userCancelsBooking.php?exid=<?php echo $exid; ?>"> Remove Notification</a>
            <?php } ?>
               </div>
 
@@ -200,12 +201,12 @@
 
             </p>
 
-            <p><span class="bold">Tickets Purchased</span> - <?php echo $tickets; ?></p>
-            <p><span class="bold">Total cost</span> -£<?php echo $totalcost; ?> (pay at door)</p>
+            <p><span class="bold">Tickets Purchased:</span>  <?php echo $tickets; ?></p>
+            <p><span class="bold">Total cost:</span> £<?php echo $totalcost; ?> (pay at door)</p>
                   <?php  if($checkReviewsExist > 0){?>
             <p><span class="bold">Rated: </span><?php echo $fetchscr['score']; ?>/ 10</p>
           <?php } ?>
-            <a href="specificExhibition.php?exid=<?php echo $exid; ?>"><input type="button" name="" value="View exhibition"></a>
+            <a class="btnStyle" href="specificExhibition.php?exid=<?php echo $exid; ?>">View Exhibition</a>
             <p></p>
           </div> <!--end of col 5 middle -->
 
@@ -220,9 +221,9 @@
             <span class="p4kProfileBooking"><?php echo $row['rating']; ?></span>
           </div>
 
-</div>
-<?php  }}?>
-          </div>
+
+<?php  }?>
+</div> <?php } ?>   </div>
 
 
 

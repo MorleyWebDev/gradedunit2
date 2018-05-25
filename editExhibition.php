@@ -9,7 +9,8 @@
      }
 
 
-     if(!isset($_GET['exid'])){
+
+     if(!isset($_GET['exid'])){     #Not really needed due to line 21 being added.
        header('location: admin.php');
      } else {
        $exid = $_GET['exid'];
@@ -59,40 +60,40 @@
 
          <div class="form-group">
            <label for="title">Title <span> <?php echo $titleErr ?> </span> </label>
-           <input type="text" name="title" placeholder="Enter a title" value="<?php echo $title ?>">
+           <input required type="text" name="title" placeholder="Enter a title" value="<?php echo $title ?>">
          </div>
 
          <div class="form-group">
            <label for="description">Description <span> <?php echo $descErr ?> </span></label>
-           <input type="text" name="description" placeholder="Enter a title" value="<?php echo $desc?>">
+           <input required type="text" name="description" placeholder="Enter a title" value="<?php echo $desc?>">
          </div>
 
          <div class="form-group">
            <label for="type">Category <span> <?php echo $typeErr ?> </span></label>
-           <input type="text" name="type" placeholder="Enter the exhibition type" value="<?php echo $type ?>">
+           <input required type="text" name="type" placeholder="Enter the exhibition type" value="<?php echo $type ?>">
          </div>
 
          <div class="form-group">
            <label for="stardate">Starting date <span> <?php echo $SDErr ?> </span></label>
-           <input type="text" name="startdate" class="datepicker" placeholder="Enter an opening date" value="<?php echo $sdate ?>">
+           <input required type="text" name="startdate" class="datepicker" placeholder="Enter an opening date" value="<?php echo $sdate ?>">
          </div>
 
          <div class="form-group">
            <label for="enddate">Ending date <span> <?php echo $EDErr ?> </span></label>
-           <input type="text" name="enddate" class="datepicker" placeholder="Enter the closing date" value="<?php echo $edate ?>">
+           <input required type="text" name="enddate" class="datepicker" placeholder="Enter the closing date" value="<?php echo $edate ?>">
          </div>
 
          <div class="form-group">
            <label for="price">Price per ticket <span> <?php echo $priceErr ?> </span></label>
-           <input type="number" name="price" placeholder="Enter a price for the exhibition" value="<?php echo $price ?>">
+           <input required type="number" name="price" placeholder="Enter a price for the exhibition" value="<?php echo $price ?>">
          </div>
 
          <div class="form-group">
            <label for="ticketlimit">Number of tickets left <span> <?php echo $limitErr ?> </span></label>
-           <input type="number" name="ticketlimit" placeholder="Enter the amount of tickets avaliable for purchase" value="<?php echo $spacesleft ?>">
+           <input required type="number" name="ticketlimit" placeholder="Enter the amount of tickets avaliable for purchase" value="<?php echo $spacesleft ?>">
          </div>
-        <a href="admin.php"><button type="button" name="button">Cancel Editing</button></a>
-         <input type="submit" name="submit" value="submit">
+        <a class="btnStyle" href="admin.php">Cancel Editing</a>
+         <input type="submit" class="btnStyle" name="submit" value="Submit">
        </form>
 
      </div>

@@ -27,11 +27,11 @@ session_start();
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-       			    <a  class="nav-item nav-link " href="register.php">Register</a>
+       			    <a  class="nav-item nav-link" href="register.php">Register</a>
             </li>
 
             <li class="nav-item">
-       			    <a id="loginbtn" class="nav-item nav-link " href="#">Login</a>
+       			    <a id="loginbtn" class="nav-item nav-link" href="#">Login</a>
             </li>
         </ul>
     </div>
@@ -50,7 +50,7 @@ session_start();
             <div class="form-group">
               <input type="text" name="un" placeholder="username" required>
               <input type="password" name="pw" placeholder="password" required><br>
-              <button type="submit" name="button">Login!</button>
+              <button type="submit" class="btnStyle" name="button">Login!</button>
             </div>
           </form>
         </div>
@@ -202,7 +202,7 @@ session_start();
       <p> click <a href="userProfile.php?Notified=1&alertBarMsg=One of your bookings has been cancelled! Scroll to the bottom to check">here</a> to view your exhibitions and remove this alert.</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btnStyle btn-default" data-dismiss="modal">Close</button>
     </div>
   </div>
 </div>
@@ -220,7 +220,7 @@ session_start();
       <p>The letter will glow blue when this happens, so it will be pretty obvious!</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btnStyle btn-default" data-dismiss="modal">Close</button>
     </div>
   </div>
 </div>

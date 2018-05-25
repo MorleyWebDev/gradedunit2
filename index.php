@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -14,8 +13,8 @@
 <body>
     <?php
     session_start();
+    #get navbar
     require("includes/nav.php");
-
     ?>
 
     <div class="indexShowcase">
@@ -23,6 +22,7 @@
     </div>
 
     <?php
+    #database connect
     require('includes/dbconx.php');
     #get mid page index content - will change depending on login state
     require("includes/landing.php");
@@ -33,49 +33,50 @@
         <h3 class="marginbottom posDown centerText">Hot Exhibits</h3>
         <p class="light posDown marginbottom centerText">Top three exhibits currently running.</p>
         <div class="row justify-content-center">
-        <!-- get top 3 exhibits - active only, non cancelled for front page. -->
+
+        <!-- get top exhibit (to style seperately) - active only, non cancelled for front page. -->
         <?php $sqlTop1 = mysqli_query($conn, "SELECT E.exhibitionid, image, spacesleft, type, title, ROUND(AVG(rating),1) as average
                                     FROM exhibitions E LEFT JOIN ratings R ON E.exhibitionid = R.exhibitionid
                                     WHERE active = 1 AND cancel = 0 AND enddate > CURDATE()
                                     GROUP By E.exhibitionid, title ORDER BY average DESC LIMIT 1");
-
-              $sql2and3 = mysqli_query($conn, "SELECT E.exhibitionid, image, spacesleft, type, title, ROUND(AVG(rating),1) as average
+        #get 2nd and third top exhibitions, active only non cancelled
+        $sql2and3 = mysqli_query($conn, "SELECT E.exhibitionid, image, spacesleft, type, title, ROUND(AVG(rating),1) as average
                                           FROM exhibitions E LEFT JOIN ratings R ON E.exhibitionid = R.exhibitionid
                                           WHERE active = 1 AND cancel = 0 AND enddate > CURDATE()
                                           GROUP By E.exhibitionid, title ORDER BY average DESC LIMIT 2 OFFSET 1");
-
-
-
+       #print top exhibit
        while($row = mysqli_fetch_array($sqlTop1)){
-              $Exid = $row['exhibitionid'];
-              $ExIMG = $row['image'];
-              $ExTitle = $row['title'];
-              $ExType = $row['type'];
-              $spaceLeft = $row['spacesleft'];
-              $averageScr = $row['average'];?>
-                <div class="col-md-4 posDown">
-                  <div class="card hotExCardTOP">
-                    <img class="IndexExImg"src="img/exhibitions/<?php echo $ExIMG ?>" class="card-img-top" alt="exhibition_image">
-                    <div class="card-body">
-                      <h5 class="card-title marginbottom"> <?php echo $ExTitle ?> </h5>
-                      <p class="card-text">Exhibition field: <?php echo $ExType; ?> </p>
-                      <p class="score">Rating: <?php echo $averageScr; ?> / 10</p>
-                      <?php if($spaceLeft > 0){
-                         ?>
-                         <p>Tickets left: <?php echo $spaceLeft; ?></p>
-                       <?php } else {?>
-                          <p>Sold out!</p>
-                        <?php } ?>
-                        <a  class="btn aWhiteHover" href="specificExhibition.php?exid=<?php echo $Exid; ?>">View Exhibition</a>
-                    </div>
+        $Exid = $row['exhibitionid'];
+        $ExIMG = $row['image'];
+        $ExTitle = $row['title'];
+        $ExType = $row['type'];
+        $spaceLeft = $row['spacesleft'];
+        $averageScr = $row['average'];?>
+          <div class="col-md-4 posDown">
+            <div class="card hotExCardTOP">
+              <img class="IndexExImg"src="img/exhibitions/<?php echo $ExIMG ?>" class="card-img-top" alt="exhibition_image">
+              <div class="card-body">
+                <h5 class="card-title marginbottom"> <?php echo $ExTitle ?> </h5>
+                <p class="card-text">Exhibition field: <?php echo $ExType; ?> </p>
+                <p class="score">Rating: <?php echo $averageScr; ?> / 10</p>
 
-                  </div>
-                </div>
+                <!-- if 1 or more tickets in the exhibition -->
+                <?php if($spaceLeft > 0){?>
+                <p>Tickets left: <?php echo $spaceLeft; ?></p>
 
+                <!-- if no tickets left in exhibition -->
+                 <?php } else {?>
+                    <p>Sold out!</p>
+                  <?php } ?>
 
-
+                  <!-- link user to the exhibition -->
+                  <a  class="btnStyle aWhiteHover" href="specificExhibition.php?exid=<?php echo $Exid; ?>">View Exhibition</a>
+              </div>
+            </div>
+          </div>
           <?php } ?>
 
+          <!-- print 2nd and 3rd top -->
         <?php  while($row = mysqli_fetch_array($sql2and3)){
                  $Exid = $row['exhibitionid'];
                  $ExIMG = $row['image'];
@@ -89,16 +90,22 @@
                        <div class="card-body">
                          <h5 class="card-title marginbottom"> <?php echo $ExTitle ?> </h5>
                          <p class="card-text">Exhibition field: <?php echo $ExType; ?> </p>
+
+                         <!-- only display a rating if it has one -->
                          <?php if($averageScr != ""){ ?>
                            <p class="score">Rating: <?php echo $averageScr; ?> / 10</p>
                          <?php } else {echo "<br/>";} ?>
-                         <?php if($spaceLeft > 0){
-                            ?>
+
+                         <!-- only display tickets left if any exist -->
+                         <?php if($spaceLeft > 0){ ?>
                             <p>Tickets left: <?php echo $spaceLeft; ?></p>
+
+                            <!-- if no tickets are left print sold out -->
                           <?php } else {?>
                              <p>Sold out!</p>
                            <?php } ?>
-                       <a  class="btn aWhiteHover" href="specificExhibition.php?exid=<?php echo $Exid; ?>">View Exhibition</a>
+                           <!--  -->
+                           <a  class="btnStyle aWhiteHover" href="specificExhibition.php?exid=<?php echo $Exid; ?>">View Exhibition</a>
                        </div>
 
                      </div>
@@ -110,7 +117,7 @@
 
       </div>
     <div class="row justify-content-center posDown">
-      <a class="viewAllExhibitionsBtn btn aWhiteHover" href="exhibitionsMain.php">View All Exhibitions </a>
+      <a class="viewAllExhibitionsBtn btnStyle aWhiteHover" href="exhibitionsMain.php">View All Exhibitions </a>
     </div>
     </div>
   </div>
