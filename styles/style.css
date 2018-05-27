@@ -18,6 +18,7 @@ body {background-color: #EEEEEE;}
 .marginauto {margin:auto;}
 .centerText{text-align: center;}
 .posDown{position: relative; top: 2rem;}
+.posDownSm{position: relative; top: 1rem;}
 #alertBar, .alertBar {background-color: #398ea7; color: white; text-align: center;}
 .aWhiteHover:hover {color:white;}
 
@@ -101,7 +102,7 @@ body {background-color: #EEEEEE;}
    position: relative;
    top: 1.5rem;
  }
- .loginForm button {
+ .loginForm button, .registerBTN1 {
 position: relative;
 top: 1rem;
  }

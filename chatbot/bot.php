@@ -2,18 +2,17 @@
 <html lang="en">
 	<head>
 						<?php require('threebg.php'); ?>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+						<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+					  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <title>Chatbot</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="botstyle.css">
 
   </head>
-	  </html>
+
 
 <body>
-  <a href="javascript:history.back()"><button type="button" class="botBack" name="button">Back</button></a>
+  <a class="botBack" href="javascript:history.back()">Back</a>
 	<div id="output"></div>
 	<div class="container botContainer">
 			<input	id="input" type="text"	placeholder="Start typing!" class="botInputs botUserInput" autocomplete="off" />
@@ -21,7 +20,6 @@
 			<button class="botInputs" id="clearChat">Clear Chat</button>
 	</div>
 
-</body>
 
 
 
@@ -129,3 +127,5 @@
 <script>
 
 </script>
+
+</body>

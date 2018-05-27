@@ -107,7 +107,7 @@ if($checkExists == 0){
 
 
                 <label for="bookPassword">Re-enter your Password to reserve tickets</label>
-                <input type="text" name="bookPassword" required id="bookPassword" class="marginbottom" placeholder="Enter your password" value="">
+                <input type="password" name="bookPassword" required id="bookPassword" class="marginbottom" placeholder="Enter your password" value="">
 
                 <input type="submit" class="purchaseTickets btnStyle" name="Purchase tickets" value="Reserve">
               </div>

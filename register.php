@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
+
     <title>register page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/style.css">
   </head>
@@ -24,40 +25,40 @@
     <?php  require('php/registerUser.php'); ?>
       <form class="form-horizontal registerform" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
         <div class="form-group">
-          <span class="control-label col-sm-2" for="email">Email <?php echo $emailErr ?> </span>
+          <span class="control-label col-sm-2">Email <?php echo $emailErr ?> </span>
           <div class="col-sm-12">
             <input type="email" value=" <?php echo $email ?> " class="form-control" id="email" placeholder="Enter email" name="email">
           </div>
         </div>
         <div class="form-group">
-          <span class="control-label col-sm-2" for="firstname">First Name <?php echo $firstnameErr ?> </span>
+          <span class="control-label col-sm-2">First Name <?php echo $firstnameErr ?> </span>
           <div class="col-sm-12">
             <input type="text" value="<?php echo $firstname ?>" class="form-control" id="firstname" placeholder="Enter first name" name="firstname">
           </div>
         </div>
         <div class="form-group">
-          <span class="control-label col-sm-2" for="lastname">Last Name <?php echo $lastnameErr ?> </span>
+          <span class="control-label col-sm-2">Last Name <?php echo $lastnameErr ?> </span>
           <div class="col-sm-12">
             <input type="text" class="form-control" id="lastname"  value="<?php echo $lastname ?>" placeholder="Enter last name" name="lastname">
           </div>
         </div>
         <div class="form-group">
-          <span class="control-label col-sm-2" for="phonenumber">Phone Number <?php echo $noErr ?> </span>
+          <span class="control-label col-sm-2">Phone Number <?php echo $noErr ?> </span>
           <div class="col-sm-12">
             <input type="number" value="<?php echo $no ?>" class="form-control" id="phonenumber" placeholder="Enter phone number" name="phonenumber">
           </div>
         </div>
         <div class="form-group">
-          <span class="control-label col-sm-2" for="username">Username <?php echo $unameErr ?> </span>
+          <span class="control-label col-sm-2">Username <?php echo $unameErr ?> </span>
           <div class="col-sm-12">
             <input type="text" value="<?php echo $uname ?>" class="form-control" id="username" placeholder="Enter username" name="username">
           </div>
         </div>
 
         <div class="form-group">
-          <span class="control-label col-sm-2" for="password">Password  <?php echo $passwordErr ?>  </span>
+          <span class="control-label col-sm-2">Password  <?php echo $passwordErr ?>  </span>
           <div class="col-sm-12">
-            <input type="text" class="form-control" value="<?php echo $passwordNew; ?>" id="password" placeholder="Enter password" name="password">
+            <input type="password" class="form-control" value="<?php echo $passwordNew; ?>" id="password" placeholder="Enter password" name="password">
           </div>
         </div>
         <div class="form-group">

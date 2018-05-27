@@ -7,9 +7,8 @@
       FROM exhibitions E LEFT JOIN ratings R ON E.exhibitionid = R.exhibitionid
       WHERE ACTIVE = 1 GROUP By E.exhibitionid, title ORDER BY cancel, average DESC");
     ?>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/style.css">
     <title>National Museums Scotland</title>

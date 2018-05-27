@@ -51,6 +51,8 @@ session_start();
               <input type="text" name="un" placeholder="username" required>
               <input type="password" name="pw" placeholder="password" required><br>
               <button type="submit" class="btnStyle" name="button">Login!</button>
+              <p class="posDownSm">Don't have an account? Register today</p>
+              <a class="btnStyle registerBTN1" href="register.php">Register</a>
             </div>
           </form>
         </div>
@@ -90,7 +92,7 @@ session_start();
             </li>
             <li class="nav-item">
                 <a class="nav-link"
-                  href="userprofile.php">
+                  href="userProfile.php">
                   <?php echo $_SESSION['username'];?>
                 </a>
             </li
@@ -148,7 +150,7 @@ session_start();
             </li>
             <li class="nav-item">
               <a class="nav-link"
-                href="userprofile.php">
+                href="userProfile.php">
                 <?php echo $_SESSION['username'];?>
               </a>
             </li>

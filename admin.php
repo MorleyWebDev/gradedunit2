@@ -79,11 +79,11 @@
       #https://stackoverflow.com/questions/7130738/find-if-date-is-older-than-30-days
      ?>
 
-    <meta charset="utf-8">
+
     <title>admin features</title>
-    <meta charset="UTF-8">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -273,41 +273,41 @@ $( function() {
       <?php include('php/createExhibition.php'); ?>
       <form class="adminCreateExFrm"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data" method="post">
         <div class="form-group">
-          <input type="file" required id="createExImage" class="FormInput" name="createExImage" value="">
+          <input type="file" required id="createExImage" class="FormInput" name="createExImage">
         </div>
         <div class="form-group">
           <label for="title">Title <span> <?php echo $titleErr ?> </span> </label>
-          <input type="text" required name="title" placeholder="Enter a title" value="<?php echo $titleCreate ?>">
+          <input type="text" required  id="title" name="title" placeholder="Enter a title" value="<?php echo $titleCreate ?>">
         </div>
 
         <div class="form-group">
           <label for="description">Description <span> <?php echo $descErr ?> </span></label>
-          <input type="text" required name="description" placeholder="Enter a title" value="<?php echo $desc?>">
+          <input type="text" required id="description" name="description" placeholder="Enter a title" value="<?php echo $desc?>">
         </div>
 
         <div class="form-group">
           <label for="type">Category <span> <?php echo $catErr ?> </span></label>
-          <input type="text" required name="type" placeholder="Enter the exhibition type" value="<?php echo $cat ?>">
+          <input type="text" required id="type" name="type" placeholder="Enter the exhibition type" value="<?php echo $cat ?>">
         </div>
 
         <div class="form-group">
-          <label for="stardate">Starting date <span> <?php echo $SDErr ?> </span></label>
-          <input type="text" required name="startdate" class="datepicker" placeholder="Enter an opening date" value="<?php echo $SD ?>">
+          <label for="startdate">Starting date <span> <?php echo $SDErr ?> </span></label>
+          <input type="text" required id="startdate" name="startdate" class="datepicker" placeholder="Enter an opening date" value="<?php echo $SD ?>">
         </div>
 
         <div class="form-group">
           <label for="enddate">Ending date <span> <?php echo $EDErr ?> </span></label>
-          <input type="text" required name="enddate" class="datepicker" placeholder="Enter the closing date" value="<?php echo $ED ?>">
+          <input type="text" required id="enddate" name="enddate" class="datepicker" placeholder="Enter the closing date" value="<?php echo $ED ?>">
         </div>
 
         <div class="form-group">
           <label for="price">Price per ticket <span> <?php echo $priceErr ?> </span></label>
-          <input type="number" required name="price" placeholder="Enter a price for the exhibition" value="<?php echo $priceCreate ?>">
+          <input type="number" required id="price" name="price" placeholder="Enter a price for the exhibition" value="<?php echo $priceCreate ?>">
         </div>
 
         <div class="form-group">
           <label for="ticketlimit">Ticket limit <span> <?php echo $limitErr ?> </span></label>
-          <input type="number" required name="ticketlimit" placeholder="Enter the amount of tickets avaliable for purchase" value="<?php echo $limit ?>">
+          <input type="number" required id="ticketlimit" name="ticketlimit" placeholder="Enter the amount of tickets avaliable for purchase" value="<?php echo $limit ?>">
         </div>
 
         <input type="submit" class="btnStyle" name="submit" value="submit">

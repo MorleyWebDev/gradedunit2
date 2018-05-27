@@ -35,11 +35,9 @@
      }
       ?>
 
-      <meta charset="utf-8">
       <title>Edit Ex</title>
-      <meta charset="UTF-8">
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
       <link rel="stylesheet" href="styles/style.css">
       <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -60,37 +58,37 @@
 
          <div class="form-group">
            <label for="title">Title <span> <?php echo $titleErr ?> </span> </label>
-           <input required type="text" name="title" placeholder="Enter a title" value="<?php echo $title ?>">
+           <input required id="title" type="text" name="title" placeholder="Enter a title" value="<?php echo $title ?>">
          </div>
 
          <div class="form-group">
            <label for="description">Description <span> <?php echo $descErr ?> </span></label>
-           <input required type="text" name="description" placeholder="Enter a title" value="<?php echo $desc?>">
+           <input required id="description" type="text" name="description" placeholder="Enter a title" value="<?php echo $desc?>">
          </div>
 
          <div class="form-group">
            <label for="type">Category <span> <?php echo $typeErr ?> </span></label>
-           <input required type="text" name="type" placeholder="Enter the exhibition type" value="<?php echo $type ?>">
+           <input required id="type" type="text" name="type" placeholder="Enter the exhibition type" value="<?php echo $type ?>">
          </div>
 
          <div class="form-group">
-           <label for="stardate">Starting date <span> <?php echo $SDErr ?> </span></label>
-           <input required type="text" name="startdate" class="datepicker" placeholder="Enter an opening date" value="<?php echo $sdate ?>">
+           <label for="startdate">Starting date <span> <?php echo $SDErr ?> </span></label>
+           <input required id="startdate" type="text" name="startdate" class="datepicker" placeholder="Enter an opening date" value="<?php echo $sdate ?>">
          </div>
 
          <div class="form-group">
            <label for="enddate">Ending date <span> <?php echo $EDErr ?> </span></label>
-           <input required type="text" name="enddate" class="datepicker" placeholder="Enter the closing date" value="<?php echo $edate ?>">
+           <input required id="enddate" type="text" name="enddate" class="datepicker" placeholder="Enter the closing date" value="<?php echo $edate ?>">
          </div>
 
          <div class="form-group">
            <label for="price">Price per ticket <span> <?php echo $priceErr ?> </span></label>
-           <input required type="number" name="price" placeholder="Enter a price for the exhibition" value="<?php echo $price ?>">
+           <input required id="price" type="number" name="price" placeholder="Enter a price for the exhibition" value="<?php echo $price ?>">
          </div>
 
          <div class="form-group">
            <label for="ticketlimit">Number of tickets left <span> <?php echo $limitErr ?> </span></label>
-           <input required type="number" name="ticketlimit" placeholder="Enter the amount of tickets avaliable for purchase" value="<?php echo $spacesleft ?>">
+           <input required id="ticketlimit" type="number" name="ticketlimit" placeholder="Enter the amount of tickets avaliable for purchase" value="<?php echo $spacesleft ?>">
          </div>
         <a class="btnStyle" href="admin.php">Cancel Editing</a>
          <input type="submit" class="btnStyle" name="submit" value="Submit">

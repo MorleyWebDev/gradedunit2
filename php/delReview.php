@@ -1,4 +1,4 @@
- <?php
+<?php
 require_once('../includes/dbconx.php');
 
 session_start();

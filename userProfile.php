@@ -1,5 +1,6 @@
-<html>
-<head>
+<!DOCTYPE html>
+<html lang="en">
+<head >
   <?php
   session_start();
   //need to add a check if on correct profile
@@ -38,9 +39,8 @@
 
    ?>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/style.css">
@@ -71,7 +71,7 @@
 
             <form action="php/updateProfilePic.php" method="post" enctype="multipart/form-data">
               <label for="profpicUpdater" class="updateProfPic btnStyle">Update Profile Picture</label>
-              <input style="display:none" type="file" id="profpicUpdater" placeholder="update your profile picture" onchange="this.form.submit()" id="updatedProfPic" name="updatedProfPic"></input>
+              <input style="display:none" type="file" id="profpicUpdater" onchange="this.form.submit()" id="updatedProfPic" name="updatedProfPic"></input>
             </form>
           </div>
 
@@ -113,7 +113,7 @@
               <input required type="email" placeholder="email" id="emailx" class="form-control" name="emailx" value="<?php echo htmlspecialchars($email); ?>">
             </div>
             <div class="form-group">
-              <label for="phoneno">Phone Number: <?php echo $noEr; ?> </label>
+              <label for="phoneNo">Phone Number: <?php echo $noEr; ?> </label>
               <input required type="number" placeholder="phone number" id="phoneNo" class="form-control" name="phoneNo" value="<?php echo htmlspecialchars($phoneNo); ?>">
             </div>
             <input class="updateDetailsBtn btnStyle" type="submit" value="Update Details">

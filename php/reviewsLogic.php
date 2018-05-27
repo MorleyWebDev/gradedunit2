@@ -153,7 +153,7 @@ $username = $review = $rating = $image = $role=""; $times;
 // view exibitions select statement
 $sqlReviewUser = mysqli_query($conn, "SELECT U.userid, R.review, R.rating, R.userid, R.datePosted, U.username, U.avatar, U.role, R.exhibitionid FROM users U
     INNER JOIN ratings R ON R.userid = U.userid
-    WHERE R.exhibitionid LIKE $exid");
+    WHERE R.exhibitionid LIKE $exid ORDER BY datePosted DESC");
 
     $rowcount = mysqli_num_rows($sqlReviewUser);
 
@@ -188,7 +188,7 @@ while($row = mysqli_fetch_array($sqlReviewUser))
         <div class="topofReview">
           <p class="userUsername bold"><?php echo $username; ?></p>
           <!-- below uses the ago func defined in timeagofunc.php to display how long ago the review was posted. -->
-          <p class="xHoursAgo"> - <?php echo ago(strtotime($datePost)); ?> </p><br/>
+          <p class="xHoursAgo"> - <?php echo " " . ago(strtotime($datePost)); ?> </p><br/>
 
         </div>
           <p class="reviewText"> <?php echo $review; ?> </p>

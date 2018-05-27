@@ -36,8 +36,7 @@ if(!isset($_GET['exid'])){
 
 
 
-  $sqlRating = mysqli_query($conn, "SELECT ROUND(AVG(ratings.rating),1) FROM Exhibitions INNER JOIN ratings ON
-    ratings.exhibitionid = exhibitions.exhibitionid WHERE exhibitions.exhibitionid LIKE $exid");
+
 
 //  $sqlBNM = mysqli_query($conn, "SELECT MAX(ROUND(AVG(ratings.rating),1)) FROM Exhibitions INNER JOIN ratings ON
   //    ratings.exhibitionid = exhibitions.exhibitionid");
@@ -45,6 +44,13 @@ if(!isset($_GET['exid'])){
   $sqlBNM = mysqli_query($conn, "SELECT E.exhibitionid, title, ROUND(AVG(rating),1) as average
                               FROM exhibitions E LEFT JOIN ratings R ON E.exhibitionid = R.exhibitionid
                               GROUP By E.exhibitionid, title ORDER BY average DESC LIMIT 1");
+
+
+  $sqlRating = mysqli_query($conn, "SELECT ROUND(AVG(ratings.rating),1) as average FROM exhibitions INNER JOIN ratings ON
+    ratings.exhibitionid = exhibitions.exhibitionid WHERE exhibitions.exhibitionid LIKE $exid");
+
+    $getTheScore = mysqli_fetch_assoc($sqlRating);
+    $getTheScore = $getTheScore['average'];
 
 
   $checkReviewsExist = mysqli_num_rows(mysqli_query($conn, "SELECT review from ratings where exhibitionid = $exid"));
@@ -101,12 +107,11 @@ if(!isset($_GET['exid'])){
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/style.css">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100|Lobster+Two" rel="stylesheet">
-    <meta charset="utf-8">
     <title> <?php echo $title; ?> </title>
   </head>
   <body>
@@ -123,17 +128,17 @@ if(!isset($_GET['exid'])){
             $canceledOnTIME = strtotime($canceledOn);
             $datedDiff = $canceledOnTIME- $now;
             $daysBetween = round($datedDiff / (60 * 60 * 24));
-            $daysTillDeleted = $daysBetween + 31;
+            $daysTillDeleted = $daysBetween + 30;
             $shouldBeGone = 0;
             if($daysTillDeleted <= 0 ){$shouldBeGone = 1;}
-            if($shouldBeGone = 1){ echo "This exhibiton has been canceled for over 30 days and will be deleted shortly.";}
+            if($shouldBeGone == 1){ echo "This exhibiton has been canceled for over 30 days and will be deleted shortly.";}
             else {
             echo "Cancelled, this page will be deleted in - <span class='bold'>" . $daysTillDeleted . "</span> days. Sorry!";
 
-          } }   if($enddateTIME < strtotime('today GMT')) {echo "Exhibition has ended.";}
-                else if($spacesleft > 5 && $shouldBeGone == 0) {echo $spacesleft . " tickets remaining";}
-                else if($spacesleft <= 5 && $spacesleft > 0 && $shouldBeGone == 0) {echo "Only " . $spacesleft . " tickets remaining - Book soon before its too late!" ;}
-                else if($shouldBeGone == 0) {echo "Exhibition Full";}
+          } }   if($enddateTIME < strtotime('today GMT') && $cancel == 0) {echo "Exhibition has ended.";}
+                else if($spacesleft > 5 && $cancel == 0) {echo $spacesleft . " tickets remaining";}
+                else if($spacesleft <= 5 && $spacesleft > 0 && $cancel == 0) {echo "Only " . $spacesleft . " tickets remaining - Book soon before its too late!" ;}
+                else if($shouldBeGone == 0 && $cancel == 0) {echo "Exhibition Full";}
            ?>
          </p>
 
@@ -146,17 +151,16 @@ if(!isset($_GET['exid'])){
     <?php
       $fetchTOP = mysqli_fetch_array($sqlBNM);  //LEAVE THIS ALONE -  are you sure?
       //logic for before start date here
-      if($fetchTOP[0] === $exid){ //if the id is equal to the highest average ex id
+      if($fetchTOP[0] == $exid){ //if the id is equal to the highest average ex id
         echo "<h2 class='p4kbnm'> ". $fetchTOP['average'] . "</h2>";
         echo "<p class='topExhibit pNoMarginBelow'>🔥 Top Exhibit!<p>";
 
-      } else {   if($numReviews == 1){
-        while ($row = mysqli_fetch_array($sqlRating)){
-        echo "<h2 class='p4kst'> ". $row[0] . "</h2>";
+      } else    if($numReviews == 1){
+        echo "<h2 class='p4kst'> ". $getTheScore . "</h2>";
+}
+       else {echo "Not yet rated.";}
 
-        }
-      } else {echo "Not yet rated.";}
-      } ?>
+       ?>
 
 
 
@@ -215,7 +219,7 @@ if(!isset($_GET['exid'])){
           <div class="col notOnMobile">
 
 
-              <textarea required class="reviewInput" rows='5' name="reviewPost" value="" placeholder="Add a public review here - be sure to attach a score!"></textarea>
+              <textarea required class="reviewInput" rows='5' name="reviewPost" placeholder="Add a public review here - be sure to attach a score!"></textarea>
           </div>
 
           <div class="col-xs-3">
@@ -235,7 +239,7 @@ if(!isset($_GET['exid'])){
               </select> <br/>
             </div>
             <div class="reviewInputBtn">
-              <input type="button" name="cancel" class="cnclReviewTextBtn btnStyle" value="cancel"> <!--js for this? CLEAR input -->
+              <input type="button" name="cancel" class="cnclReviewTextBtn btnStyle" value="Cancel"> <!--js for this CLEAR input -->
               <?php
               if(ISSET($_SESSION['id'])){
                 if($uRole == 'admin' || $uRole == 'creator'){
@@ -282,6 +286,10 @@ if(!isset($_GET['exid'])){
     $(document).ready(function(){
         $('a[href^="exhibitionsMain.php"]').addClass('active');
     });
+    // clear text box on click of clear button
+    $('.cnclReviewTextBtn').on('click', function(){
+      $('.reviewInput').val('');
+    })
     </script>
 
 

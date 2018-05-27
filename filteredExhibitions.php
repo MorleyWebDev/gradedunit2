@@ -14,7 +14,7 @@
       }
 
       $userQuery = htmlspecialchars($_POST['searchBarInput']);
-      
+
 
 
       $sql = mysqli_query($conn, "SELECT E.exhibitionid, image, title, spacesleft, type, title, ROUND(AVG(rating),1) as average
@@ -22,9 +22,8 @@
       WHERE ACTIVE = 1 AND title like '%$userQuery%' OR type like '%$userQuery%'
       GROUP By E.exhibitionid, title ORDER BY cancel, average DESC");
     ?>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/style.css">
     <title>National Museums Scotland</title>
@@ -82,7 +81,7 @@
       <p>Sold out!</p>
     <?php } ?>
     </div>
-    <a href="specificExhibition.php?exid=<?php echo $exid; ?>"> <button type="button" name="button">View Exhibition</button> </a>
+    <a class="btnStyle" href="specificExhibition.php?exid=<?php echo $exid; ?>">View exhibition</a>
 
   </div>
 
