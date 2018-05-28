@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<!-- get three.js background -->
 						<?php require('threebg.php'); ?>
+
 						<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 					  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -12,7 +14,9 @@
 
 
 <body>
+	<!-- take user back -->
   <a class="botBack" href="javascript:history.back()">Back</a>
+
 	<div id="output"></div>
 	<div class="container botContainer">
 			<input	id="input" type="text"	placeholder="Start typing!" class="botInputs botUserInput" autocomplete="off" />
@@ -23,7 +27,7 @@
 
 
 
-
+<!-- code for the bot outputs / connecting to dialogflow -->
   <script type="text/javascript">
   	var output = document.getElementById('output');
     var accessToken ="7951cae54e344503883199507d26264b";
@@ -92,7 +96,7 @@
       }
   function send() {
           var text = $("#input").val();
-    //  conversation.push("Me: " + text + '\r\n');
+				// not w3 valid code, will print multiple ids
   				output.innerHTML += "<p id='meSmile'>Me: " + text + "</p>";
           $.ajax({
               type: "POST",
@@ -102,7 +106,7 @@
               headers: {
                   "Authorization": "Bearer " + accessToken
               },
-              data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+              data: JSON.stringify({ query: text, lang: "en", sessionId: "string" }),
               success: function(data) {
                   var respText = data.result.fulfillment.speech;
                   console.log("response: " + respText);
@@ -110,22 +114,16 @@
                   $("#response").scrollTop($("#response").height());
               },
               error: function() {
-                  setResponse("can't connect to df server");
+                  setResponse("Can't connect to the server! please try again later");
               }
           });
       }
       function setResponse(val) {
-          // conversation.push("museumBot: " + val + '\r\n');
-          // $("#response").text(conversation.join(""));
+				// not w3 valid code, will print multiple ids
   				output.innerHTML += "<p id='botSmile'>Bot : " +  val + "</p>";
       }
       var conversation = [];
 
   </script>
-
-
-<script>
-
-</script>
 
 </body>

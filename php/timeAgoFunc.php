@@ -1,4 +1,5 @@
 <?php
+// takes in a time value and figures out how long ago it was in real terms - 1 second ago, 2 hours ago , 5 weeks ago - etc
 function ago($time)
 {
    $periods = array("second", "minute", "hour", "day", "week", "month", "year", "decade");

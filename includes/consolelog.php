@@ -1,5 +1,5 @@
 <?php
-
+// Function Used to debug site. 
 function logConsole($name, $data = NULL, $jsEval = FALSE)
 {
     if (! $name) return false;

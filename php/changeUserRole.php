@@ -15,6 +15,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $newRole = $_POST['userrole'];
   #update the users role
 
+// for if admin selects the null select value
 if($newRole != 'none'){
     $sqlUpdate = mysqli_query($conn, "UPDATE users SET role = '$newRole' WHERE userid = '$uidToEdit'");
     if($sqlUpdate){

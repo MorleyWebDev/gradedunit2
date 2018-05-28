@@ -1,28 +1,18 @@
 <?php
+#this page hosts the logic for the booking button - The booking button will change state depending on a varierty of factors
 $sdate = $edate = $sleft = $cncl = "";
-#if(ex-startDate < presentDate)
-#and
-#user is logged in
-#and userid+exid num rows = 0
-#echo button as active
+// get the dates to be used in button logic
 $sqlGetDates = mysqli_query($conn, "SELECT startdate, enddate, spacesleft, cancel from exhibitions where exhibitionid LIKE $exid");
 while($row = mysqli_fetch_array($sqlGetDates)){
   global $sdate; global $edate; global $sleft; global $cncl;
-
+// assign to varaibles
   $sdate = $row['startdate'];
   $edate = strtotime($row['enddate']);
   $sleft = $row['spacesleft'];
   $cncl = $row['cancel'];
 
 }
-// echo $sdate;
-// echo $edate;
-// echo $sleft;
-//echo $cncl;
-// echo $exid;
-// echo $uid;
-//change echo to innerhtml of error div
-//also add buttons - disabled etc class="disabled"
+
 
 #five conditions need to be met for the real button to be echoed.
 if(ISSET($_SESSION['id'])){
@@ -52,6 +42,6 @@ else {
   #if user is logged out
  echo '<input type="button" name="booktickets" class="btnDisable bookcaseLoggedOut" value="Book Tickets">';
 }
-
 ?>
+<!-- for printing error messages -->
 <p class="bookingLogicErr hideOnClick"></p>

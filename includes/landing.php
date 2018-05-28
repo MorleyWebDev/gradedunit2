@@ -1,12 +1,13 @@
 <?php
+// start session
 session_start();
-
+#if user is not logged in display new user content
  if(!isset($_SESSION["authuser"])){
   ?>
   <div class="jumbotron">
-    <h2>Welcome </h2>
+    <h2>Welcome</h2>
       <div class="container">
-        <p class="light centerText margintop">Formed in 2006, the National Museum of Scotland is an ever expanding collection of Scottish antiquities,
+      <p class="light centerText margintop">Formed in 2006, the National Museum of Scotland is an ever expanding collection of Scottish antiquities,
           culture and history, our collections and exhibitions will take you on an extensive journey though science, technology, history, as well as more creative persuits.
           Theres usually a lot going on so if you don't see anything which grabs your eye right away be sure to check back in a few weeks.
           We hope to update the website frequently with new exhibitions and events.</p> <p class="light centerText">After you register an account you can dive right in and start booking
@@ -31,14 +32,20 @@ session_start();
 
 
   <?php
+  // if not a new user
   } else {
+    // get user id from session
     $uid = $_SESSION['id'];
+    // get username from id
     $userDetails = mysqli_query($conn, "SELECT username from users where userid = $uid");
     while($row = mysqli_fetch_array($userDetails)){
+      // get username to be echoed later
       $un = $row['username'];
 
   ?>
   <div class="jumbotron">
+    <!-- print username to user -->
+    <!-- print rest of content to logged in user -->
     <h2>Welcome, <?php echo $un; }?>. </h2>
     <div class="container">
       <p class="light centerText margintop">Formed in 2006, the National Museum of Scotland is an ever expanding collection of Scottish antiquities,

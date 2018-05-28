@@ -1,14 +1,15 @@
-
+/* Basic styles */
 	bot.body {width: 500px; margin: 0 auto; margin-top: 20px;}
 	bot.div {position: absolute;}
 	bot.input {width: 400px;}
 	bot.button {width: 50px;}
 
+/* styles for user input / bot output */
 	#botSmile{color:#398ea7; margin-bottom: 1.4em;}
 	#meSmile{color:white;}
 
 
-
+/* content container */
 .botContainer{
 	display: block;
 	position: absolute;
@@ -16,6 +17,7 @@
 	justify-content: space-between;
 }
 
+/* back button styles */
 .botBack{
 	position: absolute;
 	top:5em;
@@ -27,6 +29,7 @@
 	border-radius: 4px;
 }
 
+/* output container for conversation */
 #output{
 	position: absolute;
 	top:0.5em;
@@ -38,12 +41,13 @@
 	max-width:500px;
   word-wrap:break-word;
 }
-
+/* Submit and clear button */
 .botInputs{
   position: relative;
 	top:90vh;
 }
 
+/* user Input field */
 #input{
 	background: transparent;
 	border: 0px;
@@ -54,6 +58,7 @@
 	margin-right: 1em;
 }
 
+/* button styles */
 #rec, #clearChat{
 	font-size: 28px;
 	padding: 8px;
@@ -62,25 +67,29 @@
 	border: 1px #398ea7 solid;
 	border-radius: 4px;
 }
-
+/* clear button styles */
 #clearChat{color:white; border: 1px white solid;}
 
-
+/* mobile container */
 @media only screen and (max-width: 576px)  {
 
+/*  Disable three.js background on mobile */
 	html{background-color: black;}
 	canvas{display: none;}
+
+/* Rest of document is edits for mobile browser.
+ Attempts to make the user interface less awful on mobile.  */
 
 	.botContainer{
 		top:-100px;
 	}
 
 	#output{font-size: 14px;}
+	
 	.botUserInput{
 	    font-size: 21px !important;
 			margin-right: 0em !important;
 			width: 49% !important;
-
 	  }
 
 	  #rec, #clearChat{

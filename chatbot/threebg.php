@@ -12,7 +12,8 @@
 		</style>
 	<body>
 
-		<script src="js/three.js"></script>  <!-- ctrl f "stats" -->
+		<!-- scripts to make three.js bg work -->
+		<script src="js/three.js"></script>
 		<script src="js/renderers/Projector.js"></script>
 		<script src="js/renderers/CanvasRenderer.js"></script>
 		<script src="js/libs/stats.min.js"></script>

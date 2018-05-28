@@ -1,10 +1,13 @@
 <?php
+// start sessions
 session_start();
+// if user doesnt have a user role. (when not logged in)
  if(!isset($_SESSION["userrole"])){
   ?>
  <!--LOGGED OUT NAVBAR -->
  <div class="alertBar" id="alertBar"> <?php echo $_GET['alertBarMsg']; ?> </div>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -18,12 +21,14 @@ session_start();
             </li>
         </ul>
     </div>
+
     <div class="mx-auto order-0">
         <a class="navbar-brand mx-auto" href="#">NMS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
+
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -64,7 +69,7 @@ session_start();
   </div>
 </div>
   </nav>
-
+<!-- Search bar -->
   <div class="navSearchBar">
     <form class="" action="filteredExhibitions.php" method="post">
       <input type="text" class="searchBarInput" placeholder="search" name="searchBarInput">
@@ -73,6 +78,7 @@ session_start();
   </div>
 
   <?php
+  // if user role is creator or readonly display regular navbar (with the user profile link)
 } else if(($_SESSION['userrole'] === 'creator'
         || $_SESSION['userrole'] === 'readonly')) {
   ?>
@@ -131,7 +137,7 @@ session_start();
   </form>
 </div>
 
-<!--admin LOGIN  -->
+<!--admin nav bar, with access to admin page  -->
   <?php
 } else if($_SESSION['userrole'] === 'admin') {
   ?>
@@ -191,7 +197,7 @@ session_start();
   </form>
 </div>
 <?php } ?>
-
+<!-- letterbox modal code -->
 <div class="modal fade" id="letterAlertModal" role="dialog">
 <div class="modal-dialog modal-sm">
   <div class="modal-content">

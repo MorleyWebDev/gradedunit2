@@ -1,4 +1,4 @@
-
+// scripts for error alerts - click to remove
 
 $('#alertBar').click(function(){
   $('#alertBar').hide(800);
@@ -11,14 +11,6 @@ $('.alertBar').click(function(){
 $('.hideOnClick').click(function(){
   $('.hideOnClick').hide(800);
 });
-
-
-// if ($('.alertBar').html) {
-//         window.setInterval(10);
-//         $('.alertBar').html.remove();
-//     }
-//
-
 
 $(".bookcaseNoSpace").click(function(){
   $(".bookingLogicErr").html("This exhibition is full. - Click to dismiss");

@@ -42,41 +42,6 @@
           }
         }
 
-
-
-
-            // if($SqlsetActive){
-              //the old exhibition has been deleted. Now check if they have any more
-              // $howManyCancels = mysqli_num_rows(mysqli_query($conn, "SELECT t.tickets from tickets t INNER JOIN exhibitions e ON e.exhibitionid = t.exhibitionid where t.userid = $Unnotify AND e.cancel=1 AND e.active=1"));
-              // if($howManyCancels == 0){
-                // echo "no of other ex" . $howManyCancels;
-            // } else {echo "user still needs to be notified. - lets do nothing.";}
-
-            //there will never be a situation where an exhibition
-            //if user has more than one exhibition canceled then
-
-
-
-
-            //SELECT r.*,t.*,e.*
-          // FROM exhibitions e
-          // FULL JOIN ratings r ON e.exhibitionid = r.exhibitionid
-          // FULL JOIN tickets t ON r.exhibitionid = t.exhibitionid
-          // WHERE e.exhibitionid = 2
-
-          //     if($unNotifyUser){
-          //       echo "g o o d";
-          //     } else { echo "server error but it fired";}
-          // } else{
-          //
-
-
-
-      #if any are older than 30 days
-      #delete where older than 30 days
-      #delete if (cancelled == 1 && (CancelledOn + 30 days) > now())
-
-      #https://stackoverflow.com/questions/7130738/find-if-date-is-older-than-30-days
      ?>
 
 
@@ -180,6 +145,7 @@ $( function() {
     <p class="centerText marginbottom light">Here you can cancel, delete or edit each exhibition on the website.</p>
    <div class="accordion">
    <?php
+   // get all exhibitions for jquery accoridan
      $allexhibitions = mysqli_query($conn, "SELECT * from exhibitions where active = 1");
 
      while($row = mysqli_fetch_array($allexhibitions)){
@@ -203,6 +169,7 @@ $( function() {
       <a class="btnStyle" href="editExhibition.php?exid=<?php echo $exid;?>">Edit Exhibition</a>
         <button class="btnStyle" type="button" data-toggle="modal" data-target="#DELETEexid<?php echo $exid?>">Delete exhibition</button>
       <?php if($cancel == 1){
+        // figuer out how long ago it was cancelled and how long till its deleted
         $now = time();
         $canceledOnTIME = strtotime($canceledOnALL);
         $datedDiff = $canceledOnTIME- $now;
@@ -271,6 +238,7 @@ $( function() {
       <h3 class="margintop centerText"> Create new exhibition</h3>
       <p class="centerText light"></p>
       <?php include('php/createExhibition.php'); ?>
+      <!-- create exhbitiion form - posts to itsself -->
       <form class="adminCreateExFrm"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data" method="post">
         <div class="form-group">
           <input type="file" required id="createExImage" class="FormInput" name="createExImage">
@@ -330,6 +298,7 @@ $( function() {
   <script src="js/loginForm.js"></script>
 
      <script>
+     // jquery datepicker for forms
      $( function() {
        $( ".datepicker" ).datepicker({
          dateFormat: 'yy-mm-dd'

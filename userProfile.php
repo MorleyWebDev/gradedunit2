@@ -7,13 +7,13 @@
     require('includes/dbconx.php');
 
 
-
+// if user doesnt have acn account logged in take them to register page
     if(!isset($_SESSION['id'])){
       header("location: register.php");
     }
 
     $uid = $_SESSION['id'];
-
+// if they access this page through the letterbox alert remove the notification
     if($_GET['Notified'] == 1){
       $_SESSION['needsNotify'] = 0;
       $Notified = mysqli_query($conn,"UPDATE users  SET needsNotified = 0 where userid = $uid");
@@ -75,6 +75,7 @@
             </form>
           </div>
 
+<!-- form for update password -->
           <form class="align-items-start form-group updatePw" action="php/changePassword.php" method="post">
             <h5>Change Password</h5>
             <div class="form-group">
@@ -90,7 +91,7 @@
         </div>
 
 
-
+<!-- form for updating user information - posts to itself -->
         <div class="col-md-7 d-flex justify-content-end align-items-end">
           <form class="form-group updateInfo" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
             <?php require('php/updateDetails.php'); ?>
@@ -120,7 +121,7 @@
           </form>
         </div>
       </div>
-
+<!-- my bookings section. -->
       <h3 class="mybookingsH">My Bookings</h3>
 
           <?php $usersBookings = mysqli_query($conn, "SELECT
@@ -163,7 +164,9 @@
 
               <div class="col-sm-2">
                 <img class = "bookedExImage" src="img/exhibitions/<?php echo $eximage; ?>" alt="exhibition picture">
+                <!-- if its not been cancelled - display cancel buttoon -->
           <?php if($cancel == 0) { ?> <input type="button" class="margintop btnStyle" data-toggle="modal" data-target="#usrCancels<?php echo $exid ?>" value="cancel booking"> <?php } ?>
+          <!-- if it has been cancelled -->
           <?php if($cancel == 1) { ?>
              <p class="pNoMarginBelow">This exhibition is cancelled, click the button below to remove it from your bookings list</p>
              <a class="btnStyle" href="php/userCancelsBooking.php?exid=<?php echo $exid; ?>"> Remove Notification</a>
@@ -189,12 +192,16 @@
                           #calculate number of days till exhibition starts
                           echo "Exhibition opens in " .round($diff / (60 * 60 * 24)). " days!";
                           }
+                          // if current date is more than start date and less than end date
                           else if(strtotime('today GMT') > $startdate && strtotime('today GMT') < $enddate ){
+                              // figure out how many days the ex is open for
                             $diff = $enddate - strtotime('today GMT');
+                            // print that amount of days
                             echo "Open for " . round($diff / (60 * 60 * 24)) . " more days";
                           }
-
+                          // if exhibition has ended
                           else if(strtotime('today GMT') > $enddate){
+                            // print that
                             echo "Exhibition has ended! Be sure to post a review if you have not already!";
                           }
              ?>
@@ -212,6 +219,7 @@
 
 
 <?php
+// if the user has posted an review for the booked exhibition, post it in the booking div
         $usersRating = mysqli_query($conn, "SELECT rating from ratings where userid = $uid AND exhibitionid = $exid");
         while($row = mysqli_fetch_array($usersRating)){
 

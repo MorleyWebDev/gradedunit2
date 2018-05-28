@@ -4,19 +4,21 @@
     <?php
       require('includes/dbconx.php');
       $emptyRequest = 0;
-
+// if they go to this page with no post request
       if(!isset($_POST['searchBarInput'])){
         header('location: index.php?alertBarMsg=We didnt quite catch that search query. Could you try again?');
       }
-
+// if the post requet is empty
       if(empty($_POST['searchBarInput'])){
         $emptyRequest = 1;
       }
-
+      // prevent rogue js being executed
       $userQuery = htmlspecialchars($_POST['searchBarInput']);
+      // prevent sql inject
+      $userQuery = mysqli_real_escape_string($conn, $userQuery);
 
 
-
+// select database query with the users input
       $sql = mysqli_query($conn, "SELECT E.exhibitionid, image, title, spacesleft, type, title, ROUND(AVG(rating),1) as average
       FROM exhibitions E LEFT JOIN ratings R ON E.exhibitionid = R.exhibitionid
       WHERE ACTIVE = 1 AND title like '%$userQuery%' OR type like '%$userQuery%'
@@ -47,6 +49,7 @@
     <?php } ?>
 
 <?php $rowcount = mysqli_num_rows($sql); ?>
+<!-- if no rows for select or empty rrequest -->
     <?php  if($rowcount == 0 || $emptyRequest == 1){ ?>
           <div class="card posDown">
             <p class='centerText pNoMarginBelow padding'>No results found.</p>
@@ -73,8 +76,10 @@
       <h5 class="card-title"><?php echo $titleMain; ?></h5>
       <p class="card-text">Exhibition field: <?php echo $typeMain; ?> </p>
       <?php  if(($averageMain != "")){ ?>
+        <!-- if no score -->
       <p class="score">Rating: <?php echo $averageMain; ?> / 10</p>
     <?php } else { echo "<br/>"; } ?>
+    <!-- if there are some spaces left -->
       <?php if($spaceLeftMain > 0){ ?>
       <p class="card-text">Tickets left <?php echo $spaceLeftMain; ?></p>
     <?php }else{  ?>

@@ -1,18 +1,15 @@
 <?php
+// connect to db
 require('includes/dbconx.php');
-require('includes/consolelog.php');
 
-
-
-
-
-
+// only execute on post
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // define variables to be used later
   $unameErr = $passwordErr = $emailErr = $firstnameErr = $lastnameErr = $noErr = $roleErr = "";
   $uname = $password = $email = $firstname = $lastname = $no = $role = "";
   $unameV = $passwordV = $emailV = $firstnameV = $lastnameV = $noV = $roleV = $unameSyntax = 0;
 
-
+// if empty print required next to the input field
     if (empty($_POST["firstname"])) {
         $firstnameErr = "- required field";
     } else {
@@ -57,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $passwordV = 1;
     }
 }
-
+// sanitisee data - real esc string to prevent sql injection
 function test_input($data)
 {
     global $conn;
@@ -113,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   echo "<div class='container'><div class='registerSuccess'>Account created. Try logging in with your username and password!</div></div>";
 
               } else {
-                  echo "something went wrong iwth insert... - " . $result;
+                  echo "Server error. please try again, sorry!" . $result;
               }
           } else {
               $unameErr = "Username must be letters and numbers only with no spaces. Sorry!";

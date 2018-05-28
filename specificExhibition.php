@@ -74,9 +74,6 @@ if(!isset($_GET['exid'])){
     $ticketsUserHasBooked = $row[2];
   }
 
-  // $sqlex1 = mysqli_query($conn, "SELECT * FROM exhibitions where exhibitionid LIKE $exid");
-  // $sqlex2 = mysqli_query($conn, "SELECT * FROM exhibitions where exhibitionid LIKE $exid");
-  // $sqlex3 = mysqli_query($conn, "SELECT * FROM exhibitions where exhibitionid LIKE $exid");
 
   while($row = mysqli_fetch_array($sqlex)){
     global $title; global $image; global $type; global $description;
@@ -123,21 +120,33 @@ if(!isset($_GET['exid'])){
         <div class='flexColumn col-sm-4 d-flex align-items-center justify-content-center'>
           <h1 class='specExTitle'> <?php echo $title; ?> </h1>
           <p class="centerText"><span class='bold'>Status:</span>
+            <!-- if exhibition is cancelled -->
           <?php if($cancel == 1) {
+            // assign var to current time
             $now = time();
+            //get var of when the ex was cancelled
             $canceledOnTIME = strtotime($canceledOn);
+            // get difference between
             $datedDiff = $canceledOnTIME- $now;
+            // get time in days
             $daysBetween = round($datedDiff / (60 * 60 * 24));
+            //get var of time in days plus 30 days
             $daysTillDeleted = $daysBetween + 30;
             $shouldBeGone = 0;
+            // if it reaches 0 it should be gone -
             if($daysTillDeleted <= 0 ){$shouldBeGone = 1;}
+            // if it reaches 0 its been over 30 days since it was cancelled - display message for this
             if($shouldBeGone == 1){ echo "This exhibiton has been canceled for over 30 days and will be deleted shortly.";}
             else {
+              // let users know how long it is till the exhibition is deleted
             echo "Cancelled, this page will be deleted in - <span class='bold'>" . $daysTillDeleted . "</span> days. Sorry!";
-
+// if end date is less  than todays date ex has ended- if its cancelled another message will show and the end date is irrelavant - so dont show it
           } }   if($enddateTIME < strtotime('today GMT') && $cancel == 0) {echo "Exhibition has ended.";}
+          // if its not ended show tickets left
                 else if($spacesleft > 5 && $cancel == 0) {echo $spacesleft . " tickets remaining";}
+                // if under 5 tickets display different message
                 else if($spacesleft <= 5 && $spacesleft > 0 && $cancel == 0) {echo "Only " . $spacesleft . " tickets remaining - Book soon before its too late!" ;}
+                // if no spaces left display full
                 else if($shouldBeGone == 0 && $cancel == 0) {echo "Exhibition Full";}
            ?>
          </p>
@@ -149,15 +158,16 @@ if(!isset($_GET['exid'])){
         </div>
 <div class="col-sm-4 align-self-center forceColumn">
     <?php
-      $fetchTOP = mysqli_fetch_array($sqlBNM);  //LEAVE THIS ALONE -  are you sure?
-      //logic for before start date here
+      $fetchTOP = mysqli_fetch_array($sqlBNM);
+
       if($fetchTOP[0] == $exid){ //if the id is equal to the highest average ex id
         echo "<h2 class='p4kbnm'> ". $fetchTOP['average'] . "</h2>";
         echo "<p class='topExhibit pNoMarginBelow'>🔥 Top Exhibit!<p>";
-
+// if not top but still has a rating post normal score css
       } else    if($numReviews == 1){
         echo "<h2 class='p4kst'> ". $getTheScore . "</h2>";
 }
+// if no reviews post not yet rated
        else {echo "Not yet rated.";}
 
        ?>
@@ -172,11 +182,9 @@ if(!isset($_GET['exid'])){
             <div class='col align-self-center'>
             <span class="specExType">  <span class=' bold'>Exhibition Field:</span>
                     <?php echo $type; ?>
- <!--if statement here for spaces free / cancelled-->
+
                 </span>
 
-
-               <!--if statement here for spaces free / cancelled-->
               <p class='specExDesc'> <?php echo $desc; ?> </p>
             </div>  <!-- end of col-xs-10 Div -->
 
@@ -185,6 +193,7 @@ if(!isset($_GET['exid'])){
 
     <div class="col-md-5">
         <div class='specExDateTime NMScard'>
+          <!-- if user has a ticket to the exhibition -->
           <?php if($CheckBooked == 1){
             echo "<p class='YouHaveBooked'>
             You have booked"?> <?php echo $ticketsUserHasBooked; ?> <?php  echo "tickets for this exhibition</p>";
@@ -203,14 +212,14 @@ if(!isset($_GET['exid'])){
 
 </div> <!-- end of 2nd row-->
 </div>
-<!--GOOD ABOVE -->
+
 <div class="container">
 
       <?php if(isset($_GET['message'])){
             $message = $_GET['message'];
             echo "<div class ='alertMessage'>" .  $message . "</div>";} ?>
 
-
+<!-- post review form -->
     <form class="reviewForm" action="php/reviewsLogic.php?exid=<?php echo$exid ?>" method="post">
       <div class="postReviewBox row">
           <div class="col-xs-3">
@@ -226,36 +235,45 @@ if(!isset($_GET['exid'])){
             <div class="ratingPost">
               <span>Score - </span>
               <select name="ratingPost">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
                 <option value="10">10</option>
+                <option value="9">9</option>
+                <option value="8">8</option>
+                <option value="7">7</option>
+                <option value="6">6</option>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
               </select> <br/>
             </div>
             <div class="reviewInputBtn">
               <input type="button" name="cancel" class="cnclReviewTextBtn btnStyle" value="Cancel"> <!--js for this CLEAR input -->
               <?php
+              // if user is logged in
               if(ISSET($_SESSION['id'])){
+                // and user is an admin or creator
                 if($uRole == 'admin' || $uRole == 'creator'){
+                  // and user has booked a ticket
                   if($CheckBooked == 1) {
+                    // and exhibition has started
                     if(strtotime('today GMT') > strtotime($startdate)){
+                      // only after all these things display the working button
                       echo '<input type="submit" name="submit" class="" value="submit">';
                     } else {
+                      // if not started yet - btn wont work
                       echo '<input type="button" name="submit" class="btnDisable revwBtnNotStartedYet" value="submit">';
                     }
                   } else {
+                    // if not booked yet
                     echo '<input type="button" name="submit" class="btnDisable revwBtnNoBooking" value="submit">';
                   }
                 } else {
+                  // if user has read only account
                   echo '<input type="button" name="submit" class="btnDisable revwBtnReadOnly" value="submit">';
                 }
               } else {
+                // if not logged in
                 echo '<input type="button" name="submit" class="btnDisable revwBtnNotLogged" value="submit">';
               }
               ?>

@@ -4,6 +4,7 @@
      <?php
      session_start();
      $role = $_SESSION['userrole'];
+     // if user not admin do not let them in
      if($role != 'admin'){
        header('location: userProfile.php');
      }
@@ -17,6 +18,7 @@
      }
 
      include('includes/dbconx.php');
+     
      $getEx = mysqli_query($conn, "SELECT exhibitionid, title, description, spacesleft, price, type, startdate, enddate FROM exhibitions where active = 1 AND exhibitionid = $exid");
 
      if(mysqli_num_rows($getEx) == 0) {
@@ -97,6 +99,7 @@
      </div>
 
      <script>
+     // script for jquery datepicker used in the form
      $( function() {
        $( ".datepicker" ).datepicker({
          dateFormat: 'yy-mm-dd'

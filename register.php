@@ -22,7 +22,9 @@
 
     <div class="container">
       <a href="javascript:history.go(-1)"><span class="backbtn">Back</span></a>
+<!-- registerUsr executes code when post request -->
     <?php  require('php/registerUser.php'); ?>
+    <!-- form posts back to itself - regusterUser.php deals with the code and uploads -->
       <form class="form-horizontal registerform" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
         <div class="form-group">
           <span class="control-label col-sm-2">Email <?php echo $emailErr ?> </span>

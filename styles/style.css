@@ -1,12 +1,13 @@
 /* 398ea7 - cyan to be used. */
 /* 8C8C8C - liight grey to be used. */
+
 body {background-color: #EEEEEE;}
 
+/* one style rules to be used often during the site. */
 .bold {font-weight: bold;}
 .light {font-weight: lighter; color: #8C8C8C;}
 .flexColumn {display: flex; flex-direction: column;}
 .vLarge {font-size: 4.1rem !important;}
-
 .margintop {margin-top: 1em;}
 .marginbottom {margin-bottom: 1em;}
 .paddingbottom {padding-bottom: 3rem;}
@@ -22,11 +23,15 @@ body {background-color: #EEEEEE;}
 #alertBar, .alertBar {background-color: #398ea7; color: white; text-align: center;}
 .aWhiteHover:hover {color:white;}
 
+.forceColumn{
+text-align: center; flex-direction: column; display: flex; align-self: center;
+}
+
 /* navbar edits */
 .navbar-toggler{ border: 0; }
 .navbar ul {text-align: center;}
-.navbar-toggler:focus{}
 
+/* register page styles */
 .registerSuccess {
   background-color: #398ea7;
    border-radius: 15px;
@@ -48,6 +53,7 @@ body {background-color: #EEEEEE;}
    box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
  }
 
+/* index styles */
  .indexShowcase {
    font-family: 'Lancelot', sans-serif;
    color: white;
@@ -96,6 +102,8 @@ body {background-color: #EEEEEE;}
    align-self: center;
  }
 
+/* login styles */
+
  .loginForm {
    text-align: center;
    padding: 5px;
@@ -114,16 +122,15 @@ top: 1rem;
   border: 1px solid #8C8C8C;
  }
 
-
+/* navbar letterbox */
 .letterBox, .ALERTEDletterBox {
   width:35px;
   margin-top:0.75rem;
 }
-.forceColumn{
-text-align: center; flex-direction: column; display: flex; align-self: center;
-}
 
 
+
+/* jumbotron styles - on most pages */
 .jumbotron {
   background-color: white;
   background-image: linear-gradient(to right, #333 35%, rgba(255, 255, 255, 0) 0%);
@@ -134,13 +141,6 @@ text-align: center; flex-direction: column; display: flex; align-self: center;
   flex-direction: column;
   align-items: center;
 }
-
-/* .cutpage{
-  background-image: linear-gradient(to right, #333 35%, rgba(255, 255, 255, 0) 0%);
-  background-position: bottom;
-  background-size: 10px 2px;
-  background-repeat: repeat-x;
-} */
 
 .jumbotron h6 {color: #999999;}
 
@@ -156,7 +156,9 @@ margin-bottom: auto;
 padding: 4px 0px 4px 0px;
 }
 
-.searchBarSubmit{
+/* search bar styles */
+
+.searchBarSubmit {
   background: #398ea7 !important;
   color: white !important;
   border: 2px solid white !important;
@@ -179,31 +181,27 @@ padding: 4px 0px 4px 0px;
 .searchBarInput::placeholder {position: relative; left: 10px;}
 
 
+/* styling buttons */
 
-
-input[type="button" i]:active, input[type="submit" i]:active, .updateProfPic,
-input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:active,
+input[type="button"]:active, input[type="submit"]:active, .updateProfPic,
+input[type="reset"]:active,
   button:active, .btnStyle:active{
     background: white;
     border: 1px #398ea7 solid;
     padding: 10px;
-    border-radius: 4px solid #398ea7 ;
+    border-radius: 4px;
     color: #398ea7;
-    -webkit-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
-    -moz-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
     box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
   }
 
- input[type="submit" i], .updateProfPic,
-  input[type="reset" i], input[type="file" i]::-webkit-file-upload-button,
+ input[type="submit"], .updateProfPic,
+  input[type="reset"], input[type="file"]::-webkit-file-upload-button,
   .btnStyle{
       background: #398ea7 !important;
       border: 0;
       padding: 10px;
       border-radius: 4px;
       color: white !important;
-      -webkit-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
-      -moz-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
       box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
     }
 
@@ -214,8 +212,6 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
       padding: 10px;
       border-radius: 4px !important;
       color: white !important;
-      -webkit-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
-      -moz-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
       box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
     }
 
@@ -223,10 +219,8 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
       background: white !important;
       border: 1px #398ea7 solid !important;
       padding: 10px !important;
-      border-radius: 4px solid #398ea7 !important;
+      border-radius: 4px;
       color: #398ea7 !important;
-      -webkit-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
-      -moz-box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
       box-shadow: 24px 24px 5px -36px rgba(0,0,0,1);
     }
 
@@ -244,6 +238,19 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
     border-radius: 4px;
     padding: 10px;
   }
+
+/* Booking page styles */
+
+/* b o o k i n g f o r m */
+.bookingForm {
+  /* text-align: center; */
+  background-color: white;
+  margin: auto;
+  line-height: 100%;
+  padding: 20px;
+}
+
+.bookingForm input[type='submit'] {padding: 10px;}
 
   .bookingLogicErr, .reviewBtnErr {
     display:none;
@@ -268,7 +275,6 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
     text-align: center;
   }
 
- /*jQuery changes this when required*/
 
 .fullUnderline {
   position:relative;
@@ -290,6 +296,8 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
   border-bottom: 1px solid grey;
 }
 
+/* back button - on most pages */
+
 .backbtn {
   color:black;
   text-decoration: none;
@@ -305,6 +313,8 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
   background: #398ea7;
 }
 
+/* main exhibition cards */
+
 .mainExCard, .mainPageCard{
   padding: 10px 5px 30px 5px;
   margin: 10px 10px 10px 10px;
@@ -316,19 +326,10 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
 .underBackbtn {
   font-size: 1.3rem;
 }
-/* b o o k i n g f o r m */
-.bookingForm {
-  /* text-align: center; */
-  background-color: white;
-  margin: auto;
-  line-height: 100%;
-  padding: 20px;
-}
-
-.bookingForm input[type='submit'] {padding: 10px;}
 
 
-/**s p e c e x **/
+
+/**specific exhibiton styles**/
 
 .bestNewBox p {
   color: green;
@@ -430,7 +431,7 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
 
 .specExContainer {margin-bottom: 10em;}
 
-/* reviews*/
+/* specific exhibition reviews section */
 .postReviewBox form {
   margin-top: 3rem;
   margin-bottom: 4rem;
@@ -466,17 +467,14 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
 
 .specExImg {width: auto; height:200px;}
 
-/*  */
-.1-5 {display: flex; align-self: center;}
+
 
 .specExDateTime p {
   text-align: center;
-   /* position: relative;
-  left:2.8rem; */
   line-height: 0.9rem;
 }
 
- /*R E V I E W S*/
+ /*still on R E V I E W S*/
 .reviewsContainer{
   display:flex;
   flex-direction: column;
@@ -498,10 +496,6 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
   -webkit-box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
   -moz-box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
   box-shadow: 7px 7px 6px 3px rgba(0,0,0,0.48);
-
-  /* -webkit-box-shadow: 21px 18px 5px 0px rgba(0,0,0,0.42);
-  -moz-box-shadow: 21px 18px 5px 0px rgba(0,0,0,0.42);
-  box-shadow: 21px 18px 5px 0px rgba(0,0,0,0.42); */
 }
 
 .topofReview{
@@ -524,6 +518,8 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
 .deleteReviewBtn{
   margin-bottom: 1.5em;
 }
+
+/* review scores */
 
 .userRatingRED {
   font-size: 1.4rem;
@@ -572,7 +568,7 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
   font-family: IBM Plex Sans;
 }
 
- /*P R O F I L E*/
+ /*user P R O F I L E styless*/
 
  .profilePageAvatar {width: 150px; height: 150px;}
 
@@ -622,7 +618,7 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
   border-radius: 10px;
 }
 
-/* a d m i n */
+/* a d m i n page styles */
   .ui-state-active,
   .ui-widget-content .ui-state-active,
    .ui-widget-header .ui-state-active,
@@ -646,6 +642,7 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
   .adminCreateExFrm input[type='submit'] {
   width: 127px;
   }
+
  /* / start of breakpoints / */
  /*  */
  /*  */
@@ -688,7 +685,6 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
     margin: 10px;
     margin-bottom: 4rem;
     margin-top: 4rem;
-    justify-content: column !important;
   }
 
   .userAvatarMine{display:none;}
@@ -750,13 +746,9 @@ input[type="reset" i]:active, input[type="file" i]::-webkit-file-upload-button:a
   }
 }
 
-//* Large devices (desktops, 992px and up)*/
+/* Large devices (desktops, 992px and up)*/
 @media (max-width: 992px) {
   .specExType{
     bottom: 4.8rem;
   }
-
  }
-
-//* Extra large devices (large desktops, 1200px and up)*/
-@media (max-width: 1200px) { ... }

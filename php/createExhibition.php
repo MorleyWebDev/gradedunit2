@@ -3,17 +3,20 @@ session_start();
 
 $role = $_SESSION['userrole'];
 
+// if not admin dont allow the connect
 if($role != 'admin'){
   header('location: userProfile.php');
 }
-
+// db connect
 require('includes/dbconx.php');
 
+// only execute code on post request
  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
+// below is validation for empty form fields
     if (empty($_POST["title"])) {
         $titleErr = "Required";
     } else {
+      // if not empty, process data and add variable for success
         $titleCreate = test_input($_POST["title"]);
         $titleV = 1;
       }
@@ -61,7 +64,7 @@ require('includes/dbconx.php');
    }
 
 
-
+   //if all fields are valid execute code
    if(
      $titleV == 1 &&
      $descV == 1 &&
@@ -70,6 +73,7 @@ require('includes/dbconx.php');
      $EDV == 1 &&
      $priceV == 1
    ){
+     // code for image upload
    $target_dir = "img/exhibitions/";
    $target_file = $target_dir . basename($_FILES["createExImage"]["name"]);
    $uploadOk = 1;
@@ -115,7 +119,7 @@ require('includes/dbconx.php');
 
 }
 
-
+// to process trim and remove the potential for rogue js to be executed by user
   function test_input($data)
   {
       $data = trim($data);
@@ -124,9 +128,9 @@ require('includes/dbconx.php');
       return $data;
   }
 
-
-
+// only on post
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // if all inputs valid
 if(
   $titleV == 1 &&
   $descV == 1 &&
@@ -135,14 +139,15 @@ if(
   $EDV == 1 &&
   $priceV == 1
   )
-
+// if image not empty
   if(!empty($uploadExImage)){
+    // upload the exhibition fields
     $insertEx = mysqli_query($conn, "insert into exhibitions (active, title, description, image, spacesleft, startdate,enddate, price, type, cancel)
             VALUE ('1','$titleCreate', '$desc', '$uploadExImage', '$limit', '$SD', '$ED', '$priceCreate', '$cat', '0')");
-
+// if it worked exho confirmation message
     if($insertEx) {
       echo "Exhibition Uploaded Successfully!";
-
+// if it didnt echo server error
 } else {
   echo "server Error. Please try again later";
 }
